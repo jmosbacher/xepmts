@@ -1,0 +1,140 @@
+xenonnt_nveto_gains:
+    resource_title: nveto_gains_
+    item_title: nveto_gain_
+    url: nveto/gains
+    datasource:
+        source: nveto_gains
+        filter:
+        default_sort:
+        projection:
+            detector: 1
+            experiment: 1
+            run_id: 1
+            timestamp: 1
+            pmt_index: 1
+            gain: 1
+            gain_err: 1
+            gain_stat_err: 1
+            gain_sys_err: 1
+            voltage: 1
+            occupancy: 1
+            occupancy_err: 1
+            _id: 1
+            _updated: 1
+            _created: 1
+            _etag: 1
+        aggregation:
+    cache_control: max-age=10,must-revalidate
+    cache_expires: 10
+    schema:
+        detector:
+            type: string
+            allowed:
+              - tpc
+              - nveto
+              - muveto
+              - unknown
+            required: true
+            default: nveto
+        experiment:
+            type: string
+            allowed:
+              - xenon1t
+              - xenonnt
+              - unknown
+            default: xenonnt
+            required: true
+        run_id:
+            type: string
+            required: true
+        timestamp:
+            type: integer
+        pmt_index:
+            type: integer
+            required: true
+        gain:
+            type: number
+            required: true
+        gain_err:
+            type: number
+            required: true
+        gain_stat_err:
+            type: number
+        gain_sys_err:
+            type: number
+        voltage:
+            type: number
+        occupancy:
+            type: number
+        occupancy_err:
+            type: number
+        _id:
+            type: objectid
+    allowed_read_roles:
+      - admin
+      - expert
+      - write:xenonnt
+      - write:nveto
+      - write:nveto_gains_
+      - read:xenonnt
+      - read:nveto
+      - read:nveto_gains_
+    allowed_item_read_roles:
+      - admin
+      - expert
+      - write:xenonnt
+      - write:nveto
+      - write:nveto_gains_
+      - read:xenonnt
+      - read:nveto
+      - read:nveto_gains_
+    allowed_write_roles:
+      - admin
+      - expert
+      - write:xenonnt
+      - write:nveto
+      - write:nveto_gains_
+    allowed_item_write_roles:
+      - admin
+      - expert
+      - write:xenonnt
+      - write:nveto
+      - write:nveto_gains_
+    mongo_prefix: MONGO
+    resource_methods:
+      - GET
+    public_methods: []
+    allowed_roles: []
+    id_field: _id
+    item_lookup_field: _id
+    item_url: regex("[a-f0-9]{24}")
+    item_lookup: true
+    public_item_methods: []
+    allowed_item_roles: []
+    allowed_filters:
+      - '*'
+    sorting: true
+    embedding: true
+    embedded_fields: []
+    pagination: true
+    projection: true
+    versioning: false
+    soft_delete: false
+    bulk_enabled: true
+    internal_resource: false
+    etag_ignore_fields:
+    item_methods:
+      - GET
+    auth_field:
+    allow_unknown: false
+    extra_response_fields: []
+    mongo_query_whitelist: []
+    mongo_write_concern:
+        w: 1
+    mongo_indexes: {}
+    hateoas: true
+    authentication:
+    merge_nested_documents: true
+    normalize_dotted_fields: true
+    normalize_on_patch: true
+    _media: []

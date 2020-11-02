@@ -1,0 +1,156 @@
+xenonnt_tpc_voltage_maps:
+    resource_title: tpc_voltage_maps_
+    item_title: tpc_voltage_map_
+    url: tpc/voltage_maps
+    datasource:
+        source: tpc_voltage_maps
+        filter:
+        default_sort:
+        projection:
+            name: 1
+            experiment: 1
+            detector: 1
+            active: 1
+            voltages: 1
+            created_by: 1
+            comments: 1
+            date: 1
+            _id: 1
+            _updated: 1
+            _created: 1
+            _etag: 1
+        aggregation:
+    additional_lookup:
+        url: regex("[\w]+")
+        field: name
+    cache_control: max-age=10,must-revalidate
+    cache_expires: 10
+    resource_methods:
+      - GET
+      - POST
+      - DELETE
+    embedding: true
+    example:
+        name: Tribute
+        detector: tpc
+        experiment: xenonnt
+        voltages:
+          - pmt_index: 3
+            voltage: 1300
+          - pmt_index: 4
+            voltage: 1200
+          - pmt_index: 5
+            voltage: 1500
+        created_by: God
+        comments: This is not the greatest HV map, this is a tribute.
+        date: 10/1/2020
+    schema:
+        name:
+            type: string
+            unique: true
+            required: true
+            regex: ^\S+$
+        experiment:
+            type: string
+            allowed:
+              - xenon1t
+              - xenonnt
+              - unknown
+            default: xenonnt
+            required: true
+        detector:
+            type: string
+            allowed:
+              - tpc
+              - nveto
+              - muveto
+              - unknown
+            required: true
+            default: tpc
+        active:
+            type: boolean
+            default: true
+        voltages:
+            type: list
+            schema:
+                type: dict
+                schema:
+                    voltage:
+                        type: number
+                        required: true
+                    pmt_index:
+                        type: integer
+                        required: true
+        created_by:
+            type: string
+        comments:
+            type: string
+        date:
+            type: string
+        _id:
+            type: objectid
+    allowed_read_roles:
+      - admin
+      - expert
+      - write:xenonnt
+      - write:tpc
+      - write:tpc_voltage_maps_
+      - read:xenonnt
+      - read:tpc
+      - read:tpc_voltage_maps_
+    allowed_item_read_roles:
+      - admin
+      - expert
+      - write:xenonnt
+      - write:tpc
+      - write:tpc_voltage_maps_
+      - read:xenonnt
+      - read:tpc
+      - read:tpc_voltage_maps_
+    allowed_write_roles:
+      - admin
+      - expert
+      - write:xenonnt
+      - write:tpc
+      - write:tpc_voltage_maps_
+    allowed_item_write_roles:
+      - admin
+      - expert
+      - write:xenonnt
+      - write:tpc
+      - write:tpc_voltage_maps_
+    mongo_prefix: MONGO
+    public_methods: []
+    allowed_roles: []
+    id_field: _id
+    item_lookup_field: _id
+    item_url: regex("[a-f0-9]{24}")
+    item_lookup: true
+    public_item_methods: []
+    allowed_item_roles: []
+    allowed_filters:
+      - '*'
+    sorting: true
+    embedded_fields: []
+    pagination: true
+    projection: true
+    versioning: false
+    soft_delete: false
+    bulk_enabled: true
+    internal_resource: false
+    etag_ignore_fields:
+    item_methods:
+      - GET
+    auth_field:
+    allow_unknown: false
+    extra_response_fields: []
+    mongo_query_whitelist: []
+    mongo_write_concern:
+        w: 1
+    mongo_indexes: {}
+    hateoas: true
+    authentication:
+    merge_nested_documents: true
+    normalize_dotted_fields: true
+    normalize_on_patch: true
+    _media: []

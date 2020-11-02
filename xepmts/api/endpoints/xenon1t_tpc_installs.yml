@@ -1,0 +1,196 @@
+xenon1t_tpc_installs:
+    resource_title: tpc_installs_1t
+    item_title: tpc_install_1t
+    url: xenon1t/tpc/installs
+    datasource:
+        source: tpc_installs_1t
+        filter:
+        default_sort:
+        projection:
+            uid: 1
+            array: 1
+            detector: 1
+            experiment: 1
+            pmt_index: 1
+            sector: 1
+            position_x: 1
+            position_y: 1
+            position_z: 1
+            position_r: 1
+            amplifier_crate: 1
+            amplifier_fan: 1
+            amplifier_plug: 1
+            amplifier_serial: 1
+            amplifier_slot: 1
+            amplifier_channel: 1
+            digitizer_channel: 1
+            digitizer_crate: 1
+            digitizer_module: 1
+            digitizer_slot: 1
+            high_voltage_crate: 1
+            high_voltage_board: 1
+            high_voltage_channel: 1
+            high_voltage_connector: 1
+            high_voltage_feedthrough: 1
+            high_voltage_return: 1
+            serial_number: 1
+            signal_channel: 1
+            signal_connector: 1
+            signal_feedthrough: 1
+            _id: 1
+            _updated: 1
+            _created: 1
+            _etag: 1
+        aggregation:
+    additional_lookup:
+        url: string
+        field: uid
+    cache_control: max-age=10,must-revalidate
+    cache_expires: 10
+    schema:
+        uid:
+            type: string
+            required: true
+            unique: true
+        array:
+            type: string
+        detector:
+            type: string
+            allowed:
+              - tpc
+              - nveto
+              - muveto
+              - unknown
+            required: true
+            default: tpc
+        experiment:
+            type: string
+            allowed:
+              - xenon1t
+              - xenonnt
+              - unknown
+            default: xenon1t
+            required: true
+        pmt_index:
+            type: integer
+            required: true
+        sector:
+            type: integer
+        position_x:
+            type: number
+        position_y:
+            type: number
+        position_z:
+            type: number
+        position_r:
+            type: number
+        amplifier_crate:
+            type: integer
+        amplifier_fan:
+            type: integer
+        amplifier_plug:
+            type: integer
+        amplifier_serial:
+            type: integer
+        amplifier_slot:
+            type: integer
+        amplifier_channel:
+            type: integer
+        digitizer_channel:
+            type: integer
+        digitizer_crate:
+            type: integer
+        digitizer_module:
+            type: integer
+        digitizer_slot:
+            type: integer
+        high_voltage_crate:
+            type: integer
+        high_voltage_board:
+            type: integer
+        high_voltage_channel:
+            type: integer
+        high_voltage_connector:
+            type: integer
+        high_voltage_feedthrough:
+            type: string
+        high_voltage_return:
+            type: integer
+        serial_number:
+            type: string
+        signal_channel:
+            type: integer
+        signal_connector:
+            type: integer
+        signal_feedthrough:
+            type: string
+        _id:
+            type: objectid
+    allowed_read_roles:
+      - admin
+      - expert
+      - write:xenon1t
+      - write:tpc
+      - write:tpc_installs_1t
+      - read:xenon1t
+      - read:tpc
+      - read:tpc_installs_1t
+    allowed_item_read_roles:
+      - admin
+      - expert
+      - write:xenon1t
+      - write:tpc
+      - write:tpc_installs_1t
+      - read:xenon1t
+      - read:tpc
+      - read:tpc_installs_1t
+    allowed_write_roles:
+      - admin
+      - expert
+      - write:xenon1t
+      - write:tpc
+      - write:tpc_installs_1t
+    allowed_item_write_roles:
+      - admin
+      - expert
+      - write:xenon1t
+      - write:tpc
+      - write:tpc_installs_1t
+    mongo_prefix: MONGO
+    resource_methods:
+      - GET
+    public_methods: []
+    allowed_roles: []
+    id_field: _id
+    item_lookup_field: _id
+    item_url: regex("[a-f0-9]{24}")
+    item_lookup: true
+    public_item_methods: []
+    allowed_item_roles: []
+    allowed_filters:
+      - '*'
+    sorting: true
+    embedding: true
+    embedded_fields: []
+    pagination: true
+    projection: true
+    versioning: false
+    soft_delete: false
+    bulk_enabled: true
+    internal_resource: false
+    etag_ignore_fields:
+    item_methods:
+      - GET
+    auth_field:
+    allow_unknown: false
+    extra_response_fields: []
+    mongo_query_whitelist: []
+    mongo_write_concern:
+        w: 1
+    mongo_indexes: {}
+    hateoas: true
+    authentication:
+    merge_nested_documents: true
+    normalize_dotted_fields: true
+    normalize_on_patch: true
+    _media: []

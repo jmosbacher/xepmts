@@ -1,0 +1,12 @@
+eve
+flask
+click
+flask-restful
+pyyaml
+flask-swagger-ui
+pyopenssl
+Eve-Swagger
+flask-sentinel
+redis
+google-cloud-secret-manager
+prometheus-flask-exporter

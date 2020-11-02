@@ -1,0 +1,188 @@
+xenon1t_muveto_afterpulses:
+    resource_title: muveto_afterpules_1t
+    item_title: muveto_afterpule_1t
+    url: xenon1t/muveto/afterpules
+    datasource:
+        source: muveto_afterpulses_1t
+        filter:
+        default_sort:
+        projection:
+            experiment: 1
+            detector: 1
+            pmt_index: 1
+            run_id: 1
+            timestamp: 1
+            start_time: 1
+            end_time: 1
+            trigger_sigma: 1
+            total_ap: 1
+            pe: 1
+            pe_error: 1
+            ar_pos: 1
+            hv: 1
+            ne_ap: 1
+            ne_pos: 1
+            xe_pos: 1
+            n2_pos: 1
+            ch4ap: 1
+            he_ap: 1
+            ar_ap: 1
+            doublexe_pos: 1
+            doublexe_ap: 1
+            trigger_mean: 1
+            gain: 1
+            ch4_pos: 1
+            n2_ap: 1
+            xe_ap: 1
+            pe_pulses: 1
+            trigger_number: 1
+            _id: 1
+            _updated: 1
+            _created: 1
+            _etag: 1
+        aggregation:
+    cache_control: max-age=10,must-revalidate
+    cache_expires: 10
+    schema:
+        experiment:
+            type: string
+            allowed:
+              - xenon1t
+              - xenonnt
+              - unknown
+            default: xenon1t
+            required: true
+        detector:
+            type: string
+            allowed:
+              - tpc
+              - nveto
+              - muveto
+              - unknown
+            required: true
+            default: muveto
+        pmt_index:
+            type: integer
+            required: true
+        run_id:
+            type: string
+        timestamp:
+            type: integer
+        start_time:
+            type: integer
+        end_time:
+            type: integer
+        trigger_sigma:
+            type: number
+        total_ap:
+            type: number
+        pe:
+            type: number
+        pe_error:
+            type: number
+        ar_pos:
+            type: number
+        hv:
+            type: number
+        ne_ap:
+            type: number
+        ne_pos:
+            type: number
+        xe_pos:
+            type: number
+        n2_pos:
+            type: number
+        ch4ap:
+            type: number
+        he_ap:
+            type: number
+        ar_ap:
+            type: number
+        doublexe_pos:
+            type: number
+        doublexe_ap:
+            type: number
+        trigger_mean:
+            type: number
+        gain:
+            type: number
+        ch4_pos:
+            type: number
+        n2_ap:
+            type: number
+        xe_ap:
+            type: number
+        pe_pulses:
+            type: number
+        trigger_number:
+            type: number
+        _id:
+            type: objectid
+    allowed_read_roles:
+      - admin
+      - expert
+      - write:xenon1t
+      - write:muveto
+      - write:muveto_afterpules_1t
+      - read:xenon1t
+      - read:muveto
+      - read:muveto_afterpules_1t
+    allowed_item_read_roles:
+      - admin
+      - expert
+      - write:xenon1t
+      - write:muveto
+      - write:muveto_afterpules_1t
+      - read:xenon1t
+      - read:muveto
+      - read:muveto_afterpules_1t
+    allowed_write_roles:
+      - admin
+      - expert
+      - write:xenon1t
+      - write:muveto
+      - write:muveto_afterpules_1t
+    allowed_item_write_roles:
+      - admin
+      - expert
+      - write:xenon1t
+      - write:muveto
+      - write:muveto_afterpules_1t
+    mongo_prefix: MONGO
+    resource_methods:
+      - GET
+    public_methods: []
+    allowed_roles: []
+    id_field: _id
+    item_lookup_field: _id
+    item_url: regex("[a-f0-9]{24}")
+    item_lookup: true
+    public_item_methods: []
+    allowed_item_roles: []
+    allowed_filters:
+      - '*'
+    sorting: true
+    embedding: true
+    embedded_fields: []
+    pagination: true
+    projection: true
+    versioning: false
+    soft_delete: false
+    bulk_enabled: true
+    internal_resource: false
+    etag_ignore_fields:
+    item_methods:
+      - GET
+    auth_field:
+    allow_unknown: false
+    extra_response_fields: []
+    mongo_query_whitelist: []
+    mongo_write_concern:
+        w: 1
+    mongo_indexes: {}
+    hateoas: true
+    authentication:
+    merge_nested_documents: true
+    normalize_dotted_fields: true
+    normalize_on_patch: true
+    _media: []
