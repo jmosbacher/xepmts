@@ -2,25 +2,21 @@ import os
 from copy import deepcopy
 
 
-def deep_find_files(path):
-    paths = {}
+def deep_find_files(path, extensions):
+    paths = []
     if not os.path.isdir(path):
         raise ValueError("{} is not a valid directory".format(path))
     for root, dirs, files in os.walk(path):
         for fname in files:
-            paths[fname] = os.path.join(root, fname)
+            if fname.split(".")[-1] in extensions:
+                paths.append(os.path.join(root, fname))
     return paths
 
-def find_by_extensions(path, extensions):
-    paths = deep_find_files(path)
-    found = [path for fname, path in paths.items() if fname.split(".")[-1] in extensions]
-    return found
-
 def find_yaml_files(path):
-    return find_by_extensions(path, ["yaml", "yml"])
+    return deep_find_files(path, ["yaml", "yml"])
 
 def find_json_files(path):
-    return find_by_extensions(path, ["json"])
+    return deep_find_files(path, ["json"])
 
 def read_endpoint_files(root):
     import yaml
@@ -69,8 +65,8 @@ def resources_from_templates(templates, experiments=EXPERIMENTS, include_as_is=I
                     resources[name] = resource
                     continue
                 new_resource = deepcopy(resource)
-                new_resource["item_title"] = "_".join([detector, new_resource["item_title"], experiment["name_suffix"]])
-                new_resource["resource_title"] = "_".join([detector, new_resource["resource_title"], experiment["name_suffix"]])
+                new_resource["item_title"] = "_".join([detector, new_resource["item_title"], experiment["name_suffix"]]).strip("_").title().replace("_", " ")
+                new_resource["resource_title"] = "_".join([detector, new_resource["resource_title"], experiment["name_suffix"]]).strip("_").title().replace("_", " ")
                 
                 new_resource["url"] = '/'.join([experiment["url_prefix"], detector, new_resource.get("url", name)]).strip("/")
                 new_resource["datasource"]["source"] = f'{detector}_{new_resource["datasource"]["source"]}'
@@ -95,3 +91,6 @@ def resources_from_templates(templates, experiments=EXPERIMENTS, include_as_is=I
                 # resources[detector.capitalize() + name + experiment["name_suffix"]] = new_resource
     return resources
 
+
+def list_roles(enpoints_dir):
+    read_endpoint_files(enpoints_dir)

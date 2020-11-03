@@ -3,14 +3,11 @@ import sys
 import os
 
 import click
-from xepmts.api.app import make_local_app
 from xepmts.api.utils import resources_from_templates, read_endpoint_files
-from xepmts.api.settings import SETTINGS_DIR
 from ruamel.yaml import YAML
 yaml = YAML()
 yaml.indent(mapping=4, sequence=4, offset=2)
 
-DEFAULT_TEMPLATE_DIR = os.path.join(os.path.abspath(SETTINGS_DIR), "endpoint_templates")
 
 @click.group()
 def main():
@@ -22,20 +19,28 @@ def main():
 @click.option('--out', default="./xepmts/api/endpoints", help='Output directory')
 def generate_endpoints(template_dir, out):
     
-    import eve
+    # import eve
     if not os.path.isdir(out):
-        os.mkdir(out)
+        os.makedirs(out)
     templates = read_endpoint_files(template_dir)
     domain = resources_from_templates(templates)
-    app = eve.Eve(settings={"DOMAIN": domain})
-    for k, v in dict(app.config["DOMAIN"]).items():
-        fpath = os.path.join(out, k+".yml")
+    for k, v in domain.items():
+        if "url" in v:
+            rpath, _, fname = v["url"].rpartition("/")
+            abspath = os.path.join(out, rpath)
+            if not os.path.exists(abspath):
+                os.makedirs(abspath)
+        else:
+            fname = k
+            abspath = out
+        fpath = os.path.join(abspath, fname+".yml")
         endpoint = {k: v}
         with open(fpath, "w") as f:
             yaml.dump(endpoint, f)
 
 @main.command()
 def serve():
+    from xepmts.api.app import make_local_app
     app = make_local_app()
     app.run(host="localhost", debug=True, ) #ssl_context="adhoc"
 

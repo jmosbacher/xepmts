@@ -43,8 +43,8 @@ voltage_maps:
         date: {type: string}
 
 voltage_map_names:
-    resource_title: VoltageMapNames
-    item_title: VoltageMapName
+    resource_title: voltage_map_names
+    item_title: voltage_map_name
     url: voltage_maps/names
     cache_control: "max-age=10,must-revalidate"
     cache_expires: 10

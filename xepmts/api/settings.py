@@ -1,15 +1,10 @@
 import os
-from xepmts.api.utils import read_endpoint_files, resources_from_templates
 
 from copy import deepcopy
 from xepmts.api.secrets import MONGO_PASSWORD
+from xepmts.api.domain import get_domain
 
-
-SETTINGS_DIR = os.path.dirname(os.path.abspath(__file__))
-DEFAULT_ENDPOINT_DIR = os.path.join(SETTINGS_DIR, "endpoints")
-ENDPOINT_DIR = os.getenv("XEPMTS_ENDPOINT_DIR", DEFAULT_ENDPOINT_DIR)
-DOMAIN = read_endpoint_files(ENDPOINT_DIR)
-# DOMAIN = resources_from_templates(domain)
+DOMAIN = get_domain()
 
 URL_PREFIX = os.getenv("XEPMTS_URL_PREFIX", "")
 API_VERSION = "v1"
@@ -34,12 +29,18 @@ MONGO_DBNAME = os.getenv("XEPMTS_MONGO_DB", "pmts")
 MONGO1T_DBNAME = MONGO_DBNAME + "1t"
 MONGO1T_AUTH_SOURCE = MONGO_AUTH_SOURCE = os.getenv("XEPMTS_MONGO_AUTH_SOURCE", MONGO_DBNAME)
 MONGO1T_PASSWORD = MONGO_PASSWORD
+
 replica_set = os.getenv("XEPMTS_MONGO_REPLICA_SET", "")
 if replica_set:
     MONGO1T_REPLICA_SET = MONGO_REPLICA_SET = replica_set
+else:
+    MONGO1T_REPLICA_SET = MONGO_REPLICA_SET = ""
+
 mongo_uri = os.getenv("XEPMTS_MONGO_URI", "")
 if mongo_uri:
     MONGO1T_URI = MONGO_URI = mongo_uri
+else:
+    MONGO1T_URI = MONGO_URI = ""
 MONGO1T_USERNAME = MONGO_USERNAME = os.getenv("XEPMTS_MONGO_USER", "")
 
 #-------------------------------------------------------------------------#
@@ -58,3 +59,52 @@ X_DOMAINS = ['http://localhost:8000',
              ]
 
 X_HEADERS = ['Content-Type', 'If-Match', 'Authorization', 'X-HTTP-Method-Override']  # Needed for the "Try it out" buttons
+
+def get_settings_dict(**overrides):
+    
+    domain_overrides = overrides.pop("DOMAIN", {})
+    domain = dict(DOMAIN)
+    domain.update(domain_overrides)
+
+    settings = dict(
+        DOMAIN = domain,
+        URL_PREFIX = URL_PREFIX,
+        API_VERSION = API_VERSION,
+        RESOURCE_METHODS = RESOURCE_METHODS,
+        ITEM_METHODS = ITEM_METHODS,
+        ALLOWED_READ_ROLES = ALLOWED_READ_ROLES,
+        ALLOWED_WRITE_ROLES = ALLOWED_WRITE_ROLES,
+        EMBEDDING = EMBEDDING,
+        MEDIA_PATH = MEDIA_PATH,
+        PAGINATION_LIMIT = PAGINATION_LIMIT,
+        SCHEMA_ENDPOINT = SCHEMA_ENDPOINT,
+        IF_MATCH = IF_MATCH,
+        ENFORCE_IF_MATCH = ENFORCE_IF_MATCH,
+        HATEOAS = HATEOAS,
+        VERSIONS = VERSIONS,
+        NORMALIZE_ON_PATCH = NORMALIZE_ON_PATCH,
+        
+        MONGO1T_HOST = MONGO1T_HOST,
+        MONGO1T_PORT = MONGO1T_PORT,
+        MONGO1T_DBNAME = MONGO1T_DBNAME,
+        MONGO1T_USERNAME = MONGO1T_USERNAME,
+        MONGO1T_PASSWORD = MONGO1T_PASSWORD,
+        MONGO1T_AUTH_SOURCE = MONGO1T_AUTH_SOURCE,
+        MONGO1T_REPLICA_SET = MONGO1T_REPLICA_SET,
+        MONGO1T_URI = MONGO1T_URI,
+
+        MONGO_HOST = MONGO_HOST,
+        MONGO_PORT = MONGO_PORT,
+        MONGO_DBNAME = MONGO_DBNAME,
+        MONGO_USERNAME = MONGO_USERNAME,
+        MONGO_PASSWORD = MONGO_PASSWORD,
+        MONGO_AUTH_SOURCE = MONGO_AUTH_SOURCE,
+        MONGO_REPLICA_SET = MONGO_REPLICA_SET,
+        MONGO_URI = MONGO_URI,
+
+        SERVERS = SERVERS,
+        X_DOMAINS = X_DOMAINS,
+        X_HEADERS = X_HEADERS,
+    )
+    settings.update(overrides)
+    return settings

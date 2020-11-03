@@ -1,7 +1,7 @@
 high_voltage_events:
     resource_title: high_voltage_events
     item_title: high_voltage_event
-    url: hv_events
+    url: high_voltage_events
     datasource:
         source: hv_events
     cache_control: "max-age=10,must-revalidate"

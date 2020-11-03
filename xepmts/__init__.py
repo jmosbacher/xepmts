@@ -7,14 +7,14 @@ __version__ = '0.1.1'
 import os
 
 from .api_client import make_client
-from .api.settings import SETTINGS_DIR
+
 import panel as pn
 from eve_panel import settings as panel_settings
 
 def notebook():
     return pn.extension()
 
-SETTINGS_FILE = os.path.join(SETTINGS_DIR, "settings.py")
+# SETTINGS_FILE = os.path.join(SETTINGS_DIR, "settings.py")
 def get_client(name=None):
     # client = make_client(SETTINGS_FILE)
     client = make_client(name)

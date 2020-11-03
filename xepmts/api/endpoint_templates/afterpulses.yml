@@ -1,8 +1,8 @@
 
 afterpulses:
-    resource_title: afterpules
-    item_title: afterpule
-    url: afterpules
+    resource_title: afterpulses
+    item_title: afterpulse
+    url: afterpulses
     datasource:
         source: afterpulses
     cache_control: "max-age=10,must-revalidate"

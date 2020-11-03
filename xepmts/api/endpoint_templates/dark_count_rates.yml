@@ -1,7 +1,7 @@
 dark_count_rates:
-    resource_title: dark_counts_rates
-    item_title: dark_counts_rate
-    url: dark_counts_rates
+    resource_title: dark_count_rates
+    item_title: dark_count_rate
+    url: dark_count_rates
     datasource:
         source: dc_rates
     cache_control: "max-age=10,must-revalidate"

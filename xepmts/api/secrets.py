@@ -13,7 +13,7 @@ if os.getenv("GAE_ENV", None):
     ROOT_TOKEN = response.payload.data.decode('UTF-8')
     
 else:
-    MONGO_PASSWORD = os.getenv("API_MONGO_PASS", "")
-    ROOT_TOKEN = os.getenv("API_ROOT_TOKEN","super_secret")
+    MONGO_PASSWORD = os.getenv("XEPMTS_MONGO_PASS", "")
+    ROOT_TOKEN = os.getenv("XEPMTS_ROOT_TOKEN","super_secret")
 
-GLOBAL_READ_TOKEN = os.getenv("API_GLOBAL_READ_TOKEN","")
+GLOBAL_READ_TOKEN = os.getenv("XEPMTS_GLOBAL_READ_TOKEN","")
