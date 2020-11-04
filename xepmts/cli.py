@@ -4,6 +4,7 @@ import os
 
 import click
 from xepmts.api.utils import resources_from_templates, read_endpoint_files
+from xepmts.api.domain import DEFAULT_TEMPLATE_DIR
 from ruamel.yaml import YAML
 yaml = YAML()
 yaml.indent(mapping=4, sequence=4, offset=2)
@@ -16,9 +17,8 @@ def main():
 
 @main.command()
 @click.option('--template_dir', default=DEFAULT_TEMPLATE_DIR, help='Template directory')
-@click.option('--out', default="./xepmts/api/endpoints", help='Output directory')
+@click.option('--out', default="./api_server/endpoints", help='Output directory')
 def generate_endpoints(template_dir, out):
-    
     # import eve
     if not os.path.isdir(out):
         os.makedirs(out)

@@ -1,5 +1,5 @@
 import eve_panel
-from .api import app
+from xepmts.api import app
 import os
 import pkg_resources
 
@@ -18,3 +18,6 @@ def make_client(app_names=None):
     for name in apps:
         getattr(client, name)._http_client.auth.set_auth_by_name("Bearer")
     return client
+
+def default_client():
+    return make_client()

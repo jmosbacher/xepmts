@@ -22,28 +22,28 @@ HATEOAS = True
 VERSIONS = "_versions"
 NORMALIZE_ON_PATCH = False
 
-# ----------------- Mongo config ------------------------------------------#
-MONGO1T_HOST = MONGO_HOST = os.getenv("XEPMTS_MONGO_HOST", "localhost") 
-MONGO1T_PORT = MONGO_PORT = int(os.getenv("XEPMTS_MONGO_PORT", 27017))
+# ----------------- Mongo config ------------------------------------------ #
+MONGO_HOST = os.getenv("XEPMTS_MONGO_HOST", "localhost")
+MONGO_PORT = int(os.getenv("XEPMTS_MONGO_PORT", 27017))
 MONGO_DBNAME = os.getenv("XEPMTS_MONGO_DB", "pmts")
+MONGO_USERNAME = os.getenv("XEPMTS_MONGO_USER", "")
+MONGO_AUTH_SOURCE = os.getenv("XEPMTS_MONGO_AUTH_SOURCE", MONGO_DBNAME)
+
+MONGO1T_HOST = MONGO_HOST
+MONGO1T_PORT = MONGO_PORT
 MONGO1T_DBNAME = MONGO_DBNAME + "1t"
-MONGO1T_AUTH_SOURCE = MONGO_AUTH_SOURCE = os.getenv("XEPMTS_MONGO_AUTH_SOURCE", MONGO_DBNAME)
+MONGO1T_AUTH_SOURCE = MONGO_AUTH_SOURCE
 MONGO1T_PASSWORD = MONGO_PASSWORD
+if os.getenv("XEPMTS_MONGO_REPLICA_SET", ""):
+    MONGO_REPLICA_SET = os.getenv("XEPMTS_MONGO_REPLICA_SET", "")
+    MONGO1T_REPLICA_SET = MONGO_REPLICA_SET
 
-replica_set = os.getenv("XEPMTS_MONGO_REPLICA_SET", "")
-if replica_set:
-    MONGO1T_REPLICA_SET = MONGO_REPLICA_SET = replica_set
-else:
-    MONGO1T_REPLICA_SET = MONGO_REPLICA_SET = ""
+MONGO1T_USERNAME = MONGO_USERNAME
 
-mongo_uri = os.getenv("XEPMTS_MONGO_URI", "")
-if mongo_uri:
-    MONGO1T_URI = MONGO_URI = mongo_uri
-else:
-    MONGO1T_URI = MONGO_URI = ""
-MONGO1T_USERNAME = MONGO_USERNAME = os.getenv("XEPMTS_MONGO_USER", "")
-
-#-------------------------------------------------------------------------#
+if os.getenv("XEPMTS_MONGO_URI", ""):
+    MONGO_URI = os.getenv("XEPMTS_MONGO_URI", "")
+    MONGO1T_URI = MONGO_URI
+# -------------------------------------------------------------------------- #
 
 SERVERS = ["https://api."+os.getenv('XEPMTS_DOMAIN','pmts.xenonnt.org'),]
 
@@ -90,21 +90,25 @@ def get_settings_dict(**overrides):
         MONGO1T_USERNAME = MONGO1T_USERNAME,
         MONGO1T_PASSWORD = MONGO1T_PASSWORD,
         MONGO1T_AUTH_SOURCE = MONGO1T_AUTH_SOURCE,
-        MONGO1T_REPLICA_SET = MONGO1T_REPLICA_SET,
-        MONGO1T_URI = MONGO1T_URI,
-
+        
         MONGO_HOST = MONGO_HOST,
         MONGO_PORT = MONGO_PORT,
         MONGO_DBNAME = MONGO_DBNAME,
         MONGO_USERNAME = MONGO_USERNAME,
         MONGO_PASSWORD = MONGO_PASSWORD,
         MONGO_AUTH_SOURCE = MONGO_AUTH_SOURCE,
-        MONGO_REPLICA_SET = MONGO_REPLICA_SET,
-        MONGO_URI = MONGO_URI,
 
         SERVERS = SERVERS,
         X_DOMAINS = X_DOMAINS,
         X_HEADERS = X_HEADERS,
     )
+    if os.getenv("XEPMTS_MONGO_URI", ""):
+        settings["MONGO1T_URI"] = MONGO1T_URI
+        settings["MONGO_URI"] = MONGO_URI
+
+    if os.getenv("XEPMTS_MONGO_REPLICA_SET", ""):
+        settings["MONGO_REPLICA_SET"] = MONGO_REPLICA_SET
+        settings["MONGO1T_REPLICA_SET"] = MONGO1T_REPLICA_SET
+
     settings.update(overrides)
     return settings
