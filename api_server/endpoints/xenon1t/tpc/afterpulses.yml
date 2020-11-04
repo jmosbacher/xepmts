@@ -1,0 +1,112 @@
+xenon1t_tpc_afterpulses:
+    resource_title: Tpc Afterpulses 1T
+    item_title: Tpc Afterpulse 1T
+    url: xenon1t/tpc/afterpulses
+    datasource:
+        source: tpc_afterpulses_1t
+    cache_control: max-age=10,must-revalidate
+    cache_expires: 10
+    schema:
+        experiment:
+            type: string
+            allowed:
+              - xenon1t
+              - xenonnt
+              - unknown
+            default: xenon1t
+            required: true
+        detector:
+            type: string
+            allowed:
+              - tpc
+              - nveto
+              - muveto
+              - unknown
+            required: true
+            default: tpc
+        pmt_index:
+            type: integer
+            required: true
+        run_id:
+            type: string
+        timestamp:
+            type: integer
+        start_time:
+            type: integer
+        end_time:
+            type: integer
+        trigger_sigma:
+            type: number
+        total_ap:
+            type: number
+        pe:
+            type: number
+        pe_error:
+            type: number
+        ar_pos:
+            type: number
+        hv:
+            type: number
+        ne_ap:
+            type: number
+        ne_pos:
+            type: number
+        xe_pos:
+            type: number
+        n2_pos:
+            type: number
+        ch4ap:
+            type: number
+        he_ap:
+            type: number
+        ar_ap:
+            type: number
+        doublexe_pos:
+            type: number
+        doublexe_ap:
+            type: number
+        trigger_mean:
+            type: number
+        gain:
+            type: number
+        ch4_pos:
+            type: number
+        n2_ap:
+            type: number
+        xe_ap:
+            type: number
+        pe_pulses:
+            type: number
+        trigger_number:
+            type: number
+    allowed_read_roles:
+      - admin
+      - expert
+      - write:xenon1t
+      - write:tpc
+      - write:tpc_afterpulses_1t
+      - read:xenon1t
+      - read:tpc
+      - read:tpc_afterpulses_1t
+    allowed_item_read_roles:
+      - admin
+      - expert
+      - write:xenon1t
+      - write:tpc
+      - write:tpc_afterpulses_1t
+      - read:xenon1t
+      - read:tpc
+      - read:tpc_afterpulses_1t
+    allowed_write_roles:
+      - admin
+      - expert
+      - write:xenon1t
+      - write:tpc
+      - write:tpc_afterpulses_1t
+    allowed_item_write_roles:
+      - admin
+      - expert
+      - write:xenon1t
+      - write:tpc
+      - write:tpc_afterpulses_1t
+    mongo_prefix: MONGO

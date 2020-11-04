@@ -1,0 +1,119 @@
+xenon1t_tpc_installs:
+    resource_title: Tpc Installs 1T
+    item_title: Tpc Install 1T
+    url: xenon1t/tpc/installs
+    datasource:
+        source: tpc_installs_1t
+    additional_lookup:
+        url: string
+        field: uid
+    cache_control: max-age=10,must-revalidate
+    cache_expires: 10
+    schema:
+        uid:
+            type: string
+            required: true
+            unique: true
+        array:
+            type: string
+        detector:
+            type: string
+            allowed:
+              - tpc
+              - nveto
+              - muveto
+              - unknown
+            required: true
+            default: tpc
+        experiment:
+            type: string
+            allowed:
+              - xenon1t
+              - xenonnt
+              - unknown
+            default: xenon1t
+            required: true
+        pmt_index:
+            type: integer
+            required: true
+        sector:
+            type: integer
+        position_x:
+            type: number
+        position_y:
+            type: number
+        position_z:
+            type: number
+        position_r:
+            type: number
+        amplifier_crate:
+            type: integer
+        amplifier_fan:
+            type: integer
+        amplifier_plug:
+            type: integer
+        amplifier_serial:
+            type: integer
+        amplifier_slot:
+            type: integer
+        amplifier_channel:
+            type: integer
+        digitizer_channel:
+            type: integer
+        digitizer_crate:
+            type: integer
+        digitizer_module:
+            type: integer
+        digitizer_slot:
+            type: integer
+        high_voltage_crate:
+            type: integer
+        high_voltage_board:
+            type: integer
+        high_voltage_channel:
+            type: integer
+        high_voltage_connector:
+            type: integer
+        high_voltage_feedthrough:
+            type: string
+        high_voltage_return:
+            type: integer
+        serial_number:
+            type: string
+        signal_channel:
+            type: integer
+        signal_connector:
+            type: integer
+        signal_feedthrough:
+            type: string
+    allowed_read_roles:
+      - admin
+      - expert
+      - write:xenon1t
+      - write:tpc
+      - write:tpc_installs_1t
+      - read:xenon1t
+      - read:tpc
+      - read:tpc_installs_1t
+    allowed_item_read_roles:
+      - admin
+      - expert
+      - write:xenon1t
+      - write:tpc
+      - write:tpc_installs_1t
+      - read:xenon1t
+      - read:tpc
+      - read:tpc_installs_1t
+    allowed_write_roles:
+      - admin
+      - expert
+      - write:xenon1t
+      - write:tpc
+      - write:tpc_installs_1t
+    allowed_item_write_roles:
+      - admin
+      - expert
+      - write:xenon1t
+      - write:tpc
+      - write:tpc_installs_1t
+    mongo_prefix: MONGO

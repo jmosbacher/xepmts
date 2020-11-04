@@ -1,0 +1,74 @@
+xenonnt_nveto_pmt_errors:
+    resource_title: Nveto Pmt Errors
+    item_title: Nveto Pmt Error
+    url: nveto/pmt_errors
+    datasource:
+        source: nveto_pmt_errors
+    cache_control: max-age=10,must-revalidate
+    cache_expires: 10
+    resource_methods:
+      - GET
+      - POST
+    schema:
+        timestamp:
+            type: string
+            required: true
+        detector:
+            type: string
+            allowed:
+              - tpc
+              - nveto
+              - muveto
+              - unknown
+            required: true
+            default: nveto
+        experiment:
+            type: string
+            allowed:
+              - xenon1t
+              - xenonnt
+              - unknown
+            default: xenonnt
+            required: true
+        pmt_index:
+            type: integer
+            required: true
+        error_code:
+            type: integer
+        operator:
+            type: string
+        details:
+            type: string
+        comments:
+            type: string
+    allowed_read_roles:
+      - admin
+      - expert
+      - write:xenonnt
+      - write:nveto
+      - write:nveto_pmt_errors
+      - read:xenonnt
+      - read:nveto
+      - read:nveto_pmt_errors
+    allowed_item_read_roles:
+      - admin
+      - expert
+      - write:xenonnt
+      - write:nveto
+      - write:nveto_pmt_errors
+      - read:xenonnt
+      - read:nveto
+      - read:nveto_pmt_errors
+    allowed_write_roles:
+      - admin
+      - expert
+      - write:xenonnt
+      - write:nveto
+      - write:nveto_pmt_errors
+    allowed_item_write_roles:
+      - admin
+      - expert
+      - write:xenonnt
+      - write:nveto
+      - write:nveto_pmt_errors
+    mongo_prefix: MONGO

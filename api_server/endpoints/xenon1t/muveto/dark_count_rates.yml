@@ -1,0 +1,69 @@
+xenon1t_muveto_dark_count_rates:
+    resource_title: Muveto Dark Count Rates 1T
+    item_title: Muveto Dark Count Rate 1T
+    url: xenon1t/muveto/dark_count_rates
+    datasource:
+        source: muveto_dc_rates_1t
+    cache_control: max-age=10,must-revalidate
+    cache_expires: 10
+    schema:
+        run_id:
+            type: string
+        timestamp:
+            type: integer
+        detector:
+            type: string
+            allowed:
+              - tpc
+              - nveto
+              - muveto
+              - unknown
+            required: true
+            default: muveto
+        experiment:
+            type: string
+            allowed:
+              - xenon1t
+              - xenonnt
+              - unknown
+            default: xenon1t
+            required: true
+        pmt_index:
+            type: integer
+            required: true
+        dcr_mean:
+            type: number
+            required: true
+        dcr_std_dev:
+            type: number
+    allowed_read_roles:
+      - admin
+      - expert
+      - write:xenon1t
+      - write:muveto
+      - write:muveto_dc_rates_1t
+      - read:xenon1t
+      - read:muveto
+      - read:muveto_dc_rates_1t
+    allowed_item_read_roles:
+      - admin
+      - expert
+      - write:xenon1t
+      - write:muveto
+      - write:muveto_dc_rates_1t
+      - read:xenon1t
+      - read:muveto
+      - read:muveto_dc_rates_1t
+    allowed_write_roles:
+      - admin
+      - expert
+      - write:xenon1t
+      - write:muveto
+      - write:muveto_dc_rates_1t
+    allowed_item_write_roles:
+      - admin
+      - expert
+      - write:xenon1t
+      - write:muveto
+      - write:muveto_dc_rates_1t
+    mongo_prefix: MONGO

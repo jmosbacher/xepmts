@@ -1,0 +1,104 @@
+xenonnt_nveto_voltage_maps:
+    resource_title: Nveto Voltage Maps
+    item_title: Nveto Voltage Map
+    url: nveto/voltage_maps
+    datasource:
+        source: nveto_voltage_maps
+    additional_lookup:
+        url: regex("[\w]+")
+        field: name
+    cache_control: max-age=10,must-revalidate
+    cache_expires: 10
+    resource_methods:
+      - GET
+      - POST
+      - DELETE
+    embedding: true
+    example:
+        name: Tribute
+        detector: tpc
+        experiment: xenonnt
+        voltages:
+          - pmt_index: 3
+            voltage: 1300
+          - pmt_index: 4
+            voltage: 1200
+          - pmt_index: 5
+            voltage: 1500
+        created_by: God
+        comments: This is not the greatest HV map, this is a tribute.
+        date: 10/1/2020
+    schema:
+        name:
+            type: string
+            unique: true
+            required: true
+            regex: ^\S+$
+        experiment:
+            type: string
+            allowed:
+              - xenon1t
+              - xenonnt
+              - unknown
+            default: xenonnt
+            required: true
+        detector:
+            type: string
+            allowed:
+              - tpc
+              - nveto
+              - muveto
+              - unknown
+            required: true
+            default: nveto
+        active:
+            type: boolean
+            default: true
+        voltages:
+            type: list
+            schema:
+                type: dict
+                schema:
+                    voltage:
+                        type: number
+                        required: true
+                    pmt_index:
+                        type: integer
+                        required: true
+        created_by:
+            type: string
+        comments:
+            type: string
+        date:
+            type: string
+    allowed_read_roles:
+      - admin
+      - expert
+      - write:xenonnt
+      - write:nveto
+      - write:nveto_voltage_maps
+      - read:xenonnt
+      - read:nveto
+      - read:nveto_voltage_maps
+    allowed_item_read_roles:
+      - admin
+      - expert
+      - write:xenonnt
+      - write:nveto
+      - write:nveto_voltage_maps
+      - read:xenonnt
+      - read:nveto
+      - read:nveto_voltage_maps
+    allowed_write_roles:
+      - admin
+      - expert
+      - write:xenonnt
+      - write:nveto
+      - write:nveto_voltage_maps
+    allowed_item_write_roles:
+      - admin
+      - expert
+      - write:xenonnt
+      - write:nveto
+      - write:nveto_voltage_maps
+    mongo_prefix: MONGO
