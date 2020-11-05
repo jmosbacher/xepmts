@@ -120,14 +120,14 @@ html_theme_options = {
 
     # Specify a base_url used to generate sitemap.xml. If not
     # specified, then no sitemap will be built.
-    'base_url': 'https://jmosbacher.github.io/xepmts',
+    'base_url': 'https://jmosbacher.github.io/xepmts/',
 
     # Set the color and the accent color
     'color_primary': 'cyan',
     'color_accent': 'light-green',
 
     # Set the repo location to get a badge with stats
-    'repo_url': 'https://github.com/jmosbacher/xepmts',
+    'repo_url': 'https://github.com/jmosbacher/xepmts/',
     'repo_name': 'XEPMTS',
     "repo_type": "github",
 
