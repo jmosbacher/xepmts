@@ -21,16 +21,10 @@ setup(
     author_email='joe.mosbacher@gmail.com',
     packages=['xepmts', 'xepmts.api'],
     package_dir={"": "."},
-    package_data={
-        "xepmts.api": [
-            "*.prod", "*.txt", "*.yaml", "endpoint_templates/*.yml",
-            "endpoints/*.yml"
-        ]
-    },
+    package_data={"xepmts.api": ["endpoint_templates/*.yml"]},
     entry_points={
     'console_scripts': ['xepmts = xepmts.cli:main'],
-    'xepmts.apps': 'db = xepmts.api.app:make_local_app'
-    },
+    'xepmts.apps': 'db = xepmts.api.app:make_local_app'},
     install_requires=[
         'bokeh==2.2.3; python_version >= "3.6"',
         'cerberus==1.3.2; python_version >= "2.7"', 'certifi==2020.6.20',

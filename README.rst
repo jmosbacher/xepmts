@@ -18,10 +18,17 @@ Basic usage::
         xepmts.notebook()
 
 
-        db = xepmts.get_client().db
+        db = xepmts.default_client().db
         db.set_token('YOUR-API-TOKEN')
 
         db.tpc.installs.next_page()
+
+        query = dict(pmt_index=4)
+        docs = db.tpc.installs.find(query)
+        df = db.tpc.installs.find_df(query)
+
+        
+
 
 
 * Free software: MIT
