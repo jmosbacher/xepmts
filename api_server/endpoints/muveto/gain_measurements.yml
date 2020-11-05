@@ -1,0 +1,74 @@
+xenonnt_muveto_gain_measurements:
+    resource_title: Muveto Gain Measurements
+    item_title: Muveto Gain Measurement
+    url: muveto/gain_measurements
+    datasource:
+        source: muveto_gain_data
+    cache_control: max-age=10,must-revalidate
+    cache_expires: 10
+    schema:
+        detector:
+            type: string
+            allowed:
+              - tpc
+              - nveto
+              - muveto
+              - unknown
+            required: true
+            default: muveto
+        experiment:
+            type: string
+            allowed:
+              - xenon1t
+              - xenonnt
+              - unknown
+            default: xenonnt
+            required: true
+        run_id:
+            type: string
+        timestamp:
+            type: integer
+        pmt_index:
+            type: integer
+            required: true
+        led_data:
+            type: list
+            schema:
+                type: integer
+                min: 0
+        noise_data:
+            type: list
+            schema:
+                type: integer
+                min: 0
+    allowed_read_roles:
+      - admin
+      - expert
+      - write:xenonnt
+      - write:muveto
+      - write:muveto_gain_data
+      - read:xenonnt
+      - read:muveto
+      - read:muveto_gain_data
+    allowed_item_read_roles:
+      - admin
+      - expert
+      - write:xenonnt
+      - write:muveto
+      - write:muveto_gain_data
+      - read:xenonnt
+      - read:muveto
+      - read:muveto_gain_data
+    allowed_write_roles:
+      - admin
+      - expert
+      - write:xenonnt
+      - write:muveto
+      - write:muveto_gain_data
+    allowed_item_write_roles:
+      - admin
+      - expert
+      - write:xenonnt
+      - write:muveto
+      - write:muveto_gain_data
+    mongo_prefix: MONGO

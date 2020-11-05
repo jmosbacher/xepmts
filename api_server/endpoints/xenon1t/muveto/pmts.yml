@@ -1,0 +1,53 @@
+xenon1t_muveto_pmts:
+    resource_title: Muveto Pmts 1T
+    item_title: Muveto Pmt 1T
+    url: xenon1t/muveto/pmts
+    datasource:
+        source: muveto_pmts_1t
+    additional_lookup:
+        url: string
+        field: serial_number
+    cache_control: max-age=10,must-revalidate
+    cache_expires: 10
+    schema:
+        serial_number:
+            type: string
+            required: true
+            unique: true
+        manufacturer:
+            type: string
+        location:
+            type: string
+        datasheet:
+            type: media
+    allowed_read_roles:
+      - admin
+      - expert
+      - write:xenon1t
+      - write:muveto
+      - write:muveto_pmts_1t
+      - read:xenon1t
+      - read:muveto
+      - read:muveto_pmts_1t
+    allowed_item_read_roles:
+      - admin
+      - expert
+      - write:xenon1t
+      - write:muveto
+      - write:muveto_pmts_1t
+      - read:xenon1t
+      - read:muveto
+      - read:muveto_pmts_1t
+    allowed_write_roles:
+      - admin
+      - expert
+      - write:xenon1t
+      - write:muveto
+      - write:muveto_pmts_1t
+    allowed_item_write_roles:
+      - admin
+      - expert
+      - write:xenon1t
+      - write:muveto
+      - write:muveto_pmts_1t
+    mongo_prefix: MONGO

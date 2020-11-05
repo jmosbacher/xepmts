@@ -1,0 +1,81 @@
+xenon1t_muveto_gains:
+    resource_title: Muveto Gains 1T
+    item_title: Muveto Gain 1T
+    url: xenon1t/muveto/gains
+    datasource:
+        source: muveto_gains_1t
+    cache_control: max-age=10,must-revalidate
+    cache_expires: 10
+    schema:
+        detector:
+            type: string
+            allowed:
+              - tpc
+              - nveto
+              - muveto
+              - unknown
+            required: true
+            default: muveto
+        experiment:
+            type: string
+            allowed:
+              - xenon1t
+              - xenonnt
+              - unknown
+            default: xenon1t
+            required: true
+        run_id:
+            type: string
+            required: true
+        timestamp:
+            type: integer
+        pmt_index:
+            type: integer
+            required: true
+        gain:
+            type: number
+            required: true
+        gain_err:
+            type: number
+            required: true
+        gain_stat_err:
+            type: number
+        gain_sys_err:
+            type: number
+        voltage:
+            type: number
+        occupancy:
+            type: number
+        occupancy_err:
+            type: number
+    allowed_read_roles:
+      - admin
+      - expert
+      - write:xenon1t
+      - write:muveto
+      - write:muveto_gains_1t
+      - read:xenon1t
+      - read:muveto
+      - read:muveto_gains_1t
+    allowed_item_read_roles:
+      - admin
+      - expert
+      - write:xenon1t
+      - write:muveto
+      - write:muveto_gains_1t
+      - read:xenon1t
+      - read:muveto
+      - read:muveto_gains_1t
+    allowed_write_roles:
+      - admin
+      - expert
+      - write:xenon1t
+      - write:muveto
+      - write:muveto_gains_1t
+    allowed_item_write_roles:
+      - admin
+      - expert
+      - write:xenon1t
+      - write:muveto
+      - write:muveto_gains_1t
+    mongo_prefix: MONGO

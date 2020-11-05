@@ -1,0 +1,75 @@
+xenonnt_tpc_current_changes:
+    resource_title: Tpc Current Changes
+    item_title: Tpc Current Change
+    url: tpc/current_changes
+    datasource:
+        source: tpc_current_changes
+    cache_control: max-age=10,must-revalidate
+    cache_expires: 10
+    resource_methods:
+      - GET
+      - POST
+    schema:
+        timestamp:
+            type: string
+            required: true
+        detector:
+            type: string
+            allowed:
+              - tpc
+              - nveto
+              - muveto
+              - unknown
+            required: true
+            default: tpc
+        experiment:
+            type: string
+            allowed:
+              - xenon1t
+              - xenonnt
+              - unknown
+            default: xenonnt
+            required: true
+        pmt_index:
+            type: integer
+            required: true
+        old_current:
+            type: number
+        new_current:
+            type: number
+            required: true
+        operator:
+            type: string
+        comments:
+            type: string
+    allowed_read_roles:
+      - admin
+      - expert
+      - write:xenonnt
+      - write:tpc
+      - write:tpc_current_changes
+      - read:xenonnt
+      - read:tpc
+      - read:tpc_current_changes
+    allowed_item_read_roles:
+      - admin
+      - expert
+      - write:xenonnt
+      - write:tpc
+      - write:tpc_current_changes
+      - read:xenonnt
+      - read:tpc
+      - read:tpc_current_changes
+    allowed_write_roles:
+      - admin
+      - expert
+      - write:xenonnt
+      - write:tpc
+      - write:tpc_current_changes
+    allowed_item_write_roles:
+      - admin
+      - expert
+      - write:xenonnt
+      - write:tpc
+      - write:tpc_current_changes
+    mongo_prefix: MONGO
