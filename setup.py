@@ -14,7 +14,7 @@ readme = ''
 setup(
     long_description=readme,
     name='xepmts',
-    version='0.1.1',
+    version='0.4.0',
     description='Top-level package for xepmts.',
     python_requires='>=3.7',
     author='Yossi Mosbacher',
