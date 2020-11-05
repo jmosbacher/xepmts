@@ -26,6 +26,7 @@ python = ">=3.7"
 click = "*"
 eve_panel = "*"
 
+
 [tool.poetry.dev-dependencies]
 bumpversion = "*"
 coverage = "*"
@@ -37,6 +38,9 @@ pytest = "*"
 sphinx = "*"
 tox = "*"
 yapf = "*"
+nbsphinx = "*"
+sphinx-material = "*"
+numpydoc = "*"
 
 [tool.poetry.scripts]
 xepmts = 'xepmts.cli:main'

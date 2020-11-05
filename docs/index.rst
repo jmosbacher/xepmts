@@ -8,6 +8,7 @@ Welcome to xepmts's documentation!
    readme
    installation
    usage
+   basic_usage
    modules
    contributing
    authors
