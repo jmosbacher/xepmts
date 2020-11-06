@@ -1,2 +1,4 @@
 xepmts
-sphinx_material
+nbsphinx
+sphinx-material
+numpydoc
