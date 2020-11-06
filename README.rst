@@ -14,6 +14,7 @@ xepmts
         :alt: Documentation Status
 
 Basic usage::
+
         import xepmts
 
         # If you are using a notebook:
@@ -55,7 +56,7 @@ Basic usage::
     
 
 * Free software: MIT
-* Documentation: https://jmosbacher.github.io/xepmts
+* Documentation: https://xepmts.readthedocs.io/
 
 
 Features

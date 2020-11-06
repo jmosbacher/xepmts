@@ -102,6 +102,9 @@ html_theme_path = sphinx_material.html_theme_path()
 html_context = sphinx_material.get_html_context()
 html_theme = "sphinx_material"
 
+html_sidebars = {
+    "**": ["logo-text.html", "globaltoc.html", "localtoc.html", "searchbox.html"]
+}
 # Theme options are theme-specific and customize the look and feel of a
 # theme further.  For a list of options available for each theme, see the
 # documentation.
@@ -116,7 +119,7 @@ html_theme_options = {
 
     # Specify a base_url used to generate sitemap.xml. If not
     # specified, then no sitemap will be built.
-    'base_url': 'https://jmosbacher.github.io/xepmts/',
+    'base_url': 'https://xepmts.readthedocs.io/',
 
     # Set the color and the accent color
     'color_primary': 'cyan',
@@ -176,25 +179,27 @@ latex_elements = {
     # 'figure_align': 'htbp',
 }
 
+latex_engine = 'xelatex'
+
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass
 # [howto, manual, or own class]).
-# latex_documents = [
-#     (master_doc, 'xepmts.tex',
-#      'xepmts Documentation',
-#      'Yossi Mosbacher', 'manual'),
-# ]
+latex_documents = [
+    (master_doc, 'xepmts.tex',
+     'xepmts Documentation',
+     'Yossi Mosbacher', 'manual'),
+]
 
 
 # -- Options for manual page output ------------------------------------
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-# man_pages = [
-#     (master_doc, 'xepmts',
-#      'xepmts Documentation',
-#      [author], 1)
-# ]
+man_pages = [
+    (master_doc, 'xepmts',
+     'xepmts Documentation',
+     [author], 1)
+]
 
 
 # -- Options for Texinfo output ----------------------------------------
@@ -202,14 +207,14 @@ latex_elements = {
 # Grouping the document tree into Texinfo files. List of tuples
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
-# texinfo_documents = [
-#     (master_doc, 'xepmts',
-#      'xepmts Documentation',
-#      author,
-#      'xepmts',
-#      'One line description of project.',
-#      'Miscellaneous'),
-# ]
+texinfo_documents = [
+    (master_doc, 'xepmts',
+     'xepmts Documentation',
+     author,
+     'xepmts',
+     'One line description of project.',
+     'Miscellaneous'),
+]
 
 
 

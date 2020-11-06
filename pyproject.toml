@@ -3,6 +3,7 @@
 name = "xepmts"
 version = "0.4.1"
 homepage = "https://github.com/jmosbacher/xepmts"
+documentation = "https://xepmts.readthedocs.io/"
 description = "Top-level package for xepmts."
 authors = ["Yossi Mosbacher <joe.mosbacher@gmail.com>"]
 readme = "README.rst"
