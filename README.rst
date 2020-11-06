@@ -15,21 +15,44 @@ xepmts
 
 Basic usage::
         import xepmts
-        xepmts.notebook()
 
+        # If you are using a notebook:
+        xepmts.notebook()
 
         db = xepmts.default_client().db
         db.set_token('YOUR-API-TOKEN')
 
-        db.tpc.installs.next_page()
+        # set the number of items to pull per page
+        db.tpc.installs.items_per_page = 25
+
+        # get the next page 
+        page = db.tpc.installs.next_page()
+
+        # iterate over pages:
+        for page in db.tpc.installs.pages():
+                df = page.df
+                # do something with data
+
+        # select only top array
+        top_array = db.tpc.installs.filter(array="top")
+        
+        # iterate over top array pages
+        for page in top_array.pages():
+                df = page.df
+                # do something with data
 
         query = dict(pmt_index=4)
-        docs = db.tpc.installs.find(query)
+        # get the first page of results for this query as a list of dictionaries
+        docs = db.tpc.installs.find(query, max_results=25, page_number=1)
+
+        # same as find, but returns a dataframe 
         df = db.tpc.installs.find_df(query)
 
-        
 
-
+        # insert documents into the database
+        docs = [{"pmt_index": 1, "position_x": 0, "position_y": 0}]
+        db.tpc.installs.insert_documents(docs)
+    
 
 * Free software: MIT
 * Documentation: https://jmosbacher.github.io/xepmts

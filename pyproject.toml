@@ -51,7 +51,8 @@ xepmts = 'xepmts.cli:main'
 [tool.dephell.main]
 from = {format = "poetrylock", path = "poetry.lock"}
 to = {format = "setuppy", path = "setup.py"}
-to = {format = "setuppy", path = "docs/requirements.txt"}
+
+#to = {format = "pip", path = "docs/requirements.txt"}
 
 
 [build-system]

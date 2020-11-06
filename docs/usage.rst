@@ -37,3 +37,9 @@ To use xepmts::
 
     # same as find, but returns a dataframe 
     df = db.tpc.installs.find_df(query)
+
+
+    # insert documents into the database
+    docs = [{"pmt_index": 1, "position_x": 0, "position_y": 0}]
+    db.tpc.installs.insert_documents(docs)
+    
