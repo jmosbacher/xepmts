@@ -31,7 +31,7 @@ setup(
         'chardet==3.0.4',
         'click==7.1.2; python_version != "3.0.*" and python_version != "3.1.*" and python_version != "3.2.*" and python_version != "3.3.*" and python_version != "3.4.*" and python_version >= "2.7"',
         'eve==1.1.4; python_version != "3.0.*" and python_version != "3.1.*" and python_version != "3.2.*" and python_version != "3.3.*" and python_version != "3.4.*" and python_version >= "2.7"',
-        'eve-panel==0.3.3; python_version >= "3.7"', 'events==0.3',
+        'eve-panel; python_version >= "3.7"', 'events==0.3',
         'flask==1.1.2; python_version != "3.0.*" and python_version != "3.1.*" and python_version != "3.2.*" and python_version != "3.3.*" and python_version != "3.4.*" and python_version >= "2.7"',
         'h11==0.11.0', 'httpcore==0.12.0; python_version >= "3.6"',
         'httpx==0.16.1; python_version >= "3.6"',
