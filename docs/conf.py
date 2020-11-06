@@ -22,10 +22,6 @@ import sys
 sys.path.insert(0, os.path.abspath('..'))
 
 import xepmts
-import param
-
-param.parameterized.docstring_signature = False
-param.parameterized.docstring_describe_params = False
 
 import sphinx_material
 
