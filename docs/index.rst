@@ -9,7 +9,6 @@ Welcome to xepmts's documentation!
    installation
    usage
    basic_usage
-   modules
    contributing
    authors
    history

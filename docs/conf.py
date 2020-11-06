@@ -139,10 +139,21 @@ html_theme_options = {
     "logo_icon": "&#xe1db",
     "nav_links": [
         {
-            "href": "https://github.com/jmosbacher/xepmts",
+            "href": "https://github.com/jmosbacher/eve-panel",
             "internal": False,
-            "title": "GITHUB",
+            "title": "Eve-Panel",
         },
+        {
+            "href": "https://github.com/pyeve/eve",
+            "internal": False,
+            "title": "Eve",
+        },
+        {
+            "href": "https://github.com/holoviz/panel",
+            "internal": False,
+            "title": "Panel",
+        },
+
     ],
 
 
