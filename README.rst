@@ -13,6 +13,9 @@ xepmts
         :target: https://xepmts.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
+Basic Usage
+-----------
+
 .. code-block:: python
 
     import xepmts
