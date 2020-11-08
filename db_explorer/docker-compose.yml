@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  panels:
+    image: gcr.io/xenon-pmts/pmtdb_production_explorer:latest
+    container_name: pmtdb_production_explorer
+    expose:
+      - "5006"
+    networks:
+      - web
+    environment:
+      - DOMAIN=${DOMAIN}
+    env_file:
+      - ./.env
+    restart: always
+    labels:
+      traefik.enable: true
+      traefik.docker.network: web
+      traefik.http.routers.panels.entrypoints: websecure
+      traefik.http.routers.panels.tls: true
+      traefik.http.routers.panels.rule: Host(`explorer.${DOMAIN}`)
+
+networks:
+  web:
+    external: true

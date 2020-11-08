@@ -16,7 +16,8 @@ def default_client():
     from xepmts.api.client import default_client
     return default_client()
 
-def notebook():
-    import panel as pn
-    return pn.extension()
+def extension():
+    import eve_panel
+    eve_panel.extension()
 
+notebook = extension

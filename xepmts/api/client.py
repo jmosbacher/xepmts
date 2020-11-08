@@ -1,5 +1,5 @@
 import eve_panel
-from xepmts.api import app
+from xepmts.api.app import make_local_app
 import os
 import pkg_resources
 
@@ -8,6 +8,8 @@ APPS = {
     for entry_point
     in pkg_resources.iter_entry_points('xepmts.apps')
 }
+
+APPS["db"] =  make_local_app
 
 def make_client(app_names=None):
     if app_names is None:
