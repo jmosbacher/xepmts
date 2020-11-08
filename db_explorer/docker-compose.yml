@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  panels:
+  explorer:
     image: gcr.io/xenon-pmts/pmtdb_production_explorer:latest
     container_name: pmtdb_production_explorer
     expose:

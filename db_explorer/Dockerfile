@@ -24,7 +24,5 @@ COPY ./Pipfile.lock Pipfile.lock
 RUN set -ex && pipenv install --deploy --system
 
 COPY ./app /app
-COPY ./start /app/start
-WORKDIR /app
-RUN chmod +x /app/start
-CMD pipenv panel serve /app
+WORKDIR /
+CMD pipenv panel serve app
