@@ -1,7 +1,7 @@
 [tool]
 [tool.poetry]
 name = "xepmts"
-version = "0.4.2"
+version = "0.4.3"
 homepage = "https://github.com/jmosbacher/xepmts"
 documentation = "https://xepmts.readthedocs.io/"
 description = "Top-level package for xepmts."

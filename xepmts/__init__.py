@@ -2,7 +2,7 @@
 
 __author__ = """Yossi Mosbacher"""
 __email__ = 'joe.mosbacher@gmail.com'
-__version__ = '0.4.2'
+__version__ = '0.4.3'
 
 def settings(**kwargs):
     from eve_panel import settings as panel_settings
