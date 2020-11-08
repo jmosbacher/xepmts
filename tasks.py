@@ -179,3 +179,5 @@ def release(c):
 @task(help={'version': "major/minor/path or explicit version"})
 def bump(c, version="patch"):
     _run(c, "bump2version {}".format(version))
+    _run(c, "git push")
+    _run(c, "git push --tags")
