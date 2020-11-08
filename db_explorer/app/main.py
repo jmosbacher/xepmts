@@ -53,5 +53,5 @@ if __name__ == "__main__":
     else:
         pn.serve(
             APP_ROUTES, port=8080, dev=False, title="XEPMTS", address=address, num_procs=1, allow_websocket_origin=["*"],
-            oauth_provider="github",oauth_key="", oauth_secret="",
+            # oauth_provider="github",oauth_key="", oauth_secret="",
         )
