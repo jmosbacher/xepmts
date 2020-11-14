@@ -19,7 +19,7 @@ def get_roles(token):
         roles = account.get("roles", [])
     else:
         try:
-            resp = requests.get(f'http://{os.getenv("DOMAIN", "localhost:8000")}/db_api/roles/{token}', timeout=5)
+            resp = requests.get(f'https://{os.getenv("DOMAIN", "localhost:8000")}/db_api/roles/{token}', timeout=5)
             if resp.ok:
                 data = resp.json()
                 roles = data["roles"]

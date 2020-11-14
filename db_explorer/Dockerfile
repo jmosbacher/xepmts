@@ -25,4 +25,4 @@ RUN set -ex && pipenv install --deploy --system
 
 COPY ./app /app
 WORKDIR /
-CMD pipenv panel serve app
+CMD pipenv run panel serve --address 0.0.0.0 --allow-websocket-origin="*" app

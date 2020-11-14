@@ -38,7 +38,8 @@ def read_endpoint_dirs(roots):
         domain.update(read_endpoint_files(root))
 
 INCLUDE_AS_IS = ["accounts",]
-ADMIN_ROLES = ["admin", "expert"]
+GLOBAL_WRITE_ROLES = ["admin", "expert"]
+GLOBAL_READ_ROLES = ["read:all"]
 
 EXPERIMENTS = {
     "xenonnt": {
@@ -56,7 +57,10 @@ EXPERIMENTS = {
 }
 
 
-def resources_from_templates(templates, experiments=EXPERIMENTS, include_as_is=INCLUDE_AS_IS, admin_roles=ADMIN_ROLES):
+def resources_from_templates(templates, experiments=EXPERIMENTS,
+                             include_as_is=INCLUDE_AS_IS,
+                            global_write_roles=GLOBAL_WRITE_ROLES,
+                            global_read_roles=GLOBAL_READ_ROLES):
     resources = {}
     for experiment_name, experiment in experiments.items():
         for detector in experiment["detectors"]:
@@ -77,8 +81,12 @@ def resources_from_templates(templates, experiments=EXPERIMENTS, include_as_is=I
                 if "detector" in new_resource["schema"]:    
                     new_resource["schema"]["detector"]["default"] = detector
                 
-                write_roles = admin_roles + [f'write:{experiment_name}',  f'write:{detector}', f'write:{new_resource["datasource"]["source"]}']
-                read_roles = write_roles + [ f'read:{experiment_name}',  f'read:{detector}', f'read:{new_resource["datasource"]["source"]}']
+                write_roles = global_write_roles + [f'write:{experiment_name}', 
+                                             f'write:{detector}', 
+                                             f'write:{new_resource["datasource"]["source"]}']
+                read_roles = write_roles + global_read_roles + [ f'read:{experiment_name}',
+                                             f'read:{detector}',
+                                             f'read:{new_resource["datasource"]["source"]}']
               
                 new_resource["allowed_read_roles"] = new_resource.get("allowed_read_roles", []) + read_roles
                 new_resource["allowed_item_read_roles"] = new_resource.get("allowed_item_read_roles", []) + read_roles
@@ -91,6 +99,3 @@ def resources_from_templates(templates, experiments=EXPERIMENTS, include_as_is=I
                 # resources[detector.capitalize() + name + experiment["name_suffix"]] = new_resource
     return resources
 
-
-def list_roles(enpoints_dir):
-    read_endpoint_files(enpoints_dir)

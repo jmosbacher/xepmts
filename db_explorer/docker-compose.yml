@@ -16,9 +16,12 @@ services:
     labels:
       traefik.enable: true
       traefik.docker.network: web
-      traefik.http.routers.panels.entrypoints: websecure
-      traefik.http.routers.panels.tls: true
-      traefik.http.routers.panels.rule: Host(`explorer.${DOMAIN}`)
+      traefik.http.routers.explorer.entrypoints: websecure
+      traefik.http.routers.explorer.tls: true
+      traefik.http.routers.explorer.tls.certresolver: myresolver
+      traefik.http.routers.explorer.rule: Host(`explorer.${DOMAIN}`)
+      traefik.http.services.explorer.loadbalancer.sticky.cookie: true
+      
 
 networks:
   web:

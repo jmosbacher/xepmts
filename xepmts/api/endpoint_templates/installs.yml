@@ -41,3 +41,35 @@ installs:
         signal_connector: {type: integer}
         signal_feedthrough: {type: string}
 
+    metadata:
+        fields:
+            _id:
+                label: ID
+            position_x:
+                label: x
+                unit: cm
+            position_y:
+                label: y
+                unit: cm
+            sector:
+                label: Sector
+            array:
+                label: Array
+        plot:
+            width: 380
+            height: 320
+            subplots: true
+            padding: 0.1
+            by: array
+            shared_axes: false
+            legend: true
+            alpha: 0.4
+            s: 180
+        plots:
+            sectors:
+                kind: scatter
+                x: position_x
+                y: position_y
+                c: sector
+                line_color: black
+                cmap: Category10

@@ -4,6 +4,9 @@ __author__ = """Yossi Mosbacher"""
 __email__ = 'joe.mosbacher@gmail.com'
 __version__ = '0.4.3'
 
+from .api.app import list_roles
+from . import api
+
 def settings(**kwargs):
     from eve_panel import settings as panel_settings
     if not kwargs:

@@ -30,10 +30,11 @@ tmpl = pn.template.MaterialTemplate(title="Xenon PMT Database",
                                     header_background="#34949e")
 
 menu = eve_panel.Menu(resources=resources, width=250)
-tmpl.main.width=1200
-tmpl.main[:] = [pn.panel(menu.selected_view, max_width=1200, scrollable=True,
- width_policy='max', sizing_mode='stretch_width')]
-tmpl.sidebar[:] = [menu.menu_view]
+tmpl.main.width = 1200
+tmpl.main[:] = [pn.panel(menu.selected_view, max_width=1200, scroll=True,
+                        width_policy='max', sizing_mode='stretch_width')]
+# tmpl.main.scroll = True
+tmpl.sidebar[:] = [menu.menu_view, db._http_client.panel()]
 tmpl.header.append(pn.panel(db._http_client.auth.credentials_view))
 
 

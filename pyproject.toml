@@ -1,10 +1,21 @@
 [tool]
+
+[tool.dephell.main]
+from = {format = "poetry", path = "pyproject.toml"}
+to = {format = "setuppy", path = "setup.py"}
+
+versioning = "semver"
+
+# git tag template for releases
+tag = "v."
+
+
 [tool.poetry]
 name = "xepmts"
 version = "0.4.3"
 homepage = "https://github.com/jmosbacher/xepmts"
 documentation = "https://xepmts.readthedocs.io/"
-description = "Top-level package for xepmts."
+description = "Python client for accessing the XENON experiment PMT data."
 authors = ["Yossi Mosbacher <joe.mosbacher@gmail.com>"]
 readme = "README.rst"
 license =  "MIT"
@@ -22,10 +33,15 @@ packages = [
     { include = "tests", format = "sdist" },
 ]
 
+[tool.poetry.scripts]
+xepmts = "xepmts.cli:main"
+
+
 [tool.poetry.dependencies]
 python = ">=3.7"
 click = "*"
 eve_panel = "*"
+eve-jwt = "^0.1.1"
 
 
 [tool.poetry.dev-dependencies]
@@ -43,19 +59,7 @@ nbsphinx = "*"
 sphinx-material = "*"
 numpydoc = "*"
 
-[tool.poetry.scripts]
-xepmts = 'xepmts.cli:main'
-
-[tool.poetry.plugins."xepmts.apps"]
-"db" = "xepmts.api.app:make_local_app"
-
-[tool.dephell.main]
-from = {format = "poetrylock", path = "poetry.lock"}
-to = {format = "setuppy", path = "setup.py"}
-
-#to = {format = "pip", path = "docs/requirements.txt"}
-
 
 [build-system]
-requires = ["poetry>=0.12", "setuptools"]
+requires = ["poetry>=0.12", "dephell", "setuptools"]
 build-backend = "poetry.masonry.api"
