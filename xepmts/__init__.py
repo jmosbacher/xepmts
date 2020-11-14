@@ -2,7 +2,7 @@
 
 __author__ = """Yossi Mosbacher"""
 __email__ = 'joe.mosbacher@gmail.com'
-__version__ = '0.4.3'
+__version__ = '0.4.4'
 
 from .api.app import list_roles
 from . import api
