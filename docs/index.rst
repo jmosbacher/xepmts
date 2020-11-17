@@ -7,8 +7,9 @@ Welcome to xepmts's documentation!
 
    readme
    installation
-   usage
    basic_usage
+   plotting_api
+   using_dask
    contributing
    authors
    history
