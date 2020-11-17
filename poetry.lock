@@ -68,7 +68,7 @@ description = "The ultimate Python library in building OAuth and OpenID Connect 
 name = "authlib"
 optional = false
 python-versions = "*"
-version = "0.15.2"
+version = "0.14.3"
 
 [package.dependencies]
 cryptography = "*"
@@ -302,10 +302,10 @@ description = "Top-level package for eve-jwt."
 name = "eve-jwt"
 optional = false
 python-versions = ">=3.7"
-version = "0.1.1"
+version = "0.1.2"
 
 [package.dependencies]
-Authlib = ">=0.15.2,<0.16.0"
+Authlib = "0.14.3"
 eve = ">=1.1.4,<2.0.0"
 expiringdict = ">=1.2.1,<2.0.0"
 flask = ">=1.1.2,<2.0.0"
@@ -1499,8 +1499,8 @@ attrs = [
     {file = "attrs-20.3.0.tar.gz", hash = "sha256:832aa3cde19744e49938b91fea06d69ecb9e649c93ba974535d08ad92164f700"},
 ]
 authlib = [
-    {file = "Authlib-0.15.2-py2.py3-none-any.whl", hash = "sha256:078b900fa9fbebf9f8dae1d5dc1ca857b6a742493093ef9b0b36ad926f36e41f"},
-    {file = "Authlib-0.15.2.tar.gz", hash = "sha256:21b34625c83ca48150684bbeca8f7c884cd281913c72d146dbf0e9d2fbfdec4e"},
+    {file = "Authlib-0.14.3-py2.py3-none-any.whl", hash = "sha256:270e778201590af8873cf7d5e8e8ca5b625a16f7afba6a4280b6fb4efdd791bf"},
+    {file = "Authlib-0.14.3.tar.gz", hash = "sha256:cc52908e9e996f3de2ac2f61bf1ee6c6f1c5ce8e67c89ff2ca473008fffc92f6"},
 ]
 babel = [
     {file = "Babel-2.9.0-py2.py3-none-any.whl", hash = "sha256:9d35c22fcc79893c3ecc85ac4a56cde1ecf3f19c540bba0922308a6c06ca6fa5"},
@@ -1673,8 +1673,8 @@ eve = [
     {file = "Eve-1.1.4.tar.gz", hash = "sha256:3a057277bba7144a0c15ab8c737dc8a1002e87e7284847aa011ce122e353418e"},
 ]
 eve-jwt = [
-    {file = "eve_jwt-0.1.1-py3-none-any.whl", hash = "sha256:76dda36df8b2a391b32dbcda7f77758fc390ce15f01be79decfff74b9f1f4209"},
-    {file = "eve_jwt-0.1.1.tar.gz", hash = "sha256:c4434e5018765e03bc1a98e650c3bf26e77f686bb74addb65162f06cdefa89ec"},
+    {file = "eve_jwt-0.1.2-py3-none-any.whl", hash = "sha256:2cd29b0c22177a5851669a7ca8fa7f31a11c4c0400bd8da139260c76f4eadd4c"},
+    {file = "eve_jwt-0.1.2.tar.gz", hash = "sha256:df60c2e21b0e74b187bb61800988033a23708be339802112ae157899615937d3"},
 ]
 eve-panel = [
     {file = "eve_panel-0.3.4-py3-none-any.whl", hash = "sha256:7df23ef56681ab11f69992df1d70c79dbae8b19ec2a9e0a866dab3752a991a19"},

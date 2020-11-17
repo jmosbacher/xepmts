@@ -56,9 +56,9 @@ class XenonTokenAuth(TokenAuth):
     def check_auth(self, token, allowed_roles, resource, method):
         if not token:
             return False
-        if token == ROOT_TOKEN:
+        if ROOT_TOKEN and token == ROOT_TOKEN:
             return True
-        if token == GLOBAL_READ_TOKEN and method in ["GET", "HEAD"]:
+        if all([GLOBAL_READ_TOKEN, token == GLOBAL_READ_TOKEN, method in ["GET", "HEAD"]]):
             return True
         # print(f"Checking roles for token {token}", file=sys.stderr)
         roles = get_roles(token)

@@ -14,6 +14,6 @@ if os.getenv("GAE_ENV", None):
     
 else:
     MONGO_PASSWORD = os.getenv("XEPMTS_MONGO_PASS", "")
-    ROOT_TOKEN = os.getenv("XEPMTS_ROOT_TOKEN","super_secret")
+    ROOT_TOKEN = os.getenv("XEPMTS_ROOT_TOKEN", None)
 
-GLOBAL_READ_TOKEN = os.getenv("XEPMTS_GLOBAL_READ_TOKEN","")
+GLOBAL_READ_TOKEN = os.getenv("XEPMTS_GLOBAL_READ_TOKEN", None)

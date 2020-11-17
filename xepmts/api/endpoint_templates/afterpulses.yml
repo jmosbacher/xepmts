@@ -7,6 +7,7 @@ afterpulses:
         source: afterpulses
     cache_control: "max-age=10,must-revalidate"
     cache_expires: 10
+    mongo_indexes: {}
     schema:
         experiment: {type: string, allowed: [xenon1t, xenonnt, unknown], default: xenonnt, required: true}
         detector: {type: string, allowed: [tpc, nveto, muveto, unknown], required: true}
