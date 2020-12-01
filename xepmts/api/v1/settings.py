@@ -55,6 +55,7 @@ X_DOMAINS = ['http://localhost:8000',
             'http://127.0.0.1:5000',
             'http://editor.swagger.io',
             "https://"+os.getenv('XEPMTS_DOMAIN','pmts.xenonnt.org'),
+            "https://*."+os.getenv('XEPMTS_DOMAIN','pmts.xenonnt.org'),
             "https://api."+os.getenv('XEPMTS_DOMAIN','pmts.xenonnt.org'),
             "https://website."+os.getenv('XEPMTS_DOMAIN','pmts.xenonnt.org'),
             "https://panels."+os.getenv('XEPMTS_DOMAIN','pmts.xenonnt.org'),
@@ -63,11 +64,6 @@ X_DOMAINS = ['http://localhost:8000',
 
 X_HEADERS = ['Content-Type', 'If-Match', 'Authorization', 'X-HTTP-Method-Override']  # Needed for the "Try it out" buttons
 
-JWT_AUDIENCES = ["api_client"]
-JWT_KEY_URL = f"https://{os.getenv('XEPMTS_DOMAIN','pmts.xenonnt.org')}/db_api/certs/"
-JWT_SCOPE_CLAIM = None
-JWT_ROLES_CLAIM = "roles"
-JWT_TTL = 3600
 
 def get_settings_dict(**overrides):
     
@@ -110,10 +106,6 @@ def get_settings_dict(**overrides):
         SERVERS = SERVERS,
         X_DOMAINS = X_DOMAINS,
         X_HEADERS = X_HEADERS,
-        JWT_KEY_URL = JWT_KEY_URL,
-        JWT_AUDIENCES = JWT_AUDIENCES,
-        JWT_SCOPE_CLAIM = JWT_SCOPE_CLAIM,
-        JWT_TTL = JWT_TTL,
     )
     if os.getenv("XEPMTS_MONGO_URI", ""):
         settings["MONGO1T_URI"] = MONGO1T_URI

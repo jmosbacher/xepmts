@@ -1,0 +1,18 @@
+current_changes:
+    resource_title: current_changes
+    item_title: current_change
+    url: current_changes
+    datasource:
+        source: current_changes
+    cache_control: "max-age=10,must-revalidate"
+    cache_expires: 10
+    resource_methods: [GET, POST]
+    schema:
+        timestamp: {type: string, required: true}
+        detector: {type: string, allowed: [tpc, nveto, muveto, unknown], required: true}
+        experiment: {type: string, allowed: [xenon1t, xenonnt, unknown], default: xenonnt, required: true}
+        pmt_index: {type: integer, required: true}
+        old_current: {type: number}
+        new_current: {type: number, required: true}
+        operator: {type: string}
+        comments: {type: string}

@@ -1,0 +1,24 @@
+gain_measurements:
+    resource_title: gain_measurements
+    item_title: gain_measurement
+    url: gain_measurements
+    datasource:
+        source: gain_data
+    cache_control: "max-age=10,must-revalidate"
+    cache_expires: 10
+    schema:
+        detector: {type: string, allowed: [tpc, nveto, muveto, unknown], required: true}
+        experiment: {type: string, allowed: [xenon1t, xenonnt, unknown], default: xenonnt, required: true}
+        run_id: {type: string}
+        timestamp: {type: integer}
+        pmt_index: {type: integer, required: true}
+        led_data:
+            type: list
+            schema:
+                type: integer
+                min: 0
+        noise_data:
+            type: list
+            schema:
+                type: integer
+                min: 0

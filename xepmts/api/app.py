@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 import os
 
-from xepmts.api.settings import get_settings_dict
+from .settings import get_settings_dict
 
+VERSIONS = ["v1", "v2"]
 
 def make_app(settings=None, auth=None, app=None,
              swagger=True, swagger_ui=True, fs_store=False,
