@@ -1,10 +1,11 @@
-import eve_panel
 from xepmts.api import server
 import os
 import pkg_resources
 
 
 def make_client(version):
+    import eve_panel
+
     make_app = getattr(server, version).app.make_app
     app = make_app()
     client = eve_panel.EveClient.from_app(app, name="xepmts", sort_by_url=True)
