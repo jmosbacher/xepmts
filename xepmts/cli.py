@@ -3,8 +3,8 @@ import sys
 import os
 
 import click
-from xepmts.api.utils import resources_from_templates, read_endpoint_files
-from xepmts.api.domain import DEFAULT_TEMPLATE_DIR
+from xepmts.api.server.v1.utils import resources_from_templates, read_endpoint_files
+from xepmts.api.server.domain import DEFAULT_TEMPLATE_DIR
 from ruamel.yaml import YAML
 yaml = YAML()
 yaml.indent(mapping=4, sequence=4, offset=2)
@@ -40,7 +40,7 @@ def generate_endpoints(template_dir, out):
 
 @main.command()
 def serve():
-    from xepmts.api.app import make_local_app
+    from xepmts.api.server.v1.app import make_local_app
     app = make_local_app()
     app.run(host="localhost", debug=True, ) #ssl_context="adhoc"
 

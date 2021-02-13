@@ -12,7 +12,7 @@ tag = "v."
 
 [tool.poetry]
 name = "xepmts"
-version = "0.4.6"
+version = "0.4.7"
 homepage = "https://github.com/jmosbacher/xepmts"
 documentation = "https://xepmts.readthedocs.io/"
 description = "Python client for accessing the XENON experiment PMT data."
@@ -24,7 +24,7 @@ classifiers=[
     'Intended Audience :: Developers',
     'License :: OSI Approved :: MIT License',
     'Natural Language :: English',
-
+    'Programming Language :: Python :: 3.6',
     'Programming Language :: Python :: 3.7',
     'Programming Language :: Python :: 3.8',
 ]
