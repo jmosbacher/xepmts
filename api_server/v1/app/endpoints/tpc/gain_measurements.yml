@@ -1,0 +1,74 @@
+xenonnt_tpc_gain_measurements:
+    resource_title: Tpc Gain Measurements
+    item_title: Tpc Gain Measurement
+    url: tpc/gain_measurements
+    datasource:
+        source: tpc_gain_data
+    cache_control: max-age=10,must-revalidate
+    cache_expires: 10
+    schema:
+        detector:
+            type: string
+            allowed:
+              - tpc
+              - nveto
+              - muveto
+              - unknown
+            required: true
+            default: tpc
+        experiment:
+            type: string
+            allowed:
+              - xenon1t
+              - xenonnt
+              - unknown
+            default: xenonnt
+            required: true
+        run_id:
+            type: string
+        timestamp:
+            type: integer
+        pmt_index:
+            type: integer
+            required: true
+        led_data:
+            type: list
+            schema:
+                type: integer
+                min: 0
+        noise_data:
+            type: list
+            schema:
+                type: integer
+                min: 0
+    allowed_read_roles:
+      - admin
+      - expert
+      - write:xenonnt
+      - write:tpc
+      - write:tpc_gain_data
+      - read:xenonnt
+      - read:tpc
+      - read:tpc_gain_data
+    allowed_item_read_roles:
+      - admin
+      - expert
+      - write:xenonnt
+      - write:tpc
+      - write:tpc_gain_data
+      - read:xenonnt
+      - read:tpc
+      - read:tpc_gain_data
+    allowed_write_roles:
+      - admin
+      - expert
+      - write:xenonnt
+      - write:tpc
+      - write:tpc_gain_data
+    allowed_item_write_roles:
+      - admin
+      - expert
+      - write:xenonnt
+      - write:tpc
+      - write:tpc_gain_data
+    mongo_prefix: MONGO

@@ -23,7 +23,7 @@ Basic Usage
     # If you are using a notebook:
     xepmts.notebook()
 
-    db = xepmts.default_client().db
+    db = xepmts.default_client()
     db.set_token('YOUR-API-TOKEN')
 
     # set the number of items to pull per page

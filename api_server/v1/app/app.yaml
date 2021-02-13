@@ -1,0 +1,12 @@
+runtime: python37
+service: api
+
+env_variables:
+  XEPMTS_DOMAIN: pmts.xenonnt.org
+  XEPMTS_MONGO_HOST: "lngs-proxy.yossisprojects.com"
+  XEPMTS_MONGO_PORT: 27017
+  XEPMTS_MONGO_DB: pmts
+  XEPMTS_MONGO_USER: api
+  XEPMTS_MONGO_AUTH_SOURCE: pmts
+  #XEPMTS_MONGO_REPLICA_SET: RunsDatabase
+  #XEPMTS_ENDPOINT_DIR: endpoints

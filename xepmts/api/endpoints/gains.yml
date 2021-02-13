@@ -1,0 +1,21 @@
+gains:
+    resource_title: gains
+    item_title: gain
+    url: gains
+    datasource:
+        source: gains
+    cache_control: "max-age=10,must-revalidate"
+    cache_expires: 10
+    schema:
+        detector: {type: string, allowed: [tpc, nveto, muveto, unknown], required: true}
+        experiment: {type: string, allowed: [xenon1t, xenonnt, unknown], default: xenonnt, required: true}
+        run_id: {type: string, required: true}
+        timestamp: {type: integer}
+        pmt_index: {type: integer, required: true}
+        gain: {type: number, required: true} 
+        gain_err: {type: number, required: true}
+        gain_stat_err: {type: number}
+        gain_sys_err: {type: number}
+        voltage: {type: number}
+        occupancy: {type: number}
+        occupancy_err: {type: number}

@@ -1,0 +1,75 @@
+installs:
+    resource_title: installs
+    item_title: install
+    url: installs
+    datasource:
+        source: installs
+    additional_lookup:
+        url: string
+        field: uid
+    cache_control: "max-age=10,must-revalidate"
+    cache_expires: 10
+    schema:
+        uid: {type: string, required: true, unique: true}
+        array:  {type: string, } #allowed: [top, bottom, diagnostic, na, unknown]
+        detector: {type: string, allowed: [tpc, nveto, muveto, unknown], required: true}
+        experiment: {type: string, allowed: [xenon1t, xenonnt, unknown], default: xenonnt, required: true}
+        pmt_index: {type: integer, required: true}
+        sector: {type: integer}
+        position_x: {type: number}
+        position_y: {type: number}
+        position_z: {type: number}
+        position_r: {type: number}
+        amplifier_crate: {type: integer}
+        amplifier_fan: {type: integer}
+        amplifier_plug: {type: integer}
+        amplifier_serial: {type: integer}
+        amplifier_slot: {type: integer}
+        amplifier_channel: {type: integer}
+        digitizer_channel: {type: integer}
+        digitizer_crate: {type: integer}
+        digitizer_module : {type: integer}
+        digitizer_slot: {type: integer}
+        high_voltage_crate: {type: integer}
+        high_voltage_board: {type: integer}
+        high_voltage_channel: {type: integer}
+        high_voltage_connector: {type: integer}
+        high_voltage_feedthrough: {type: string}
+        high_voltage_return: {type: integer}
+        serial_number: {type: string}
+        signal_channel: {type: integer}
+        signal_connector: {type: integer}
+        signal_feedthrough: {type: string}
+
+    metadata:
+        fields:
+            _id:
+                label: ID
+            position_x:
+                label: x
+                unit: cm
+            position_y:
+                label: y
+                unit: cm
+            sector:
+                label: Sector
+            array:
+                label: Array
+        plot:
+            width: 380
+            height: 320
+            subplots: true
+            padding: 0.1
+            by: array
+            shared_axes: false
+            legend: true
+            alpha: 0.4
+            s: 180
+        plots:
+            sectors:
+                kind: scatter
+                x: position_x
+                y: position_y
+                c: sector
+                line_color: black
+                cmap: Category10

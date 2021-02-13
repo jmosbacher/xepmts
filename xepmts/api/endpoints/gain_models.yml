@@ -1,0 +1,29 @@
+gain_models:
+    resource_title: gain_models
+    item_title: gain_model
+    url: gain_models
+    datasource:
+        source: gain_models
+    cache_control: "max-age=10,must-revalidate"
+    cache_expires: 10
+    versioning: true
+    resource_methods: ["GET", "POST", "DELETE"]
+    item_methods: ["GET", "PUT", "PATCH", "DELETE"]
+    soft_delete: true
+    schema:
+        detector: {type: string, allowed: [tpc, nveto, muveto, unknown], required: true}
+        experiment: {type: string, allowed: [xenon1t, xenonnt, unknown], default: xenonnt, required: true}
+        run_id: {type: string, required: true}
+        timestamp: {type: string}
+        pmt_index: {type: integer, required: true}
+        gain: {type: number, required: true}
+        gain_err: {type: number, required: true}
+        gain_stat_err: {type: number}
+        gain_sys_err: {type: number}
+        voltage: {type: number, required: true}
+        gain_model: {type: number, required: true}
+        gain_model_stat_err: {type: number, required: true}
+        gain_model_err: {type: number, required: true}
+        adctoe_gain_model: {type: number, required: true}
+        adctoe_gain_model_err: {type: number, required: true}
+        time: {type: string, required: true}
