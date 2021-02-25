@@ -7,7 +7,10 @@ __version__ = '0.4.8'
 # import eve_panel
 from xepmts import api
 from xepmts.api.server.v1.app import list_roles
-from xepmts.api.server.v1.client import default_client
+from xepmts.api.server.v2.app import list_roles as list_v2_roles
+
+from xepmts.api.client import default_client, get_client
+
 
 def settings(**kwargs):
     from eve_panel import settings as panel_settings
@@ -17,12 +20,11 @@ def settings(**kwargs):
         for k,v in kwargs.items():
             setattr(panel_settings, k, v)
 
-# def default_client():
-    
-#     return default_client()
 
 def extension():
     import eve_panel
+    import nest_asyncio
     eve_panel.extension()
+    nest_asyncio.apply()
 
 notebook = extension

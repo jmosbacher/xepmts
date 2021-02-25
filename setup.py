@@ -24,7 +24,7 @@ if os.path.exists(readme_path):
 setup(
     long_description=readme,
     name='xepmts',
-    version='0.4.7',
+    version='0.4.8',
     description='Python client for accessing the XENON experiment PMT data.',
     python_requires='>=3.6',
     project_urls={"documentation": "https://xepmts.readthedocs.io/", "homepage": "https://github.com/jmosbacher/xepmts"},

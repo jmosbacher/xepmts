@@ -5,7 +5,7 @@ from xepmts.api.server.v2.domain import get_domain
 from xepmts.api.server.v2 import settings
 
 
-def make_app(swagger=True, **kwargs):
+def make_app(swagger=False, export_metrics=False, **kwargs):
     from eve import Eve
     
     app = Eve(settings=settings.__file__, **kwargs)
@@ -34,6 +34,11 @@ def make_app(swagger=True, **kwargs):
             'schemes': ['http', 'https'],
 
         }
+
+    if export_metrics:
+        from prometheus_flask_exporter import PrometheusMetrics
+        PrometheusMetrics(app)
+
     return app
 
 

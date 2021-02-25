@@ -63,8 +63,8 @@ X_DOMAINS = ['http://localhost:8000',
 
 X_HEADERS = ['Content-Type', 'If-Match', 'Authorization', 'X-HTTP-Method-Override']  # Needed for the "Try it out" buttons
 
-JWT_AUDIENCES = ["https://api.pmts.xenonnt.org"]
-JWT_KEY_URL = "https://auth-dot-xenon-pmts.uc.r.appspot.com/.well-known/certs"
-JWT_SCOPE_CLAIM = "scope"
-JWT_ROLES_CLAIM = "roles"
+JWT_AUDIENCES = os.getenv("XEPMTS_JWT_AUDIENCES", "https://api.pmts.xenonnt.org").split(",")
+JWT_KEY_URL = os.getenv("XEPMTS_JWT_KEY_URL", "https://auth-dot-xenon-pmts.uc.r.appspot.com/.well-known/jwks.json")
+JWT_SCOPE_CLAIM = os.getenv("XEPMTS_JWT_SCOPE_CLAIM","scope")
+JWT_ROLES_CLAIM = os.getenv("XEPMTS_JWT_ROLES_CLAIM", "roles")
 JWT_TTL = 3600

@@ -6,13 +6,13 @@ from xepmts.api.server.v1 import settings as settings
 settings_file = settings.__file__
 
 def make_app(settings=settings_file, auth=None, app=None,
-             swagger=True, fs_store=False,
+             swagger=False, fs_store=False,
              export_metrics=False):
 
     kwargs = {}
-    if fs_store:
-        from eve_fsmediastorage import FileSystemMediaStorage
-        kwargs["media"] = FileSystemMediaStorage
+    # if fs_store:
+    #     from eve_fsmediastorage import FileSystemMediaStorage
+    #     kwargs["media"] = FileSystemMediaStorage
 
     if app is None:
         from eve import Eve
