@@ -1,5 +1,5 @@
 # """Retain v1 as api default"""
-# from .v1 import app, utils, settings, client, domain
+
 # from . import v2
 # from six import iteritems
 

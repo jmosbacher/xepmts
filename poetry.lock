@@ -342,7 +342,7 @@ description = "Top-level package for Eve-Panel."
 name = "eve-panel"
 optional = false
 python-versions = ">=3.6"
-version = "0.3.10"
+version = "0.3.12"
 
 [package.dependencies]
 Authlib = ">=0.15.3,<0.16.0"
@@ -507,7 +507,7 @@ marker = "python_version < \"3.7\""
 name = "importlib-resources"
 optional = false
 python-versions = ">=3.6"
-version = "5.1.0"
+version = "5.1.1"
 
 [package.dependencies]
 [package.dependencies.zipp]
@@ -516,7 +516,7 @@ version = ">=0.4"
 
 [package.extras]
 docs = ["sphinx", "jaraco.packaging (>=8.2)", "rst.linker (>=1.9)"]
-testing = ["pytest (>=3.5,<3.7.3 || >3.7.3)", "pytest-checkdocs (>=1.2.3)", "pytest-flake8", "pytest-cov", "pytest-enabler", "pytest-black (>=0.3.7)", "pytest-mypy"]
+testing = ["pytest (>=4.6)", "pytest-checkdocs (>=1.2.3)", "pytest-flake8", "pytest-cov", "pytest-enabler", "pytest-black (>=0.3.7)", "pytest-mypy"]
 
 [[package]]
 category = "dev"
@@ -778,7 +778,7 @@ description = "Jupyter Notebook Tools for Sphinx"
 name = "nbsphinx"
 optional = false
 python-versions = ">=3.6"
-version = "0.8.1"
+version = "0.8.2"
 
 [package.dependencies]
 docutils = "*"
@@ -1735,8 +1735,8 @@ eve = [
     {file = "Eve-1.1.5.tar.gz", hash = "sha256:5647ee7dd6e063b967276e49f564cd4f96decdd0a218482bdf86c404a2be1fbf"},
 ]
 eve-panel = [
-    {file = "eve_panel-0.3.10-py3-none-any.whl", hash = "sha256:572ba250eca1259d42ea7b3d8a907c5e4e0db2627a16d6e35b5734a0092a5598"},
-    {file = "eve_panel-0.3.10.tar.gz", hash = "sha256:54baa2b1b1df6aebfcbae78ee4a7aa7a814f2ebdd0706cfa013fb8b6442f008a"},
+    {file = "eve_panel-0.3.12-py3-none-any.whl", hash = "sha256:9335c73c470cb6efa5aaeda1fc35702515b09ef642118fc3e4ae9dc342576777"},
+    {file = "eve_panel-0.3.12.tar.gz", hash = "sha256:a173a8757f14665d94e7821e7d6dd212323f96a880e9ccd5618e53f9f96b3fd9"},
 ]
 events = [
     {file = "Events-0.3.tar.gz", hash = "sha256:f4d9c41a5c160ce504278f219fe56f44242ca63794a0ad638b52d1e087ac2a41"},
@@ -1795,8 +1795,8 @@ importlib-metadata = [
     {file = "importlib_metadata-3.7.0.tar.gz", hash = "sha256:24499ffde1b80be08284100393955842be4a59c7c16bbf2738aad0e464a8e0aa"},
 ]
 importlib-resources = [
-    {file = "importlib_resources-5.1.0-py3-none-any.whl", hash = "sha256:885b8eae589179f661c909d699a546cf10d83692553e34dca1bf5eb06f7f6217"},
-    {file = "importlib_resources-5.1.0.tar.gz", hash = "sha256:bfdad047bce441405a49cf8eb48ddce5e56c696e185f59147a8b79e75e9e6380"},
+    {file = "importlib_resources-5.1.1-py3-none-any.whl", hash = "sha256:67bcf65e7b9f7f2ea54a342254c7e87607819955469034bc581fae26e1743306"},
+    {file = "importlib_resources-5.1.1.tar.gz", hash = "sha256:563c5579cd40a7d5c6256ea6519b510152b6968103ab540b9771a50093a09056"},
 ]
 iniconfig = [
     {file = "iniconfig-1.1.1-py2.py3-none-any.whl", hash = "sha256:011e24c64b7f47f6ebd835bb12a743f2fbe9a26d4cecaa7f53bc4f35ee9da8b3"},
@@ -1961,8 +1961,8 @@ nbformat = [
     {file = "nbformat-5.1.2.tar.gz", hash = "sha256:1d223e64a18bfa7cdf2db2e9ba8a818312fc2a0701d2e910b58df66809385a56"},
 ]
 nbsphinx = [
-    {file = "nbsphinx-0.8.1-py3-none-any.whl", hash = "sha256:ef75e15047e36faa9741267286b9dc7d5a0d16302f65adee73885e8949ec6f75"},
-    {file = "nbsphinx-0.8.1.tar.gz", hash = "sha256:24d59aa3a1077ba58d9769c64c38fb05b761a1af21c1ac15f6393500cd008ea6"},
+    {file = "nbsphinx-0.8.2-py3-none-any.whl", hash = "sha256:044c5a8b13a03492372954940e99dedfaec206bd0be0faefb0e381c9f4435ac6"},
+    {file = "nbsphinx-0.8.2.tar.gz", hash = "sha256:53352237e2363079f6e38637a8ce90b47e720c8e2eb133a6a6f66fc13ff494cb"},
 ]
 nest-asyncio = [
     {file = "nest_asyncio-1.5.1-py3-none-any.whl", hash = "sha256:76d6e972265063fe92a90b9cc4fb82616e07d586b346ed9d2c89a4187acea39c"},
