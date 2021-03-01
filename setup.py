@@ -24,7 +24,7 @@ if os.path.exists(readme_path):
 setup(
     long_description=readme,
     name='xepmts',
-    version='0.4.9',
+    version='0.4.11',
     description='Python client for accessing the XENON experiment PMT data.',
     python_requires='>=3.6',
     project_urls={"documentation": "https://xepmts.readthedocs.io/", "homepage": "https://github.com/jmosbacher/xepmts"},
@@ -36,6 +36,6 @@ setup(
     packages=['xepmts', 'xepmts.api', 'xepmts.api.server', 'xepmts.api.server.v1', 'xepmts.api.server.v2'],
     package_dir={"": "."},
     package_data={"xepmts.api": ["endpoints/*.yml"]},
-    install_requires=['click', 'eve-panel==0.*,>=0.3.10'],
+    install_requires=['click', 'eve-panel==0.*,>=0.3.12', 'xeauth==0.*,>=0.1.2'],
     extras_require={"dev": ["bumpversion", "coverage", "flake8", "invoke", "isort", "nbsphinx", "numpydoc", "pylint", "pytest", "sphinx", "sphinx-material", "tox", "yapf"]},
 )
