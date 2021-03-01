@@ -7,7 +7,7 @@ python-versions = "*"
 version = "0.7.12"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "A small Python module for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
 name = "appdirs"
 optional = false
@@ -1513,6 +1513,21 @@ python-versions = "*"
 version = "1.12.1"
 
 [[package]]
+category = "main"
+description = "Top-level package for xeauth."
+name = "xeauth"
+optional = false
+python-versions = ">=3.6"
+version = "0.1.2"
+
+[package.dependencies]
+Authlib = ">=0.15.3,<0.16.0"
+appdirs = ">=1.4.4,<2.0.0"
+click = "*"
+httpx = ">=0.16.1,<0.17.0"
+panel = ">=0.10.3,<0.11.0"
+
+[[package]]
 category = "dev"
 description = "A formatter for Python code."
 name = "yapf"
@@ -1534,7 +1549,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["pytest (>=3.5,<3.7.3 || >3.7.3)", "pytest-checkdocs (>=1.2.3)", "pytest-flake8", "pytest-cov", "jaraco.test (>=3.2.0)", "jaraco.itertools", "func-timeout", "pytest-black (>=0.3.7)", "pytest-mypy"]
 
 [metadata]
-content-hash = "56a56f776b45681f9356223631c834e9284a465f4516aa4436efd03d4b7e55d5"
+content-hash = "3b726a7012bd98fa5544824d356f3f43e9d56a455480ed242de737038f2b0551"
 lock-version = "1.0"
 python-versions = ">=3.6"
 
@@ -2499,6 +2514,10 @@ werkzeug = [
 ]
 wrapt = [
     {file = "wrapt-1.12.1.tar.gz", hash = "sha256:b62ffa81fb85f4332a4f609cab4ac40709470da05643a082ec1eb88e6d9b97d7"},
+]
+xeauth = [
+    {file = "xeauth-0.1.2-py3-none-any.whl", hash = "sha256:1e484fc01428c28bb066b77b8149f9d6251cb907cb41ca575d7676b3c599d54c"},
+    {file = "xeauth-0.1.2.tar.gz", hash = "sha256:61c909731d037cf066ae2b5bc198f90748b12984e183edfb0eb78ef2378a1f80"},
 ]
 yapf = [
     {file = "yapf-0.30.0-py2.py3-none-any.whl", hash = "sha256:3abf61ba67cf603069710d30acbc88cfe565d907e16ad81429ae90ce9651e0c9"},
