@@ -40,7 +40,7 @@ xepmts = "xepmts.cli:main"
 [tool.poetry.dependencies]
 python = ">=3.6"
 click = "*"
-eve-panel = "^0.3.10"
+eve-panel = "^0.3.12"
 xeauth = "^0.1.2"
 
 
