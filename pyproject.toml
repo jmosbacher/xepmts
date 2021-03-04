@@ -38,10 +38,42 @@ xepmts = "xepmts.cli:main"
 
 
 [tool.poetry.dependencies]
-python = ">=3.6"
+python = ">=3.7.1"
 click = "*"
-eve-panel = "^0.3.12"
-xeauth = "^0.1.2"
+eve-panel = "0.3.12"
+xeauth = "0.1.2"
+bokeh = "2.2.3"
+pandas = "^1.2.3"
+toml = "^0.10.2"
+
+eve-jwt = {version = "^0.1.9", optional = true}
+flask_swagger_ui = {version = "^3.36.0", optional = true}
+prometheus_flask_exporter = {version = "^0.18.1", optional = true}
+dask = {extras = ["dataframe"], version = "^2021.2.0", optional = true}
+hvplot = {version = "^0.7.0", optional = true}
+awesome-panel-extensions = {version = "^20210124.1", optional = true}
+holoviews = {version = "^1.14.2", optional = true}
+ipywidgets_bokeh = {version = "^1.0.2", optional = true}
+ipywidgets = {version = "^7.6.3", optional = true}
+ipyleaflet = {version = "^0.13.6", optional = true}
+ipyvolume = {version = "^0.5.2", optional = true}
+streamz = {version = "^0.6.2", optional = true}
+plotly = {version = "^4.14.3", optional = true}
+altair = {version = "^4.1.0", optional = true}
+bqplot = {version = "^0.12.23", optional = true}
+invoke = "^1.5.0"
+pandas-profiling = {version = "^2.11.0", optional = true}
+
+
+[tool.poetry.extras]
+dask = ["dask"]
+plotting = ["hvplot"]
+server = ["eve-jwt", "flask_swagger_ui", "prometheus_flask_exporter"]
+webclient = ["awesome-panel-extensions"]
+full = ["dask", "hvplot", "eve-jwt",
+        "flask_swagger_ui", "prometheus_flask_exporter",
+         "awesome-panel-extensions", "ipywidgets_bokeh",
+         "ipywidgets"]
 
 
 [tool.poetry.dev-dependencies]

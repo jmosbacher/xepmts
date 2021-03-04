@@ -23,8 +23,6 @@ def settings(**kwargs):
 
 def extension():
     import eve_panel
-    import nest_asyncio
     eve_panel.extension()
-    nest_asyncio.apply()
 
 notebook = extension
