@@ -2,7 +2,7 @@
 
 __author__ = """Yossi Mosbacher"""
 __email__ = 'joe.mosbacher@gmail.com'
-__version__ = '0.4.12'
+__version__ = '0.4.13'
 
 # import eve_panel
 from xepmts import api
@@ -23,8 +23,6 @@ def settings(**kwargs):
 
 def extension():
     import eve_panel
-    import nest_asyncio
     eve_panel.extension()
-    nest_asyncio.apply()
 
 notebook = extension

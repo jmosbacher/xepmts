@@ -19,3 +19,31 @@ gains:
         voltage: {type: number}
         occupancy: {type: number}
         occupancy_err: {type: number}
+    metadata:
+        fields:
+            _id:
+                label: ID
+            timestamp:
+                label: time
+                unit: ns
+            gain:
+                label: Gain
+            gain_err:
+                label: Gain Error
+            pmt_index:
+                label: PMT
+        plot:
+            height: 400
+            subplots: true
+            padding: 0.1
+            shared_axes: false
+            legend: true
+            alpha: 0.6
+            s: 180
+        plots:
+            gain_distribution:
+                kind: hist
+                y: gain
+                groupby: pmt_index
+                bins: 50
+                responsive: true

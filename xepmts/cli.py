@@ -3,11 +3,7 @@ import sys
 import os
 
 import click
-from xepmts.api.server.v1.utils import resources_from_templates, read_endpoint_files
-from xepmts.api.server.domain import DEFAULT_TEMPLATE_DIR
-from ruamel.yaml import YAML
-yaml = YAML()
-yaml.indent(mapping=4, sequence=4, offset=2)
+import xepmts
 
 
 @click.group()
@@ -15,34 +11,45 @@ def main():
     """Console script for xepmts."""
     return 0
 
-@main.command()
-@click.option('--template_dir', default=DEFAULT_TEMPLATE_DIR, help='Template directory')
-@click.option('--out', default="./api_server/endpoints", help='Output directory')
-def generate_endpoints(template_dir, out):
-    # import eve
-    if not os.path.isdir(out):
-        os.makedirs(out)
-    templates = read_endpoint_files(template_dir)
-    domain = resources_from_templates(templates)
-    for k, v in domain.items():
-        if "url" in v:
-            rpath, _, fname = v["url"].rpartition("/")
-            abspath = os.path.join(out, rpath)
-            if not os.path.exists(abspath):
-                os.makedirs(abspath)
-        else:
-            fname = k
-            abspath = out
-        fpath = os.path.join(abspath, fname+".yml")
-        endpoint = {k: v}
-        with open(fpath, "w") as f:
-            yaml.dump(endpoint, f)
 
-@main.command()
-def serve():
-    from xepmts.api.server.v1.app import make_local_app
-    app = make_local_app()
-    app.run(host="localhost", debug=True, ) #ssl_context="adhoc"
+@main.group()
+def server():
+    pass
+
+@server.command()
+@click.option('--address', default="localhost", help='Server address.')
+@click.option('--port', default=5006, help='Server port.')
+@click.option('--debug', default=False, help='Enable debugging.', is_flag=True)
+@click.option('--reload', default=False, help='Enable auto-reload on code change.', is_flag=True)
+@click.option('--evalex', default=False, help='Enable Evalex.', is_flag=True)
+def serve(address, port, debug, reload, evalex):
+    from xepmts.api.server import run_simple
+    run_simple(address, port,  debug, reload, evalex)
+   
+@main.group()
+def webclient():
+    pass
+
+@webclient.command()
+@click.option('--address', default="localhost", help='Server address.')
+@click.option('--port', default=5006, help='Server port.')
+@click.option('--nproc', default=1, help='Number of Processes to spawn.')
+@click.option('--allow_websocket_origin', default=["localhost"],  multiple=True, help='Whitelisted origins for ws connections.')
+@click.option('--debug', default=False, help='Enable auto-reload on code change.', is_flag=True)
+def serve(address, port, nproc,
+          allow_websocket_origin, debug):
+    origins = []
+    for origin in allow_websocket_origin:
+        origin = origin.strip("/")
+        # if not origin.startswith("http"):
+        #     origin = "http://" + origin
+        if not origin.endswith(str(port)):
+            origin = origin + f":{port}"
+        origins.append(origin)
+    from xepmts.web_client.src import site
+    site.serve(address=address, port=port, nproc=nproc,
+              allow_websocket_origin=origins, debug=debug)
+    
 
 
 if __name__ == "__main__":
