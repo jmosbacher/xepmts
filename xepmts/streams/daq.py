@@ -212,22 +212,34 @@ class LiveDAQStreamz(DAQStreamz):
     start_button = param.Action(lambda self: self.start(), label="Start")
     stop_button = param.Action(lambda self: self.stop(), label="Stop")
     futures = param.List([])
+    future = param.Parameter()
 
-    def wait_for_futures(self):
-        self.futures = [f for f in self.futures if f.running()]
-        if not self.futures:
-            self.loading = False
-            self._cbs.pop(-1)
-        
+    def worker(self):
+        try:
+            self.fetch_all(asynchronous=False)
+        finally:
+            self.loading=False
+                
     def callback(self):
         if self.loading:
             return
         self.loading = True
+        self.future = executor.submit(self.worker)
+#     def wait_for_futures(self):
+#         self.futures = [f for f in self.futures if f.running()]
+#         if not self.futures:
+#             self.loading = False
+#             self._cbs.pop(-1)
         
-        self.futures = self.fetch_all(asynchronous=True)
-#         self.future = executor.submit(self.wait_for_futures, futures)
-        cb = pn.state.add_periodic_callback(self.wait_for_futures, period=100)              
-        self._cbs.append(cb)
+#     def callback(self):
+#         if self.loading:
+#             return
+#         self.loading = True
+        
+#         self.futures = self.fetch_all(asynchronous=True)
+# #         self.future = executor.submit(self.wait_for_futures, futures)
+#         cb = pn.state.add_periodic_callback(self.wait_for_futures, period=100)              
+#         self._cbs.append(cb)
 #         loop = IOLoop.current()
 #         for idx in gains.page_numbers:
 #             future = executor.submit(gains.get_page, idx)
