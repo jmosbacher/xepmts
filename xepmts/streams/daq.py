@@ -7,13 +7,14 @@ from streamz.dataframe import DataFrame as sDataFrame
 import holoviews as hv
 import httpx
 import logging
+import hvplot.streamz
 
 from concurrent.futures import ThreadPoolExecutor
 from panel.io.server import unlocked
 from tornado.ioloop import IOLoop
 
 
-executor = ThreadPoolExecutor(max_workers=4)
+executor = ThreadPoolExecutor(max_workers=5)
 logger = logging.getLogger(__name__)
 
 
@@ -25,39 +26,39 @@ class DAQStreamz(param.Parameterized):
     reader_info_columns = param.List(['time', 'reader', 'host', 'rate',
                                       'status', 'mode', 'buffer_size'], constant=True)
     
-    reader_names = param.List([])
+    reader_names = param.List(list(range(7)))
     xaxis = param.Selector(["position_x", "sector"], default="position_x")
     yaxis = param.Selector(["position_y", "array"], default="position_y")
+    colormap = param.Selector(hv.plotting.list_cmaps(), default="Plasma", )
     groupby = param.Selector(["array", "detector"], default="array")
     
-    _sources = param.List(default=None, precedence=-1)
-    _streams = param.List(default=None, precedence=-1)
+    loading = param.Boolean(False, precedence=-1)
+
+    _sources = param.Dict(default=None, precedence=-1)
     _rates = param.Parameter(default=None, precedence=-1)
     _readers = param.Parameter(default=None, precedence=-1)
     
     rates_base_info = param.DataFrame(default=None, precedence=-1)
     readers_base_info = param.DataFrame(default=None, precedence=-1)
     
-
     def reset_streams(self):
         self._rates = None
         self._readers = None
-        self._streams = None
         self._sources = None
         
-    def _fetch_status(self, name):
+    def _fetch_single_reader(self, name):
         try:
             r = httpx.get(f"https://xenonnt.lngs.infn.it/api/getstatus/{name}", 
-                      params={'api_user': self.api_user, 'api_key': self.api_key })
+                    params={'api_user': self.api_user, 'api_key': self.api_key })
             r.raise_for_status()
             resp = r.json()[0]
             rates = resp["channels"]
             result = {}
             result["rates"] = {
-                 "time": [pd.to_datetime(resp["time"])]*len(rates),  
-                 "signal_channel": [int(x) for x in rates.keys()],
-                 "rate": list(rates.values()),
-                              }
+                "time": [pd.to_datetime(resp["time"])]*len(rates),  
+                "signal_channel": [int(x) for x in rates.keys()],
+                "rate": list(rates.values()),
+                            }
             result["reader_info"] = {k: [v] for k,v in resp.items() if k in self.reader_info_columns}
             result["reader_info"]["time"] = [pd.to_datetime(t) for t in result["reader_info"]["time"]]
             
@@ -69,32 +70,40 @@ class DAQStreamz(param.Parameterized):
             }
         return result
     
+    def emit(self, name, data):
+        logger.debug(f"emitting {name}. columns: {data.keys()} ")
+        self.sources[name].emit(data)
+        
+    def data_ready_cb(self, name):
+        def cb(future):
+            data = future.result()
+            self.emit(name, data)
+        cb.__name__ = str(name) + "_data_ready"
+        return cb
+
+    def all_loaded(self, data):
+        self.loading = False
+        return data
+
     @property
     def rates_example(self):
         return pd.DataFrame({col:[] for col in self.rate_columns}).astype({"time":'datetime64[ns]', "signal_channel": 'int64'})
         
-    
     @property
     def reader_info_example(self):
-        return pd.DataFrame({col:[] for col in self.reader_info_columns} )
+        return pd.DataFrame({col:[] for col in self.reader_info_columns})
     
     @property
     def sources(self):
         if self._sources is None:
-            self._sources = [streamz.Stream() for _ in self.reader_names]
+            self._sources = {name: streamz.Stream() for name in self.reader_names}
         return self._sources
-    
-    @property
-    def streams(self):
-        if self._streams is None:
-            self._streams = [source.map(self._fetch_status) for source in self.sources]
-        return self._streams
     
     @property
     def rates(self):
         if self._rates is None:
-            rate_streams = [stream.pluck("rates").map(pd.DataFrame) for stream in self.streams]
-            self._rates = streamz.zip(*rate_streams).map(pd.concat).map(lambda df: df.infer_objects())
+            rate_streams = [source.pluck("rates").map(pd.DataFrame).filter(lambda df: len(df)>0) for source in self.sources.values()]
+            self._rates = streamz.zip(*rate_streams).map(pd.concat).map(self.all_loaded)
         return self._rates
     
     def convert_datetime(self, df):
@@ -108,13 +117,14 @@ class DAQStreamz(param.Parameterized):
         stream = self.rates
         if self.rates_base_info is not None:
             base = self.rates_base_info.copy()
-            stream = stream.map(lambda df: base.infer_objects().merge(df)).map(lambda df: df[self.rate_columns])
+            example = base.merge(example, how="outer")[self.rate_columns]
+            stream = stream.filter(lambda df: len(df)>0).map(lambda df: base.merge(df)).map(lambda df: df[self.rate_columns])
         return sDataFrame(stream, example=example)
             
     @property
     def readers(self):    
         if self._readers is None:
-            reader_streams = [stream.pluck("reader_info").map(pd.DataFrame) for stream in self.streams]
+            reader_streams = [source.pluck("reader_info").map(pd.DataFrame) for source in self.sources.values()]
             self._readers = streamz.zip(*reader_streams).map(pd.concat)
         return self._readers
     
@@ -128,59 +138,106 @@ class DAQStreamz(param.Parameterized):
             stream = stream.map(lambda df: df.merge(base)[columns])
         return sDataFrame(stream, example=example)
     
-    def fetch(self, reader_name, asynchronous=True, timeout=None):  
-        for reader, source in zip(self.reader_names, self.sources):
-            if reader == reader_name:
-                f = executor.submit(source.emit, reader)
-                break
+    def fetch(self, reader_name, asynchronous=True, timeout=None): 
+        if reader_name in self.reader_names:
+            f = executor.submit(self._fetch_single_reader, reader_name)
         else:
             raise ValueError(f"No reader named {reader_name} options are: {self.reader_names}")
         if asynchronous:
+            loop = IOLoop.current()
+            loop.add_future(f, self.data_ready_cb(reader_name))
             return f
         else:
-            return f.result()
-        
-    def fetch_all(self, asynchronous=True, timeout=None):
-        futures = []
-        for reader, source in zip(self.reader_names, self.sources):
-            f = executor.submit(source.emit, reader)
-            futures.append(f)
-        if asynchronous:
-            return futures
-        for f in futures:
-            f.result(timeout=timeout)
-        
-    def _rate_plots(self, data):
-        if not len(data):
-            data = self.rates_example
-            if self.rates_base_info is not None:
-                data =  self.rates_base_info.merge(data, how="outer")
-                
-        plot = hv.Points(data, kdims=[self.xaxis, self.yaxis],
-                             vdims=["rate", "signal_channel", self.groupby ])
-        def pick_last(x):
-            if len(x):
-                return x.iloc[-1]
-            else:
-                return np.nan
+            data = f.result()
+            self.emit(reader_name, data)
             
-        plots = {group: plot.select(**{self.groupby: group}).aggregate([self.xaxis, self.yaxis], pick_last)
-                         for group in data[self.groupby].unique()}
+    def fetch_all(self, asynchronous=True, timeout=None):
+        futures = {}
+        self.loading = True
+        for reader, source in self.sources.items():
+            f = executor.submit(self._fetch_single_reader, reader)
+            futures[reader] = f
+            
+        if asynchronous:
+            loop = IOLoop.current()
+            for name, f in futures.items():
+                loop.add_future(f, self.data_ready_cb(name))
+            return futures
         
-        if len(plots)>1:
-            aspect = 1
-        else:
-            aspect = 2
-        maxval = data["rate"].max() or None
-        return hv.NdLayout(plots).cols(2).opts(
-            hv.opts.Points(color="rate", aspect=aspect, colorbar=True, 
-                  size=15, clim=(1, maxval), logz=True,
-                 default_tools=["hover", "tap"], cmap="Plasma")
-        )
+        for reader_name, f in futures.items():
+            data = f.result(timeout=timeout)
+            self.emit(reader_name, data)
+            
+    # def _rate_plots(self, data):
+    #     if not len(data):
+    #         data = self.rates_example
+    #         if self.rates_base_info is not None:
+    #             data =  self.rates_base_info.merge(data, how="outer")
+    #     plot = hv.Points(data, kdims=[self.xaxis, self.yaxis],
+    #                          vdims=["rate", "signal_channel", self.groupby ])
+    #     def pick_last(x):
+    #         nonna = x.dropna()
+    #         if len(nonna):
+    #             return nonna.iloc[-1]
+    #         else:
+    #             return np.nan
+            
+    #     plots = {group: plot.select(**{self.groupby: group}).aggregate([self.xaxis, self.yaxis], np.nanmean)
+    #                      for group in data[self.groupby].unique()}
+        
+    #     if len(plots)>1:
+    #         aspect = 1
+    #     else:
+    #         aspect = 2
+    #     maxval = data["rate"].max() or None
+    #     return hv.NdLayout(plots).cols(2).opts(
+    #         hv.opts.Points(color="rate", aspect=aspect, colorbar=True, 
+    #               size=15, clim=(1, maxval), logz=True,
+    #              default_tools=["hover", "tap"], cmap="Plasma")
+    #     )
     
     def rate_plots(self):
-        return hv.DynamicMap(self._rate_plots, streams=[hv.streams.Buffer(self.rates_df, length=500)])
+        plots = []
+        sdf = self.rates_df
+        nitems = len(self.rates_base_info)
+        return sdf.hvplot.scatter(x=self.xaxis,
+                                y=self.yaxis,
+                                c="rate",
+                                s=180,
+                                by=self.groupby,
+                                subplots=True,
+                                cmap=self.colormap,
+                                responsive=True,
+                                backlog=nitems)
+
+        groups = self.rates_base_info[self.groupby].unique()
+        if len(groups)>1:
+            aspect = 1.2
+        else:
+            aspect = 2
+        for group in groups:
+            nitems = len(self.rates_base_info[self.rates_base_info[self.groupby]==group])
+            plot = sdf[sdf[self.groupby]==group].hvplot.scatter(x=self.xaxis,
+                                                                y=self.yaxis,
+                                                                c="rate",
+                                                                s=180,
+                                                                aspect=aspect,
+                                                                cmap=self.colormap,
+                                                                responsive=True,
+                                                                 title=group,
+                                                                 backlog=nitems)
+            plots.append(plot)
+        return hv.NdLayout({group: plot for group,plot in zip(groups, plots)},
+                         kdims=self.groupby).cols(2)
+        # return pn.layout.GridBox(*plots, ncols=2, sizing_mode="stretch_both")
     
+        # bsize = 500
+        # initial = None
+        # if self.rates_base_info is not None:
+        #     bsize = len(self.rates_base_info)
+        # return hv.DynamicMap(self._rate_plots,
+        #                  streams=[hv.streams.Buffer(self.rates_df, length=bsize)])
+
     def view(self):
         return pn.panel(self.rate_plots)
     
@@ -205,46 +262,21 @@ class LiveDAQStreamz(DAQStreamz):
     auto_start = param.Boolean(False)
 
     running = param.Boolean(False, precedence=-1)
-    loading = param.Boolean(False, precedence=-1)
+    
     _cbs = param.List([], precedence=-1)
     _view = param.Parameter(precedence=-1)
     
     start_button = param.Action(lambda self: self.start(), label="Start")
     stop_button = param.Action(lambda self: self.stop(), label="Stop")
-    futures = param.List([])
-    future = param.Parameter()
+    futures = param.Dict({})
 
-    def worker(self):
-        try:
-            self.fetch_all(asynchronous=False)
-        finally:
-            self.loading=False
-                
     def callback(self):
         if self.loading:
             return
-        self.loading = True
-        self.future = executor.submit(self.worker)
-#     def wait_for_futures(self):
-#         self.futures = [f for f in self.futures if f.running()]
-#         if not self.futures:
-#             self.loading = False
-#             self._cbs.pop(-1)
-        
-#     def callback(self):
-#         if self.loading:
-#             return
-#         self.loading = True
-        
-#         self.futures = self.fetch_all(asynchronous=True)
-# #         self.future = executor.submit(self.wait_for_futures, futures)
-#         cb = pn.state.add_periodic_callback(self.wait_for_futures, period=100)              
-#         self._cbs.append(cb)
-#         loop = IOLoop.current()
-#         for idx in gains.page_numbers:
-#             future = executor.submit(gains.get_page, idx)
-#             loop.add_future(future, self._update_gains)
-            
+        if not self.running:
+            return
+        self.futures = self.fetch_all(asynchronous=True)
+                
     def start(self):
         self.stop()  
         cb = pn.state.add_periodic_callback(self.callback, 
@@ -255,11 +287,11 @@ class LiveDAQStreamz(DAQStreamz):
         self.running = True
         
     def stop(self):
+        self.running = False
         for cb in self._cbs:
             if cb.running:
                 cb.stop()
         self._cbs = []
-        self.running = False
         
     @property
     def sources(self):
@@ -286,24 +318,27 @@ class LiveDAQStreamz(DAQStreamz):
                     self.param.period,
                     self.param.timeout,
                     self.param.count,
-                   
                     align="center",
-                    sizing_mode="stretch_width")     
-    
-    @param.depends("running")
+                    sizing_mode="stretch_width")    
+
+    # @param.depends("running")
     def stream_view(self):
-        reader_info = pn.pane.DataFrame(self.readers_df, height=200, sizing_mode="stretch_width")
-        tabs = pn.Tabs(("Rates", self.rate_plots()),
-                       ("Reader info", reader_info),
-                        sizing_mode="stretch_both")
-        return tabs
+        return self.rate_plots()
+        # reader_info = pn.pane.DataFrame(self.readers_df, height=200, sizing_mode="stretch_width")
+        # tabs = pn.Tabs(("Rates", self.rate_plots()),
+        #             #    ("Reader info", reader_info),
+        #                 sizing_mode="stretch_both")
+        # if self.running:
+        #     return self.rate_plots()
+        # else:
+        #     return pn.Column("Not running.")
     
     @param.depends("_view",)
     def view(self):
         if self._view is None:
 #             rates = pn.pane.DataFrame(self.rates_df, height=500, sizing_mode="stretch_width")
             self._view = pn.Column(self.controls,
-                                   self.stream_view,
+                                   self.stream_view(),
                                    height=600,
                                    sizing_mode="stretch_width")
         return self._view
@@ -345,41 +380,42 @@ class LiveDAQStreamzViewer(param.Parameterized):
     loading = param.Boolean(False, precedence=-1)
     
     def add_stream(self, detector):
-        if detector in self.daq_streams:
-            return
-        self.loading = True
-        try:
-            streams = self.daq_streams
-            config = self.CONFIGS[detector]
-            installs = getattr(self.client, detector).installs.to_dataframe()
-            installs["signal_channel"] = installs.pmt_index.astype("int64")
-            stream = LiveDAQStreamz(name=detector,
-                                    api_key=self.api_key,
-                                    api_user=self.api_user,
-                                    rates_base_info=installs,
-                                    **config
-                                   )
-            streams[detector] = stream
-            self.daq_streams = streams
-        finally:
-            self.loading = False
-            
+        if detector not in self.daq_streams:
+            self.loading = True
+            try:
+                streams = self.daq_streams
+                config = self.CONFIGS[detector]
+                installs = getattr(self.client, detector).installs.to_dataframe()
+                installs["signal_channel"] = installs.pmt_index.astype("int64")
+                stream = LiveDAQStreamz(name=detector,
+                                        api_key=self.api_key,
+                                        api_user=self.api_user,
+                                        rates_base_info=installs,
+                                        **config
+                                    )
+                streams[detector] = stream
+                self.daq_streams = streams
+            finally:
+                self.loading = False
+
+        self.daq_stream = self.daq_streams[detector]
+
     def reload_stream(self, detector):
         stream = self.daq_streams.pop(detector, None)
         if stream:
             stream.stop()
         self.add_stream(detector)
         
-    @param.depends("daq_streams", "loading")
+    @param.depends("daq_stream", "loading")
     def streams_view(self):
         if self.loading:
             return pn.indicators.LoadingSpinner(value=True)
         
-        if not len(self.daq_streams):
+        if self.daq_stream is None:
             return pn.Column("## No streams loaded yet")
         
-        streams = pn.Tabs(*[(k, v.view) for k,v in self.daq_streams.items()])
-        return streams
+        # streams = pn.Tabs(*[(k, v.view) for k,v in self.daq_streams.items()])
+        return self.daq_stream.view()
     
     def controls(self):
         return pn.Row(self.param.detector,
