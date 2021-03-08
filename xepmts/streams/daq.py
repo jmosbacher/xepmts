@@ -25,7 +25,7 @@ class DAQStreamz(param.Parameterized):
     reader_info_columns = param.List(['time', 'reader', 'host', 'rate',
                                       'status', 'mode', 'buffer_size'], constant=True)
     
-    reader_names = param.List(list(range(7)))
+    reader_names = param.List([])
     xaxis = param.Selector(["position_x", "sector"], default="position_x")
     yaxis = param.Selector(["position_y", "array"], default="position_y")
     groupby = param.Selector(["array", "detector"], default="array")
@@ -45,9 +45,9 @@ class DAQStreamz(param.Parameterized):
         self._streams = None
         self._sources = None
         
-    def _fetch_status(self, i):
+    def _fetch_status(self, name):
         try:
-            r = httpx.get(f"https://xenonnt.lngs.infn.it/api/getstatus/reader{i}_reader_0", 
+            r = httpx.get(f"https://xenonnt.lngs.infn.it/api/getstatus/{name}", 
                       params={'api_user': self.api_user, 'api_key': self.api_key })
             r.raise_for_status()
             resp = r.json()[0]
@@ -316,9 +316,9 @@ class LiveDAQStreamz(DAQStreamz):
 class LiveDAQStreamzViewer(param.Parameterized):
     
     CONFIGS = {
-        "tpc": dict(xaxis="position_x", yaxis="position_y", groupby="array", reader_names=[0,1,2,3,4]),
-        "nveto": dict(xaxis="sector", yaxis="array", groupby="detector", reader_names=[6]),
-        "muveto": dict(xaxis="sector", yaxis="array", groupby="detector", reader_names=[5]),
+        "tpc": dict(xaxis="position_x", yaxis="position_y", groupby="array", reader_names=[f"reader{i}_reader_0" for i in range(4)]),
+        "nveto": dict(xaxis="sector", yaxis="array", groupby="detector", reader_names=["reader6_reader_0", "reader6_reader_1"]),
+        "muveto": dict(xaxis="sector", yaxis="array", groupby="detector", reader_names=["reader5_reader_0"]),
 
     }
 
