@@ -81,8 +81,8 @@ def resources_from_templates(templates, experiments=EXPERIMENTS,
                 if "detector" in new_resource["schema"]:    
                     new_resource["schema"]["detector"]["default"] = detector
                 
-                write_roles = global_write_roles + [f'readWrite{experiment_name.capitalize()}',  f'readWrite{detector.capitalize()}', f'readWrite{new_resource["resource_title"]}']
-                read_roles = write_roles + global_read_roles + [ f'read{experiment_name.capitalize()}',  f'read{detector.capitalize()}', f'read{new_resource["resource_title"]}']
+                write_roles = global_write_roles + [f'readWrite{experiment_name.capitalize()}',  f'readWrite{detector.capitalize()}', f'readWrite{new_resource["resource_title"].title().replace("_", "")}']
+                read_roles = write_roles + global_read_roles + [ f'read{experiment_name.capitalize()}',  f'read{detector.capitalize()}', f'read{new_resource["resource_title"].title().replace("_", "")}']
               
                 new_resource["allowed_read_roles"] = new_resource.get("allowed_read_roles", []) + read_roles
                 new_resource["allowed_item_read_roles"] = new_resource.get("allowed_item_read_roles", []) + read_roles

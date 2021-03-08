@@ -8,7 +8,8 @@ high_voltage_events:
     cache_expires: 10
     resource_methods: [GET, POST]
     schema:
-        timestamp: {type: string, required: true}
+        timestampseconds: {type: string, required: true}
+        datetime: {type: datetime}
         detector: {type: string, allowed: [tpc, nveto, muveto, unknown], required: true}
         experiment: {type: string, allowed: [xenon1t, xenonnt, unknown], default: xenonnt, required: true}
         voltage_changes:

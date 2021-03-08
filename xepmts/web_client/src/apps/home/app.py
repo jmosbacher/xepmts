@@ -8,14 +8,18 @@ from awesome_panel_extensions.frameworks.fast.fast_menu import to_menu
 from xepmts.web_client.src.shared.templates import ListTemplate
 from xepmts.web_client.src.shared import config, get_db
 from xepmts.web_client.src.shared._menu import session_menu
+from xepmts.web_client.src.shared.models import CenterColumn
 from copy import deepcopy
 
 HOME_PATH = pathlib.Path(__file__).parent / "home.md"
 HOME_CONTENT = HOME_PATH.read_text()
+AINT_NOONE_GOT_TIME = str(HOME_PATH.parent / "aint.gif")
+
 WELCOME = """
 ### Welcome to the XENON PMT archive, home to all things PMT related.
-Please send requests for additional content to [Yossi Mosbacher](joe.mosbacher@gmail.com)
-    
+Please send requests for additional content to [Yossi Mosbacher](mailto:joe.mosbacher@gmail.com)
+
+
 
 """
 def view():
@@ -23,11 +27,14 @@ def view():
     pn.config.sizing_mode = "stretch_width"
     db = pn.state.as_cached(pn.state.curdoc.session_context.id, get_db)
     db.session.auth.token_file = ""
+    aint_noone = CenterColumn("# Writing a python script just to check the PMT gain evolution?", 
+                               pn.pane.GIF(AINT_NOONE_GOT_TIME),
+                               "# Thats what the web client is for.")
     sections = [
-
         pn.pane.Markdown(WELCOME),
+        pn.Card(db.session.panel(), header="## Authentication"),
         pn.pane.Markdown(HOME_CONTENT),
-        pn.Card(db.session.panel(), header="## Authentication")
+        aint_noone,
     ]
     
     menu = session_menu(pn.state.curdoc.session_context.id)

@@ -127,3 +127,22 @@ mp4_url = ""
 youtube_url = ""
 gif_url = ""
 binder_url = ""
+
+
+[readout_rates]
+name = "PMT Readout rates"
+introduction = ""
+description = ""
+author = "yossi_mosbacher"
+owner = "yossi_mosbacher"
+url = "readout_rates"
+servable = "src/apps/readout_rates/app.py"
+thumbnail_url = ""
+tags = []
+category = "Live Data"
+documentation_url = ""
+code_url = ""
+mp4_url = ""
+youtube_url = ""
+gif_url = ""
+binder_url = ""

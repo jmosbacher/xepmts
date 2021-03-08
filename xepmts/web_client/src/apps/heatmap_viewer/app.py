@@ -23,7 +23,7 @@ class HeatmapPlotter(BaseSection):
     ncols = param.Integer(2)
     size = param.Integer(12)
     alpha = param.Number(0.9)
-    colormap = param.Selector(hv.plotting.list_cmaps(), default="Plasma")
+    colormap = param.Selector(hv.plotting.list_cmaps(), default="coolwarm")
     
     selection = param.Parameter(precedence=-1)
     _plot = param.Parameter(precedence=-1)
@@ -32,7 +32,7 @@ class HeatmapPlotter(BaseSection):
 
     def _init_view(self):
         self._view = pn.Column("Data not loaded yet.", sizing_mode="stretch_both")
-        self._extra_columns = pn.widgets.MultiSelect(options=[], throttled=True)
+        self._extra_columns = pn.widgets.MultiSelect(options=[], )
 
     def _update_view(self, *events):
         if self.data is None:

@@ -2,15 +2,17 @@ from xepmts.api import server
 import os
 import pkg_resources
 
-DEFAULT_SERVER = "gae_proxy"
+DEFAULT_SERVER = "xenonnt.org"
 SERVERS = {
-    "xenon": "https://api.pmts.xenonnt.org/",
+    "xenonnt.org": "https://api.pmts.xenonnt.org/",
     "gae": "https://api-dot-xenon-pmts.uc.r.appspot.com/",
     "gae_proxy": "https://api-proxy-dot-xenon-pmts.uc.r.appspot.com/",
     "deta": "https://38nq2t.deta.dev/"
 }
 
-def get_client(version):
+
+def get_client(version, scopes=["read:all"],):
+
     import eve_panel
     servers = {f"{name}_{version}": f"{address.strip('/')}/{version}"
                 for name, address in SERVERS.items()}
@@ -24,9 +26,9 @@ def get_client(version):
     client.db = client
     if version=="v2":
         client.set_auth("XenonAuth")
-        client.set_credentials(audience="https://api.pmts.xenonnt.org", scopes=["read:all"])
+        client.set_credentials(audience="https://api.pmts.xenonnt.org", scopes=scopes)
         
     return client
 
 def default_client():
-    return get_client("v1")
+    return get_client("v2")

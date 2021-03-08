@@ -230,23 +230,33 @@ class FilterTool(BaseSection):
     def make_group_plots(self):
         installs = hv.Table(self.data)
         cols = list(self.data.columns)
-        groups = list(self.data[self.groupby].unique())
+        groups = list(sorted(self.data[self.groupby].unique(), reverse=True))
         extra_cols = [col for col in cols if col not in [self.xaxis, self.yaxis]]
         
         pmt_plot = hv.Points(installs, kdims=[self.xaxis,self.yaxis], vdims=extra_cols).opts(
                     alpha=self.alpha, color=self.color, size=self.size, responsive=True,
-                    nonselection_alpha=0.1, cmap=self.colormap, colorbar=True,
+                    nonselection_alpha=0.1, cmap=self.colormap, colorbar=True, default_tools=["tap", "hover", "lasso_select"],
         )
+        labels = hv.Labels(installs, kdims=[self.xaxis,self.yaxis], vdims=["pmt_index", self.groupby])
 
-        plots = {group: pmt_plot.select(**{self.groupby:group}).opts(default_tools=["tap", "hover", "lasso_select"],
-                                                                     framewise=True,
-                                                            aspect=1.1, min_width=350, responsive=True) for group in groups}
-        
+        plots = {group: pmt_plot.select(**{self.groupby: group}) for group in groups}
         self._selections = [hv.streams.Selection1D(source=plots[group],).rename(index=f"{group}")
                             for group in groups ]                        
-    
-        return hv.NdLayout(plots, kdims=self.groupby).cols(self.ncols)
+        for k,v in plots.items():
+            plots[k] = v*labels.select(**{self.groupby:k})
+        if self.xaxis == "position_x" and self.yaxis=="position_y":
+            tpc_wall = hv.Ellipse(0,0, 134, kdims=["position_x", "position_y"]).opts(color="white")
+            for k,v in plots.items():
+                plots[k] = tpc_wall*v
 
+        layout =  hv.NdLayout(plots, kdims=self.groupby).cols(self.ncols).opts(
+            hv.opts.Points(framewise=True, aspect=1.1, min_width=350, responsive=True,
+                            default_tools=["tap", "hover", "lasso_select"]),
+            hv.opts.Ellipse(default_tools=[]),
+            hv.opts.Labels(text_font_size="6px", default_tools=[]),
+            )
+        
+        return layout
 
     def make_details_table(self):
         installs = hv.Table(self.data)
