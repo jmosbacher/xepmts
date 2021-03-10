@@ -2,7 +2,7 @@
 
 __author__ = """Yossi Mosbacher"""
 __email__ = 'joe.mosbacher@gmail.com'
-__version__ = '0.4.14'
+__version__ = '0.4.15'
 
 # import eve_panel
 from xepmts import api
