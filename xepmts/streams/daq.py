@@ -2,13 +2,16 @@ import panel as pn
 import param
 import numpy as np
 import pandas as pd
-import streamz
-from streamz.dataframe import DataFrame as sDataFrame
-import holoviews as hv
+
 import httpx
 import logging
-import hvplot.streamz
-
+try:
+    import holoviews as hv
+    import hvplot.streamz
+    import streamz
+    from streamz.dataframe import DataFrame as sDataFrame
+except:
+    pass
 from concurrent.futures import ThreadPoolExecutor
 from panel.io.server import unlocked
 from tornado.ioloop import IOLoop
