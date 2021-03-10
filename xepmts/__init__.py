@@ -10,7 +10,7 @@ from xepmts.api.server.v1.app import list_roles
 from xepmts.api.server.v2.app import list_roles as list_v2_roles
 
 from xepmts.api.client import default_client, get_client
-
+from . import streams
 
 def settings(**kwargs):
     from eve_panel import settings as panel_settings

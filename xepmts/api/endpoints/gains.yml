@@ -10,6 +10,7 @@ gains:
         detector: {type: string, allowed: [tpc, nveto, muveto, unknown], required: true}
         experiment: {type: string, allowed: [xenon1t, xenonnt, unknown], default: xenonnt, required: true}
         run_id: {type: string, required: true}
+        timestampseconds: { type: integer, min: 0 }
         timestamp: {type: integer}
         pmt_index: {type: integer, required: true}
         gain: {type: number, required: true} 
