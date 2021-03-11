@@ -9,8 +9,8 @@ spe_acceptances:
   cache_control: "max-age=10,must-revalidate"
   cache_expires: 10
   schema:
-    detector: {type: string, allowed: [tpc, nveto, muveto, unknown], required: true}
-    experiment: {type: string, allowed: [xenon1t, xenonnt, unknown], default: xenonnt, required: true}
+    detector: { type: string, allowed: [tpc, nveto, muveto, unknown], required: true}
+    experiment: { type: string, allowed: [xenon1t, xenonnt, unknown], default: xenonnt, required: true}
     timestampseconds: { type: integer, required: true, min: 0 }
     pmt_index: { type: integer, required: true, min: 0 }
     run_id: { type: string, required: true }
@@ -25,29 +25,34 @@ spe_acceptances:
       required: false
       schema:
         type: number
-        len: 4
+        minlength: 4
+        maxlength: 4
     threshold_percent_3bin:
       type: list
       required: false
       schema:
         type: number
-        len: 4
+        minlength: 4
+        maxlength: 4
     threshold_percent_4bin:
       type: list
       required: false
       schema:
         type: number
-        len: 4
+        minlength: 4
+        maxlength: 4
     threshold_percent_5bin:
       type: list
       required: false
       schema:
         type: number
-        len: 4
+        minlength: 4
+        maxlength: 4
     threshold_percent_6bin:
       type: list
       required: false
       schema:
         type: number
-        len: 4
+        minlength: 4
+        maxlength: 4
       
