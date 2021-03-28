@@ -3,7 +3,7 @@
 spe_acceptances:
   resource_title: spe_acceptances
   item_title: spe_acceptance
-  url: spe_acceptances
+  url: spe_acc
   datasource:
       source: spe_acceptances
   cache_control: "max-age=10,must-revalidate"

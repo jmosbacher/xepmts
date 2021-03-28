@@ -199,19 +199,21 @@ class DAQStreamz(param.Parameterized):
     #              default_tools=["hover", "tap"], cmap="Plasma")
     #     )
     
-    def rate_plots(self):
+    def rate_plots(self, **kwargs):
         plots = []
         sdf = self.rates_df
         nitems = len(self.rates_base_info)
-        return sdf.hvplot.scatter(x=self.xaxis,
-                                y=self.yaxis,
-                                c="rate",
-                                s=180,
-                                by=self.groupby,
-                                subplots=True,
-                                cmap=self.colormap,
-                                responsive=True,
-                                backlog=nitems)
+        psettings = dict(x=self.xaxis,
+                        y=self.yaxis,
+                        c="rate",
+                        s=180,
+                        by=self.groupby,
+                        subplots=True,
+                        cmap=self.colormap,
+                        responsive=True,
+                        backlog=nitems)
+        psettings.update(kwargs)
+        return sdf.hvplot.scatter(**psettings)
 
         groups = self.rates_base_info[self.groupby].unique()
         if len(groups)>1:

@@ -6,7 +6,7 @@ from .daq import LiveDAQStreamzViewer
 
 
 
-def get_live_rate_viewer(db=None, api_user=None, api_key=None, detectors=["tpc"]):
+def get_live_rate_viewer(db=None, api_user=None, api_key=None, detector="tpc"):
     if db is None:
         import xepmts
         db = xepmts.get_client("v2")
@@ -33,6 +33,5 @@ def get_live_rate_viewer(db=None, api_user=None, api_key=None, detectors=["tpc"]
         client=db,
     )
 
-    for d in detectors:
-        viewer.add_stream(d)
-    return viewer
+    viewer.add_stream(detector)
+    return viewer.daq_streams[detector]
