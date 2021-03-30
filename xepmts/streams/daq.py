@@ -7,11 +7,13 @@ import httpx
 import logging
 try:
     import holoviews as hv
+    colormaps = hv.plotting.list_cmaps()
     import hvplot.streamz
     import streamz
     from streamz.dataframe import DataFrame as sDataFrame
 except:
-    pass
+    colormaps = ["Plasma"]
+
 from concurrent.futures import ThreadPoolExecutor
 from panel.io.server import unlocked
 from tornado.ioloop import IOLoop
@@ -32,7 +34,7 @@ class DAQStreamz(param.Parameterized):
     reader_names = param.List(list(range(7)))
     xaxis = param.Selector(["position_x", "sector"], default="position_x")
     yaxis = param.Selector(["position_y", "array"], default="position_y")
-    colormap = param.Selector(hv.plotting.list_cmaps(), default="Plasma", )
+    colormap = param.Selector(colormaps, default="Plasma", )
     groupby = param.Selector(["array", "detector"], default="array")
     
     loading = param.Boolean(False, precedence=-1)
