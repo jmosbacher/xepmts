@@ -170,34 +170,7 @@ class DAQStreamz(param.Parameterized):
         for reader_name, f in futures.items():
             data = f.result(timeout=timeout)
             self.emit(reader_name, data)
-            
-    # def _rate_plots(self, data):
-    #     if not len(data):
-    #         data = self.rates_example
-    #         if self.rates_base_info is not None:
-    #             data =  self.rates_base_info.merge(data, how="outer")
-    #     plot = hv.Points(data, kdims=[self.xaxis, self.yaxis],
-    #                          vdims=["rate", "signal_channel", self.groupby ])
-    #     def pick_last(x):
-    #         nonna = x.dropna()
-    #         if len(nonna):
-    #             return nonna.iloc[-1]
-    #         else:
-    #             return np.nan
-            
-    #     plots = {group: plot.select(**{self.groupby: group}).aggregate([self.xaxis, self.yaxis], np.nanmean)
-    #                      for group in data[self.groupby].unique()}
-        
-    #     if len(plots)>1:
-    #         aspect = 1
-    #     else:
-    #         aspect = 2
-    #     maxval = data["rate"].max() or None
-    #     return hv.NdLayout(plots).cols(2).opts(
-    #         hv.opts.Points(color="rate", aspect=aspect, colorbar=True, 
-    #               size=15, clim=(1, maxval), logz=True,
-    #              default_tools=["hover", "tap"], cmap="Plasma")
-    #     )
+    
     
     def rate_plots(self, **kwargs):
         plots = []

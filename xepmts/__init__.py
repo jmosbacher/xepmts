@@ -4,12 +4,7 @@ __author__ = """Yossi Mosbacher"""
 __email__ = 'joe.mosbacher@gmail.com'
 __version__ = '0.4.18'
 
-# import eve_panel
-from xepmts import api
-from xepmts.api.server.v1.app import list_roles
-from xepmts.api.server.v2.app import list_roles as list_v2_roles
-
-from xepmts.api.client import default_client, get_client
+from xepmts.db.client import default_client, get_client
 from . import streams
 
 def settings(**kwargs):
@@ -19,7 +14,6 @@ def settings(**kwargs):
     else:
         for k,v in kwargs.items():
             setattr(panel_settings, k, v)
-
 
 def extension():
     import eve_panel
