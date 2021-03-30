@@ -341,11 +341,11 @@ tests = ["redis", "testfixtures", "pytest", "tox"]
 
 [[package]]
 name = "eve-panel"
-version = "0.3.12"
+version = "0.3.13"
 description = "Top-level package for Eve-Panel."
 category = "main"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.7"
 
 [package.dependencies]
 Authlib = ">=0.15.3,<0.16.0"
@@ -353,7 +353,7 @@ dask = "*"
 eve = ">=1.1.3,<2.0.0"
 httpx = ">=0.16.1,<0.17.0"
 pandas = "*"
-panel = ">=0.10.1,<0.11.0"
+panel = ">=0.11,<0.12"
 
 [package.extras]
 plotting = ["hvplot"]
@@ -908,14 +908,14 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 
 [[package]]
 name = "panel"
-version = "0.10.3"
+version = "0.11.1"
 description = "A high level app and dashboarding solution for Python."
 category = "main"
 optional = false
 python-versions = ">=3.6"
 
 [package.dependencies]
-bokeh = ">=2.2.2"
+bokeh = ">=2.3.0,<2.4.0"
 markdown = "*"
 param = ">=1.10.0"
 pyct = ">=0.4.4"
@@ -924,12 +924,12 @@ requests = "*"
 tqdm = "*"
 
 [package.extras]
-all = ["altair", "channels", "codecov", "datashader", "django", "flake8", "folium", "graphviz", "holoviews (>=1.13.2)", "hvplot", "ipyleaflet", "ipympl", "ipython (>=7.0)", "ipyvolume", "ipywidgets", "ipywidgets-bokeh", "jupyter-bokeh", "lxml", "matplotlib", "nbconvert (<6.0)", "nbsite (>=0.6.1)", "nbsmoke (>=0.2.0)", "notebook (>=5.4)", "pandas", "parameterized", "phantomjs", "pillow", "plotly", "pytest", "pytest-cov", "pyvista", "scikit-learn", "scipy", "selenium", "sphinx-holoviz-theme", "streamz", "twine", "vega-datasets", "vtk"]
-build = ["param (>=1.9.2)", "pyct (>=0.4.4)", "setuptools (>=30.3.0)", "bokeh (>=2.0.0)", "pyviz-comms (>=0.6.0)", "nodejs (>=10.13.0)"]
-doc = ["notebook (>=5.4)", "holoviews (>=1.13.2)", "matplotlib", "pillow", "plotly", "nbsite (>=0.6.1)", "nbconvert (<6.0)", "sphinx-holoviz-theme", "selenium", "phantomjs", "graphviz", "lxml"]
-examples = ["hvplot", "plotly", "altair", "streamz", "vega-datasets", "vtk", "scikit-learn", "datashader", "jupyter-bokeh", "django", "channels", "pyvista", "ipywidgets", "ipywidgets-bokeh", "ipyvolume", "ipyleaflet"]
-recommended = ["notebook (>=5.4)", "holoviews (>=1.13.2)", "matplotlib", "pillow", "plotly"]
-tests = ["flake8", "parameterized", "pytest", "scipy", "nbsmoke (>=0.2.0)", "pytest-cov", "codecov", "folium", "ipympl", "twine", "pandas", "ipython (>=7.0)"]
+all = ["altair", "channels", "codecov", "datashader", "django", "flake8", "folium", "graphviz", "holoviews", "holoviews (>1.14.1)", "hvplot", "ipyleaflet", "ipympl", "ipython (>=7.0)", "ipyvolume", "ipywidgets", "ipywidgets-bokeh", "jupyter-bokeh", "lxml", "matplotlib", "nbconvert (<6.0)", "nbsite (>=0.6.1)", "nbsmoke (>=0.2.0)", "notebook (>=5.4)", "pandas", "parameterized", "phantomjs", "pillow", "plotly", "pytest", "pytest-cov", "pyvista", "scikit-learn", "scipy", "selenium", "sphinx-holoviz-theme", "streamz", "twine", "vega-datasets", "vtk", "xarray (<0.17)"]
+build = ["param (>=1.9.2)", "pyct (>=0.4.4)", "setuptools (>=30.3.0)", "bokeh (>=2.0.0)", "pyviz-comms (>=0.6.0)"]
+doc = ["notebook (>=5.4)", "holoviews (>1.14.1)", "matplotlib", "pillow", "plotly", "nbsite (>=0.6.1)", "nbconvert (<6.0)", "sphinx-holoviz-theme", "selenium", "phantomjs", "graphviz", "lxml"]
+examples = ["hvplot", "plotly", "altair", "streamz", "vega-datasets", "vtk", "scikit-learn", "datashader", "jupyter-bokeh", "django", "channels", "pyvista", "ipywidgets", "ipywidgets-bokeh", "ipyvolume", "ipyleaflet", "xarray (<0.17)"]
+recommended = ["notebook (>=5.4)", "holoviews (>1.14.1)", "matplotlib", "pillow", "plotly"]
+tests = ["flake8", "parameterized", "pytest", "scipy", "nbsmoke (>=0.2.0)", "pytest-cov", "codecov", "folium", "ipympl", "twine", "pandas", "ipython (>=7.0)", "holoviews"]
 
 [[package]]
 name = "param"
@@ -1570,18 +1570,18 @@ python-versions = "*"
 
 [[package]]
 name = "xeauth"
-version = "0.1.2"
+version = "0.1.4"
 description = "Top-level package for xeauth."
 category = "main"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.7.1"
 
 [package.dependencies]
 appdirs = ">=1.4.4,<2.0.0"
 Authlib = ">=0.15.3,<0.16.0"
 click = "*"
 httpx = ">=0.16.1,<0.17.0"
-panel = ">=0.10.3,<0.11.0"
+panel = ">=0.11.1,<0.12.0"
 
 [[package]]
 name = "xepmts-endpoints"
@@ -1636,7 +1636,7 @@ server = []
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.7.1"
-content-hash = "adf357990b97f43c85858086483bd1cf8ec5567cd3d18b7bc94a88e31e3ab220"
+content-hash = "866cd184dad0cbfccc9505bd68f5affadec2e3b1e9dc961a27f0e79b7b146820"
 
 [metadata.files]
 alabaster = [
@@ -1841,8 +1841,8 @@ eve = [
     {file = "Eve-1.1.5.tar.gz", hash = "sha256:5647ee7dd6e063b967276e49f564cd4f96decdd0a218482bdf86c404a2be1fbf"},
 ]
 eve-panel = [
-    {file = "eve_panel-0.3.12-py3-none-any.whl", hash = "sha256:9335c73c470cb6efa5aaeda1fc35702515b09ef642118fc3e4ae9dc342576777"},
-    {file = "eve_panel-0.3.12.tar.gz", hash = "sha256:a173a8757f14665d94e7821e7d6dd212323f96a880e9ccd5618e53f9f96b3fd9"},
+    {file = "eve_panel-0.3.13-py3-none-any.whl", hash = "sha256:45053d78749a4dd4bcbbaa0ec171e0d622e171867ae271413edf6a9c463b036b"},
+    {file = "eve_panel-0.3.13.tar.gz", hash = "sha256:b13c8d0ad5c9cf9f6b86ac4b6bf1e2878c697ad45af3a20524f16e56892303d6"},
 ]
 events = [
     {file = "Events-0.3.tar.gz", hash = "sha256:f4d9c41a5c160ce504278f219fe56f44242ca63794a0ad638b52d1e087ac2a41"},
@@ -2128,8 +2128,8 @@ pandocfilters = [
     {file = "pandocfilters-1.4.3.tar.gz", hash = "sha256:bc63fbb50534b4b1f8ebe1860889289e8af94a23bff7445259592df25a3906eb"},
 ]
 panel = [
-    {file = "panel-0.10.3-py2.py3-none-any.whl", hash = "sha256:0a97efd48ad9e88289c7e37b488a70eaa6e9946c8b3f886e184d5fd31aea1301"},
-    {file = "panel-0.10.3.tar.gz", hash = "sha256:3619d8d3aec631ba047b294163ddecfa62727ca89576bff4a8c08e84416eb212"},
+    {file = "panel-0.11.1-py2.py3-none-any.whl", hash = "sha256:633fb2a7da31635b674d3532cf5018c8d54ae3ea5f766986b10168a938efe26a"},
+    {file = "panel-0.11.1.tar.gz", hash = "sha256:ce531e5c0c8a8ae74d523762aeb1666650caebbe1867aba16129d29791e921f9"},
 ]
 param = [
     {file = "param-1.10.1-py2.py3-none-any.whl", hash = "sha256:fdfdb9544e7bdc0a1e5df7ced1c4840aa106625192b8efe0b6e2479f1519dc37"},
@@ -2605,8 +2605,8 @@ wrapt = [
     {file = "wrapt-1.12.1.tar.gz", hash = "sha256:b62ffa81fb85f4332a4f609cab4ac40709470da05643a082ec1eb88e6d9b97d7"},
 ]
 xeauth = [
-    {file = "xeauth-0.1.2-py3-none-any.whl", hash = "sha256:1e484fc01428c28bb066b77b8149f9d6251cb907cb41ca575d7676b3c599d54c"},
-    {file = "xeauth-0.1.2.tar.gz", hash = "sha256:61c909731d037cf066ae2b5bc198f90748b12984e183edfb0eb78ef2378a1f80"},
+    {file = "xeauth-0.1.4-py3-none-any.whl", hash = "sha256:81b5910388f26e30ba7d91d2cb06046d484e56a33c17ef2567c0741400bcddc6"},
+    {file = "xeauth-0.1.4.tar.gz", hash = "sha256:38be984cba3e848e70b1c1ef633a168e1f990e7e1bcdd2bc03f607e51a404a51"},
 ]
 xepmts-endpoints = [
     {file = "xepmts_endpoints-0.1.0-py3-none-any.whl", hash = "sha256:fe5e82d7fbe0ae9e42bb32db0826e052431bd4a74e26b3cdc4823d8ae3e9f30f"},
