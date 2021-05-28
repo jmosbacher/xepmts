@@ -2,7 +2,7 @@
 
 __author__ = """Yossi Mosbacher"""
 __email__ = 'joe.mosbacher@gmail.com'
-__version__ = '0.4.22'
+__version__ = '0.4.23'
 
 from xepmts.db.client import default_client, get_client
 from . import streams
