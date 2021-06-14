@@ -36,6 +36,6 @@ setup(
     packages=['xepmts', 'xepmts.db', 'xepmts.streams'],
     package_dir={"": "."},
     package_data={},
-    install_requires=['bokeh==2.2.3', 'click', 'eve-panel==0.3.12', 'pandas==1.*,>=1.2.3', 'toml==0.*,>=0.10.2', 'xeauth==0.1.2', 'xepmts-endpoints==0.*,>=0.1.0'],
+    install_requires=['bokeh==2.3.2', 'click', 'eve-panel==0.3.12', 'pandas==1.*,>=1.2.3', 'toml==0.*,>=0.10.2', 'xeauth==0.1.2', 'xepmts-endpoints==0.*,>=0.1.0'],
     extras_require={"dask": ["dask[dataframe]==2021.*,>=2021.2.0"], "dev": ["bumpversion", "coverage", "flake8", "invoke", "isort", "nbsphinx", "numpydoc", "pylint", "pytest", "sphinx", "sphinx-material", "tox", "yapf"], "full": ["dask[dataframe]==2021.*,>=2021.2.0", "hvplot==0.*,>=0.7.0", "streamz"], "live": ["streamz"], "plotting": ["hvplot==0.*,>=0.7.0"]},
 )
