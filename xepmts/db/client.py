@@ -1,4 +1,4 @@
-from xepmts_endpoints import get_endpoints
+from .endpoints import get_endpoints
 import os
 import pkg_resources
 
@@ -11,16 +11,21 @@ SERVERS = {
 }
 
 
-def get_client(version, scopes=["read:all"],):
-    import eve
+def get_client(version, scopes=["read:all"], servers=None):
     import eve_panel
-    servers = {f"{name}_{version}": f"{address.strip('/')}/{version}"
-                for name, address in SERVERS.items()}
-    servers["default"] = f"{SERVERS[DEFAULT_SERVER].strip('/')}/{version}"
+    if servers is None:
+        servers = {f"{name}": f"{address.strip('/')}/{version}"
+                    for name, address in SERVERS.items()}
+        servers["default"] = f"{SERVERS[DEFAULT_SERVER].strip('/')}/{version}"
+    elif isinstance(servers, str):
+        servers = {'default': servers}
+    elif isinstance(servers, (tuple,list)):
+        servers = {f'server_{i}': server for i,server in enumerate(servers)}
+    if not isinstance(servers, dict):
+        raise ValueError("Servers parameter must be of type dict with signiture: {name: url}")
 
-    app = eve.Eve(settings={"DOMAIN": get_endpoints()})
-
-    client = eve_panel.EveClient.from_app(app, name="xepmts", auth_scheme="Bearer",
+    endpoints = get_endpoints(servers.values())
+    client = eve_panel.EveClient.from_domain_def(domain_def=endpoints, name="xepmts", auth_scheme="Bearer",
                              sort_by_url=True, servers=servers)
     client.select_server("default")
     client.db = client
