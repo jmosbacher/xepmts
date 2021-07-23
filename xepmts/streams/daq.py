@@ -69,6 +69,7 @@ class DAQStreamz(param.Parameterized):
             
         except Exception as e:
             print(e)
+            print(r.content)
             result = {
                 "rates": self.rates_example[["time", "signal_channel", "rate"]].to_dict(orient="list"),
                 "reader_info": self.reader_info_example.to_dict(orient="list"),
@@ -343,7 +344,7 @@ class LiveDAQStreamz(DAQStreamz):
 class LiveDAQStreamzViewer(param.Parameterized):
     
     CONFIGS = {
-        "tpc": dict(xaxis="position_x", yaxis="position_y", groupby="array", reader_names=[f"reader{i}_reader_0" for i in range(4)]),
+        "tpc": dict(xaxis="position_x", yaxis="position_y", groupby="array", reader_names=[f"reader{i}_reader_0" for i in range(3)]),
         "nveto": dict(xaxis="sector", yaxis="array", groupby="detector", reader_names=["reader6_reader_0", "reader6_reader_1"]),
         "muveto": dict(xaxis="sector", yaxis="array", groupby="detector", reader_names=["reader5_reader_0"]),
 
@@ -402,7 +403,6 @@ class LiveDAQStreamzViewer(param.Parameterized):
                       self.param.add_detector,
                       self.param.reload_detector,
                      sizing_mode="stretch_width")
-    
     
     def view(self):
         return pn.Column(
