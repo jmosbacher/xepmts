@@ -19,7 +19,7 @@ from panel.io.server import unlocked
 from tornado.ioloop import IOLoop
 
 
-executor = ThreadPoolExecutor(max_workers=5)
+executor = ThreadPoolExecutor(max_workers=20)
 logger = logging.getLogger(__name__)
 
 
@@ -183,13 +183,21 @@ class DAQStreamz(param.Parameterized):
                         y=self.yaxis,
                         c="rate",
                         s=180,
-                        by=self.groupby,
-                        subplots=True,
                         cmap=self.colormap,
                         responsive=True,
                         backlog=nitems)
         psettings.update(kwargs)
-        return sdf.hvplot.scatter(**psettings)
+        if self.rates_base_info is None:
+            return sdf.hvplot.scatter(**psettings)
+        groups = self.rates_base_info[self.groupby].unique()
+        plot = None
+        for group in groups:
+            p = sdf[sdf[self.groupby]==group].hvplot.scatter(**psettings)
+            if plot is None:
+                plot = p
+            else:
+                plot = plot + p
+        return plot
 
         groups = self.rates_base_info[self.groupby].unique()
         if len(groups)>1:
