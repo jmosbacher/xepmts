@@ -28,7 +28,10 @@ def get_client(version, scopes=["read:all"], servers=None):
     endpoints = get_endpoints(servers.values())
     client = eve_panel.EveClient.from_domain_def(domain_def=endpoints, name="xepmts", auth_scheme="Bearer",
                              sort_by_url=True, servers=servers)
-    client.select_server("default")
+    if 'default' in servers:
+        client.select_server("default")
+    elif len(servers):
+        client.select_server(list(servers)[0])
     client.db = client
     if version=="v2":
         client.set_auth("XenonAuth")
