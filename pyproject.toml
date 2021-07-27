@@ -12,7 +12,7 @@ tag = "v."
 
 [tool.poetry]
 name = "xepmts"
-version = "0.4.29"
+version = "0.4.30"
 homepage = "https://github.com/jmosbacher/xepmts"
 documentation = "https://xepmts.readthedocs.io/"
 description = "Python client for accessing the XENON experiment PMT data."
