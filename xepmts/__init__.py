@@ -4,7 +4,7 @@ __author__ = """Yossi Mosbacher"""
 __email__ = 'joe.mosbacher@gmail.com'
 __version__ = '0.4.29'
 
-from xepmts.db.client import default_client, get_client
+from xepmts.db.client import default_client, get_client, get_admin_client
 from . import streams
 
 def settings(**kwargs):

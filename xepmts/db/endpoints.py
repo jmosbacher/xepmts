@@ -13,10 +13,12 @@ def get_endpoints(servers, endpoint_path='endpoints'):
     for server in servers:
         uri = "/".join([server.rstrip('/'), endpoint_path.lstrip('/')])
         log.info(f"Attempting to read endpoints from {uri}")
-        r = httpx.get(uri, timeout=15)
-        if not r.is_error:
-            log.info('Endpoints read succesfully from server.')
-            return {k: clean_nones(v) for k,v in r.json().items()}
-
+        try:
+            r = httpx.get(uri, timeout=5)
+            if not r.is_error:
+                log.info('Endpoints read succesfully from server.')
+                return {k: clean_nones(v) for k,v in r.json().items()}
+        except:
+            pass
     log.error("Failed to read endpoint definitions from server, loading defaults.")
     return xepmts_endpoints.get_endpoints()
