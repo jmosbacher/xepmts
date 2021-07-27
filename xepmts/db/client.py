@@ -2,7 +2,6 @@ from .endpoints import get_endpoints
 import os
 import pkg_resources
 
-DEFAULT_SERVER = "xenonnt.org"
 SERVERS = {
     "xenonnt.org": "https://api.pmts.xenonnt.org/",
     "gae": "https://api-dot-xenon-pmts.uc.r.appspot.com/",
@@ -11,6 +10,7 @@ SERVERS = {
     "lngs": "https://xe1t-mysql.lngs.infn.it/api/",
 }
 
+DEFAULT_SERVER = "lngs"
 
 def get_client(version, scopes=["read:all"], servers=None):
     import eve_panel
