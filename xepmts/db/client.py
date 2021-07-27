@@ -15,9 +15,9 @@ DEFAULT_SERVER = "lngs"
 def get_client(version, scopes=["read:all"], servers=None):
     import eve_panel
     if servers is None:
-        servers = {f"{name}": f"{address.strip('/')}/{version}"
-                    for name, address in SERVERS.items()}
-        servers["default"] = f"{SERVERS[DEFAULT_SERVER].strip('/')}/{version}"
+        servers = {"default": f"{SERVERS[DEFAULT_SERVER].strip('/')}/{version}"}
+        servers.update({f"{name}": f"{address.strip('/')}/{version}"
+                    for name, address in SERVERS.items()})
     elif isinstance(servers, str):
         servers = {'default': servers}
     elif isinstance(servers, (tuple,list)):
