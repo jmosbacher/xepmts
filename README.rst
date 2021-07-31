@@ -23,8 +23,13 @@ Basic Usage
     # If you are using a notebook:
     xepmts.notebook()
 
+    # v1 client
     db = xepmts.get_client("v1")
     db.login(token='YOUR-API-TOKEN')
+
+    # v2 client
+    db = xepmts.get_client("v2")
+    db.login()
 
     # set the number of items to pull per page
     db.tpc.installs.items_per_page = 25

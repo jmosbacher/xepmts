@@ -189,15 +189,6 @@ class DAQStreamz(param.Parameterized):
         psettings.update(kwargs)
         if self.rates_base_info is None:
             return sdf.hvplot.scatter(**psettings)
-        groups = self.rates_base_info[self.groupby].unique()
-        plot = None
-        for group in groups:
-            p = sdf[sdf[self.groupby]==group].hvplot.scatter(**psettings)
-            if plot is None:
-                plot = p
-            else:
-                plot = plot + p
-        return plot
 
         groups = self.rates_base_info[self.groupby].unique()
         if len(groups)>1:
