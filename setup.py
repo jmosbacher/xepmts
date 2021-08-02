@@ -24,7 +24,7 @@ if os.path.exists(readme_path):
 setup(
     long_description=readme,
     name='xepmts',
-    version='0.4.18',
+    version='0.6.0',
     description='Python client for accessing the XENON experiment PMT data.',
     python_requires='>=3.7.1',
     project_urls={"documentation": "https://xepmts.readthedocs.io/", "homepage": "https://github.com/jmosbacher/xepmts"},
@@ -36,6 +36,6 @@ setup(
     packages=['xepmts', 'xepmts.db', 'xepmts.streams'],
     package_dir={"": "."},
     package_data={},
-    install_requires=['bokeh==2.2.3', 'click', 'eve-panel==0.3.12', 'pandas==1.*,>=1.2.3', 'toml==0.*,>=0.10.2', 'xeauth==0.1.7', 'xepmts-endpoints==0.*,>=0.1.0'],
-    extras_require={"dask": ["dask[dataframe]==2021.*,>=2021.2.0"], "dev": ["bumpversion", "coverage", "flake8", "invoke", "isort", "nbsphinx", "numpydoc", "pylint", "pytest", "sphinx", "sphinx-material", "tox", "yapf"], "full": ["dask[dataframe]==2021.*,>=2021.2.0", "hvplot==0.*,>=0.7.0", "streamz"], "live": ["streamz"], "plotting": ["hvplot==0.*,>=0.7.0"]},
+    install_requires=['click', 'eve-panel==0.*,>=0.3.12', 'panel==0.*,>=0.11.1', 'toml==0.*,>=0.10.2', 'xeauth==0.*,>=0.1.2', 'xepmts-endpoints==0.*,>=0.1.0'],
+    extras_require={"dev": ["bumpversion", "coverage", "flake8", "invoke", "ipykernel", "isort", "jupyter", "nbsphinx", "numpydoc", "pylint", "pytest", "pyviz-comms", "sphinx", "sphinx-material", "tox", "yapf"], "full": ["dask[dataframe]==2021.*,>=2021.2.0", "hvplot==0.*,>=0.7.0", "streamz"], "live": ["streamz"], "plotting": ["hvplot==0.*,>=0.7.0"]},
 )
