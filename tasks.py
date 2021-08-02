@@ -177,9 +177,12 @@ def release(c):
     _run(c, "poetry publish")
 
 @task(help={'version': "major/minor/path or explicit version"})
-def bump(c, version="patch"):
-    _run(c, "bump2version {}".format(version))
-    
+def bump(c, version="patch", new_version=None):
+    if new_version is None:
+        _run(c, "bump2version {}".format(version))
+    else:
+        _run(c, "bump2version --new-version {} {}".format(new_version, version))
+        
 @task(pre=[bump],help={'version': "major/minor/path or explicit version"})
 def bump_and_commit(c, version="patch"):
     _run(c, "git push")
