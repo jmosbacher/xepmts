@@ -1969,7 +1969,7 @@ python-versions = "*"
 
 [[package]]
 name = "xeauth"
-version = "0.1.6"
+version = "0.1.7"
 description = "Top-level package for xeauth."
 category = "main"
 optional = false
@@ -3287,8 +3287,8 @@ wrapt = [
     {file = "wrapt-1.12.1.tar.gz", hash = "sha256:b62ffa81fb85f4332a4f609cab4ac40709470da05643a082ec1eb88e6d9b97d7"},
 ]
 xeauth = [
-    {file = "xeauth-0.1.6-py3-none-any.whl", hash = "sha256:5d0c70455936f275bf48587a8e397b8d0dbf6e6960e26a7d442bdb2560d7d380"},
-    {file = "xeauth-0.1.6.tar.gz", hash = "sha256:94a63f8b3df11925acb62c98a685881982e10e9de8b0a2f9d381afc4fa582bb8"},
+    {file = "xeauth-0.1.7-py3-none-any.whl", hash = "sha256:13e99b0b15bd04a38bf739569bba0faf863edf6ab90d6eaa7f5346cf6f87cabc"},
+    {file = "xeauth-0.1.7.tar.gz", hash = "sha256:0f9a8e35453ca656be56a72162292b5929f516c11ae9976f6fb47cb1e942b53b"},
 ]
 xepmts-endpoints = [
     {file = "xepmts_endpoints-0.1.4-py3-none-any.whl", hash = "sha256:3a1a52f9914d76664cda1f73233baef9ac5186651813df03715f047e5ef49cf2"},
