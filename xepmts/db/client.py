@@ -12,8 +12,8 @@ SERVERS = {
     "xenonnt.org": "https://api.pmts.xenonnt.org/",
     "gae": "https://api-dot-xenon-pmts.uc.r.appspot.com/",
     "gae_proxy": "https://api-proxy-dot-xenon-pmts.uc.r.appspot.com/",
-    "deta": "https://38nq2t.deta.dev/",
     "lngs": "https://xe1t-mysql.lngs.infn.it/api/",
+    "lngs_mirror": "https://api.pmts.yossisprojects.com/"
 }
 
 DEFAULT_SERVER = "lngs"
