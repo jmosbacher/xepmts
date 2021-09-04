@@ -2,7 +2,7 @@
 
 __author__ = """Yossi Mosbacher"""
 __email__ = 'joe.mosbacher@gmail.com'
-__version__ = '0.5.5'
+__version__ = '0.5.6'
 
 import xeauth
 from xepmts.db.client import default_client, get_admin_client
