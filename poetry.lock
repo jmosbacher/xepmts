@@ -468,7 +468,7 @@ description = "Top-level package for Eve-Panel."
 name = "eve-panel"
 optional = false
 python-versions = ">=3.7"
-version = "0.3.25"
+version = "0.3.26"
 
 [package.dependencies]
 Authlib = ">=0.15.3,<0.16.0"
@@ -2154,7 +2154,7 @@ live = ["streamz"]
 plotting = ["hvplot"]
 
 [metadata]
-content-hash = "530ef139d167b02d68ebe1d72f70272db057f9875e7aff9edad1671d9c8aaa61"
+content-hash = "10dd162e5a4fc9d31c1f22e56061f841629659937cf649ea264fd54e48725312"
 lock-version = "1.0"
 python-versions = ">=3.7.1"
 
@@ -2466,8 +2466,8 @@ eve = [
     {file = "Eve-1.1.5.tar.gz", hash = "sha256:5647ee7dd6e063b967276e49f564cd4f96decdd0a218482bdf86c404a2be1fbf"},
 ]
 eve-panel = [
-    {file = "eve_panel-0.3.25-py3-none-any.whl", hash = "sha256:b7477626c1aa11b20be67d139cd1612613803b0763af09bc3d7782df1ab06508"},
-    {file = "eve_panel-0.3.25.tar.gz", hash = "sha256:99fa487f05ba4be5edaa04b1ff64e58b60c2ff92b9de3711d87835eb63f2ca29"},
+    {file = "eve_panel-0.3.26-py3-none-any.whl", hash = "sha256:101f4a8c07c47f6fcf86edfa1e91f3fa22e28db3c2c8bb530c2dd8160db2ce55"},
+    {file = "eve_panel-0.3.26.tar.gz", hash = "sha256:bee02bb8f792a37e0ea7a8680188737d42c01e9b3efb6aef0834c7ef22e0e7f4"},
 ]
 events = [
     {file = "Events-0.3.tar.gz", hash = "sha256:f4d9c41a5c160ce504278f219fe56f44242ca63794a0ad638b52d1e087ac2a41"},
