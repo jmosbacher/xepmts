@@ -2094,7 +2094,7 @@ description = "Top-level package for xeauth."
 name = "xeauth"
 optional = false
 python-versions = ">=3.7.1"
-version = "0.1.10"
+version = "0.1.11"
 
 [package.dependencies]
 Authlib = ">=0.15.3,<0.16.0"
@@ -2137,7 +2137,7 @@ heapdict = "*"
 [[package]]
 category = "main"
 description = "Backport of pathlib-compatible object wrapper for zip files"
-marker = "python_version < \"3.8\" and python_full_version < \"3.8.0\" or python_version < \"3.8.0\" and python_full_version < \"3.8.0\" or python_version == \"3.7\" and python_full_version < \"3.8.0\""
+marker = "python_version < \"3.8.0\""
 name = "zipp"
 optional = false
 python-versions = ">=3.6"
@@ -2154,7 +2154,7 @@ live = ["streamz"]
 plotting = ["hvplot"]
 
 [metadata]
-content-hash = "10dd162e5a4fc9d31c1f22e56061f841629659937cf649ea264fd54e48725312"
+content-hash = "49d0767703c5c7825c9730e9cf0351537dbc9e11577769e6cbd814d01e4b47fa"
 lock-version = "1.0"
 python-versions = ">=3.7.1"
 
@@ -3443,8 +3443,8 @@ wrapt = [
     {file = "wrapt-1.12.1.tar.gz", hash = "sha256:b62ffa81fb85f4332a4f609cab4ac40709470da05643a082ec1eb88e6d9b97d7"},
 ]
 xeauth = [
-    {file = "xeauth-0.1.10-py3-none-any.whl", hash = "sha256:d9e4293027c06eec134692dfbba40c90a23f68dc81ae2754a00d89c876d8fcae"},
-    {file = "xeauth-0.1.10.tar.gz", hash = "sha256:62809463135b9ad7e35f805a4a2badb9add9817c170c9db5469bd1afffa196ec"},
+    {file = "xeauth-0.1.11-py3-none-any.whl", hash = "sha256:f8ee0b6471f21ada5cf669e76b2b111e4287c39c0a27d86da4f13f34ef7fbf12"},
+    {file = "xeauth-0.1.11.tar.gz", hash = "sha256:f7683f23ae3cdd289d0f2660f18701b1bd50970710ac8cf86c640cc5caee1799"},
 ]
 xepmts-endpoints = [
     {file = "xepmts_endpoints-0.1.4-py3-none-any.whl", hash = "sha256:3a1a52f9914d76664cda1f73233baef9ac5186651813df03715f047e5ef49cf2"},
