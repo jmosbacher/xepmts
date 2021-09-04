@@ -18,7 +18,8 @@ SERVERS = {
 
 DEFAULT_SERVER = "lngs"
 
-def get_client(version, auth=None, scopes=["read:all"], server='default', extra_servers=None, endpoint_path='endpoints', timeout=25):
+
+def get_client(version, xetoken, server='default', extra_servers=None, endpoint_path='endpoints', timeout=25):
     import eve_panel
     servers = {"default": f"{SERVERS[DEFAULT_SERVER].strip('/')}/{version}"}
     servers.update({f"{name}": f"{address.rstrip('/')}/{version}"
@@ -29,24 +30,19 @@ def get_client(version, auth=None, scopes=["read:all"], server='default', extra_
             servers.update(extra_servers)
         else:
             raise TypeError("extra_servers must be a dictionary of with signiture: {name: url}")
-    if auth is None:
-        if version == 'v1':
-            auth = "Bearer"
-        else:
-            auth = "XenonAuth"
+    
     if server in servers:
-        url = "/".join([servers[server].rstrip('/'),endpoint_path.lstrip('/')])
-        endpoints = get_endpoints(url, timeout=timeout)
+        url = f"{servers[server].rstrip('/')}/{endpoint_path.lstrip('/')}"
+        with xetoken.Client() as client:
+            endpoints = get_endpoints(url, timeout=timeout, client=client)
     if endpoints is None:
         log.error("Failed to read endpoint definitions from server, loading defaults.")
         endpoints = default_endpoints()
-    client = eve_panel.EveClient.from_domain_def(domain_def=endpoints, name="xepmts", auth_scheme=auth,
+    client = eve_panel.EveClient.from_domain_def(domain_def=endpoints, name="xepmts", auth_scheme="Bearer",
                                 sort_by_url=True, servers=servers)
     client.select_server(server)
     client.db = client
-    if version=="v2":
-        client.set_credentials(audience="https://api.pmts.xenonnt.org", scopes=scopes)
-        
+    client.set_credentials(token=xetoken.access_token)
     return client
 
 def default_client():

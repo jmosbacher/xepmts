@@ -25,6 +25,7 @@ class ConfigParameter(param.Parameter):
         super()._set_names(attrib_name)
         
 class Config(param.Parameterized):
+    OAUTH_AUDIENCE = ConfigParameter(str, env_prefix="xepmts", default="https://api.pmts.xenonnt.org")
     API_SERVER = ConfigParameter(str, env_prefix="xepmts", default="https://xe1t-mysql.lngs.infn.it/api/v1")
     AUTH_SERVER_URI = ConfigParameter(str, env_prefix="xepmts", default="https://xe1t-mysql.lngs.infn.it/xeauth/")
     API_TOKEN = ConfigParameter(str, env_prefix="xepmts", default="")

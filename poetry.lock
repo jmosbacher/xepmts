@@ -8,6 +8,27 @@ version = "0.7.12"
 
 [[package]]
 category = "main"
+description = "High level compatibility layer for multiple asynchronous event loop implementations"
+name = "anyio"
+optional = false
+python-versions = ">=3.6.2"
+version = "3.3.0"
+
+[package.dependencies]
+idna = ">=2.8"
+sniffio = ">=1.1"
+
+[package.dependencies.typing-extensions]
+python = "<3.8"
+version = "*"
+
+[package.extras]
+doc = ["sphinx-rtd-theme", "sphinx-autodoc-typehints (>=1.2.0)"]
+test = ["coverage (>=4.5)", "hypothesis (>=4.0)", "pytest (>=6.0)", "pytest-mock (>=3.6.1)", "trustme", "uvloop (<0.15)", "mock (>=4)", "uvloop (>=0.15)"]
+trio = ["trio (>=0.16)"]
+
+[[package]]
+category = "main"
 description = "A small Python module for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
 name = "appdirs"
 optional = false
@@ -246,7 +267,6 @@ pycparser = "*"
 [[package]]
 category = "main"
 description = "The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet."
-marker = "python_version >= \"3\""
 name = "charset-normalizer"
 optional = false
 python-versions = ">=3.5.0"
@@ -348,7 +368,7 @@ description = "Parallel PyData with Task Scheduling"
 name = "dask"
 optional = false
 python-versions = ">=3.7"
-version = "2021.8.1"
+version = "2021.9.0"
 
 [package.dependencies]
 cloudpickle = ">=1.1.1"
@@ -368,10 +388,10 @@ version = ">=1.0"
 
 [package.extras]
 array = ["numpy (>=1.18)"]
-complete = ["bokeh (>=1.0.0,<2.0.0 || >2.0.0)", "distributed (2021.08.1)", "jinja2", "numpy (>=1.18)", "pandas (>=1.0)"]
+complete = ["bokeh (>=1.0.0,<2.0.0 || >2.0.0)", "distributed (2021.09.0)", "jinja2", "numpy (>=1.18)", "pandas (>=1.0)"]
 dataframe = ["numpy (>=1.18)", "pandas (>=1.0)"]
 diagnostics = ["bokeh (>=1.0.0,<2.0.0 || >2.0.0)", "jinja2"]
-distributed = ["distributed (2021.08.1)"]
+distributed = ["distributed (2021.09.0)"]
 test = ["pytest", "pytest-rerunfailures", "pytest-xdist"]
 
 [[package]]
@@ -448,13 +468,13 @@ description = "Top-level package for Eve-Panel."
 name = "eve-panel"
 optional = false
 python-versions = ">=3.7"
-version = "0.3.22"
+version = "0.3.25"
 
 [package.dependencies]
 Authlib = ">=0.15.3,<0.16.0"
 dask = "*"
 eve = ">=1.1.3,<2.0.0"
-httpx = ">=0.16.1,<0.17.0"
+httpx = ">=0.19,<0.20"
 pandas = "*"
 panel = ">=0.12.1,<0.13.0"
 
@@ -589,10 +609,11 @@ description = "A minimal low-level HTTP client."
 name = "httpcore"
 optional = false
 python-versions = ">=3.6"
-version = "0.12.3"
+version = "0.13.6"
 
 [package.dependencies]
-h11 = "<1.0.0"
+anyio = ">=3.0.0,<4.0.0"
+h11 = ">=0.11,<0.13"
 sniffio = ">=1.0.0,<2.0.0"
 
 [package.extras]
@@ -604,11 +625,12 @@ description = "The next generation HTTP client."
 name = "httpx"
 optional = false
 python-versions = ">=3.6"
-version = "0.16.1"
+version = "0.19.0"
 
 [package.dependencies]
 certifi = "*"
-httpcore = ">=0.12.0,<0.13.0"
+charset-normalizer = "*"
+httpcore = ">=0.13.3,<0.14.0"
 sniffio = "*"
 
 [package.dependencies.rfc3986]
@@ -616,8 +638,8 @@ extras = ["idna2008"]
 version = ">=1.3,<2"
 
 [package.extras]
-brotli = ["brotlipy (>=0.7.0,<0.8.0)"]
-http2 = ["h2 (>=3.0.0,<4.0.0)"]
+brotli = ["brotlicffi", "brotli"]
+http2 = ["h2 (>=3,<5)"]
 
 [[package]]
 category = "main"
@@ -1613,7 +1635,7 @@ description = "Provides an abstraction layer on top of the various Qt bindings (
 name = "qtpy"
 optional = false
 python-versions = ">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*"
-version = "1.10.0"
+version = "1.11.0"
 
 [[package]]
 category = "main"
@@ -2072,13 +2094,13 @@ description = "Top-level package for xeauth."
 name = "xeauth"
 optional = false
 python-versions = ">=3.7.1"
-version = "0.1.9"
+version = "0.1.10"
 
 [package.dependencies]
 Authlib = ">=0.15.3,<0.16.0"
 appdirs = ">=1.4.4,<2.0.0"
 click = "*"
-httpx = ">=0.16.1,<0.17.0"
+httpx = ">=0.19,<0.20"
 panel = ">=0.12.1,<0.13.0"
 
 [[package]]
@@ -2132,7 +2154,7 @@ live = ["streamz"]
 plotting = ["hvplot"]
 
 [metadata]
-content-hash = "087f356ef5a59dc8736b924d5effb92874fd3c348f51eaffe242ed15ced1581b"
+content-hash = "530ef139d167b02d68ebe1d72f70272db057f9875e7aff9edad1671d9c8aaa61"
 lock-version = "1.0"
 python-versions = ">=3.7.1"
 
@@ -2140,6 +2162,10 @@ python-versions = ">=3.7.1"
 alabaster = [
     {file = "alabaster-0.7.12-py2.py3-none-any.whl", hash = "sha256:446438bdcca0e05bd45ea2de1668c1d9b032e1a9154c2c259092d77031ddd359"},
     {file = "alabaster-0.7.12.tar.gz", hash = "sha256:a661d72d58e6ea8a57f7a86e37d86716863ee5e92788398526d58b26a4e4dc02"},
+]
+anyio = [
+    {file = "anyio-3.3.0-py3-none-any.whl", hash = "sha256:929a6852074397afe1d989002aa96d457e3e1e5441357c60d03e7eea0e65e1b0"},
+    {file = "anyio-3.3.0.tar.gz", hash = "sha256:ae57a67583e5ff8b4af47666ff5651c3732d45fd26c929253748e796af860374"},
 ]
 appdirs = [
     {file = "appdirs-1.4.4-py2.py3-none-any.whl", hash = "sha256:a841dacd6b99318a741b166adb07e19ee71a274450e68237b4650ca1055ab128"},
@@ -2355,8 +2381,8 @@ css-html-js-minify = [
     {file = "css_html_js_minify-2.5.5-py3.6.egg", hash = "sha256:4704e04a0cd6dd56d61bbfa3bfffc630da6b2284be33519be0b456672e2a2438"},
 ]
 dask = [
-    {file = "dask-2021.8.1-py3-none-any.whl", hash = "sha256:61504a7d369081fdf417e8a1dcb461181416f8d0638073105788592bd1bf3eb7"},
-    {file = "dask-2021.8.1.tar.gz", hash = "sha256:89efe49dfef162387a89c8b255b30ef495856405786ef94884df985fe1a344bd"},
+    {file = "dask-2021.9.0-py3-none-any.whl", hash = "sha256:cf557bfd8f0086270ca3f6b344d945e4a8061f118a7c5b7b0c2e4b56f6c419c4"},
+    {file = "dask-2021.9.0.tar.gz", hash = "sha256:7c1ed5069fd81925130db7a7c94037eb8259fb3599adb4d130748aa3966e5684"},
 ]
 debugpy = [
     {file = "debugpy-1.4.1-cp27-cp27m-macosx_10_14_x86_64.whl", hash = "sha256:a2c5a1c49239707ed5bc8e97d8f9252fb392d9e13c79c7b477593d7dde4ae24a"},
@@ -2440,8 +2466,8 @@ eve = [
     {file = "Eve-1.1.5.tar.gz", hash = "sha256:5647ee7dd6e063b967276e49f564cd4f96decdd0a218482bdf86c404a2be1fbf"},
 ]
 eve-panel = [
-    {file = "eve_panel-0.3.22-py3-none-any.whl", hash = "sha256:6b813e0eaefcd83375fc1cf60ae4b86a5f45aea5a751f1abbb46d76b5882209a"},
-    {file = "eve_panel-0.3.22.tar.gz", hash = "sha256:077586ffee15fa318531a4025123118d096b377f5dbe09e5d0c142982cb65052"},
+    {file = "eve_panel-0.3.25-py3-none-any.whl", hash = "sha256:b7477626c1aa11b20be67d139cd1612613803b0763af09bc3d7782df1ab06508"},
+    {file = "eve_panel-0.3.25.tar.gz", hash = "sha256:99fa487f05ba4be5edaa04b1ff64e58b60c2ff92b9de3711d87835eb63f2ca29"},
 ]
 events = [
     {file = "Events-0.3.tar.gz", hash = "sha256:f4d9c41a5c160ce504278f219fe56f44242ca63794a0ad638b52d1e087ac2a41"},
@@ -2475,12 +2501,12 @@ holoviews = [
     {file = "holoviews-1.14.5.tar.gz", hash = "sha256:268e07c09012d24233d8957f0207b9aec33000b639e661ca50e68458d735e6be"},
 ]
 httpcore = [
-    {file = "httpcore-0.12.3-py3-none-any.whl", hash = "sha256:93e822cd16c32016b414b789aeff4e855d0ccbfc51df563ee34d4dbadbb3bcdc"},
-    {file = "httpcore-0.12.3.tar.gz", hash = "sha256:37ae835fb370049b2030c3290e12ed298bf1473c41bb72ca4aa78681eba9b7c9"},
+    {file = "httpcore-0.13.6-py3-none-any.whl", hash = "sha256:db4c0dcb8323494d01b8c6d812d80091a31e520033e7b0120883d6f52da649ff"},
+    {file = "httpcore-0.13.6.tar.gz", hash = "sha256:b0d16f0012ec88d8cc848f5a55f8a03158405f4bca02ee49bc4ca2c1fda49f3e"},
 ]
 httpx = [
-    {file = "httpx-0.16.1-py3-none-any.whl", hash = "sha256:9cffb8ba31fac6536f2c8cde30df859013f59e4bcc5b8d43901cb3654a8e0a5b"},
-    {file = "httpx-0.16.1.tar.gz", hash = "sha256:126424c279c842738805974687e0518a94c7ae8d140cd65b9c4f77ac46ffa537"},
+    {file = "httpx-0.19.0-py3-none-any.whl", hash = "sha256:9bd728a6c5ec0a9e243932a9983d57d3cc4a87bb4f554e1360fce407f78f9435"},
+    {file = "httpx-0.19.0.tar.gz", hash = "sha256:92ecd2c00c688b529eda11cedb15161eaf02dee9116712f621c70d9a40b2cdd0"},
 ]
 hvplot = [
     {file = "hvplot-0.7.3-py2.py3-none-any.whl", hash = "sha256:09410f8f569b00fcf59dc7b6d976e0bddf722d21d8d86029b7408016ab7ca477"},
@@ -3158,8 +3184,8 @@ qtconsole = [
     {file = "qtconsole-5.1.1.tar.gz", hash = "sha256:bbc34bca14f65535afcb401bc74b752bac955e5313001ba640383f7e5857dc49"},
 ]
 qtpy = [
-    {file = "QtPy-1.10.0-py2.py3-none-any.whl", hash = "sha256:f683ce6cd825ba8248a798bf1dfa1a07aca387c88ae44fa5479537490aace7be"},
-    {file = "QtPy-1.10.0.tar.gz", hash = "sha256:3d20f010caa3b2c04835d6a2f66f8873b041bdaf7a76085c2a0d7890cdd65ea9"},
+    {file = "QtPy-1.11.0-py2.py3-none-any.whl", hash = "sha256:bd8baebb80c4d0d97e4e5a5cf15695522f6acc1fecc20b94a70a01ddf6c9e27e"},
+    {file = "QtPy-1.11.0.tar.gz", hash = "sha256:bbd61f8d6480a01cec39ad94249dbde7d0a8fce2aca61ff5037b645c4fd13e02"},
 ]
 requests = [
     {file = "requests-2.26.0-py2.py3-none-any.whl", hash = "sha256:6c1246513ecd5ecd4528a0906f910e8f0f9c6b8ec72030dc9fd154dc1a6efd24"},
@@ -3417,8 +3443,8 @@ wrapt = [
     {file = "wrapt-1.12.1.tar.gz", hash = "sha256:b62ffa81fb85f4332a4f609cab4ac40709470da05643a082ec1eb88e6d9b97d7"},
 ]
 xeauth = [
-    {file = "xeauth-0.1.9-py3-none-any.whl", hash = "sha256:c1f0e0e3cfeadbf8878577b5bfd6e95340fec163041921fdffb8354c8d049aac"},
-    {file = "xeauth-0.1.9.tar.gz", hash = "sha256:00e95304ecfa9051b15a422783386f51c4d78370c1f752e5748c8af22dcd25f2"},
+    {file = "xeauth-0.1.10-py3-none-any.whl", hash = "sha256:d9e4293027c06eec134692dfbba40c90a23f68dc81ae2754a00d89c876d8fcae"},
+    {file = "xeauth-0.1.10.tar.gz", hash = "sha256:62809463135b9ad7e35f805a4a2badb9add9817c170c9db5469bd1afffa196ec"},
 ]
 xepmts-endpoints = [
     {file = "xepmts_endpoints-0.1.4-py3-none-any.whl", hash = "sha256:3a1a52f9914d76664cda1f73233baef9ac5186651813df03715f047e5ef49cf2"},
