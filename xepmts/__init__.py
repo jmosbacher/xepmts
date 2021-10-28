@@ -4,6 +4,7 @@ __author__ = """Yossi Mosbacher"""
 __email__ = 'joe.mosbacher@gmail.com'
 __version__ = '0.5.6'
 
+from getpass import getpass
 import xeauth
 from xepmts.db.client import default_client, get_admin_client
 from xepmts.db.client import get_client as _get_client
@@ -25,8 +26,11 @@ def login(version='v2',
         xetoken = xeauth.tokens.XeToken(access_token=token)
     elif username is not None:
         xetoken = xeauth.user_login(username=username, password=password, scope=scope, audience=audience, **auth_kwargs )
-    else:
+    elif version=='v2':
         xetoken = xeauth.login(scopes=scope, audience=audience, **auth_kwargs)
+    else:
+        token = getpass.getpass('API Token: ')
+        xetoken = xeauth.tokens.XeToken(access_token=token)
     try:
         if xetoken.expired:
             xetoken.refresh_tokens()
