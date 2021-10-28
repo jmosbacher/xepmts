@@ -2,7 +2,7 @@
 
 __author__ = """Yossi Mosbacher"""
 __email__ = 'joe.mosbacher@gmail.com'
-__version__ = '0.5.6'
+__version__ = '0.5.7'
 
 from getpass import getpass
 import xeauth
