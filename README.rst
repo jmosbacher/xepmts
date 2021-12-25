@@ -1,7 +1,7 @@
 ======
 xepmts
 ======
-
+A helper package for managing the PMT database used by the XENONnT Dark Matter Experiment.
 
 .. image:: https://img.shields.io/pypi/v/xepmts.svg
         :target: https://pypi.python.org/pypi/xepmts
@@ -23,13 +23,11 @@ Basic Usage
     # If you are using a notebook:
     xepmts.notebook()
 
-    # v1 client
-    db = xepmts.get_client("v1")
-    db.login(token='YOUR-API-TOKEN')
+    # use v1 client
+    db = xepmts.login("v1", token='YOUR-API-TOKEN')
 
-    # v2 client
-    db = xepmts.get_client("v2")
-    db.login()
+    # or the v2 client
+    db = xepmts.login("v2")
 
     # set the number of items to pull per page
     db.tpc.installs.items_per_page = 25
