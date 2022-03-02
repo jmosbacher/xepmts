@@ -16,7 +16,7 @@ SERVERS = {
     "lngs_mirror": "https://api.pmts.yossisprojects.com/"
 }
 
-DEFAULT_SERVER = "lngs"
+DEFAULT_SERVER = "lngs_mirror"
 
 
 def get_client(version, xetoken, server='default', extra_servers=None, endpoint_path='endpoints', timeout=25):
