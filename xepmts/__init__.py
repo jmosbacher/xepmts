@@ -19,15 +19,14 @@ def login(version='v2',
           auth_kwargs={},
           **kwargs):
     auth_kwargs = dict(auth_kwargs)
-    scope = " ".join(scopes)
     audience = auth_kwargs.pop('audience', config.OAUTH_AUDIENCE)
 
     if token is not None:
         xetoken = xeauth.tokens.XeToken(access_token=token)
     elif username is not None:
-        xetoken = xeauth.user_login(username=username, password=password, scope=scope, audience=audience, **auth_kwargs )
+        xetoken = xeauth.user_login(username=username, password=password, scopes=scopes, audience=audience, **auth_kwargs )
     elif version=='v2':
-        xetoken = xeauth.login(scopes=scope, audience=audience, **auth_kwargs)
+        xetoken = xeauth.login(scopes=scopes, audience=audience, **auth_kwargs)
     else:
         token = getpass.getpass('API Token: ')
         xetoken = xeauth.tokens.XeToken(access_token=token)

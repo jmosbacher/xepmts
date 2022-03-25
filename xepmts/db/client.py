@@ -31,6 +31,8 @@ def get_client(version, xetoken, server='default', extra_servers=None, endpoint_
         else:
             raise TypeError("extra_servers must be a dictionary of with signiture: {name: url}")
     
+    endpoints = None
+
     if server in servers:
         url = f"{servers[server].rstrip('/')}/{endpoint_path.lstrip('/')}"
         with xetoken.Client() as client:
