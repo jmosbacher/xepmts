@@ -22,14 +22,14 @@ def login(version='v2',
     audience = auth_kwargs.pop('audience', config.OAUTH_AUDIENCE)
 
     if token is not None:
-        xetoken = xeauth.tokens.XeToken(access_token=token)
+        xetoken = xeauth.token.XeToken(access_token=token)
     elif username is not None:
         xetoken = xeauth.user_login(username=username, password=password, scopes=scopes, audience=audience, **auth_kwargs )
     elif version=='v2':
         xetoken = xeauth.login(scopes=scopes, audience=audience, **auth_kwargs)
     else:
         token = getpass.getpass('API Token: ')
-        xetoken = xeauth.tokens.XeToken(access_token=token)
+        xetoken = xeauth.token.XeToken(access_token=token)
     try:
         if xetoken.expired:
             xetoken.refresh_tokens()

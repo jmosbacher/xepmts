@@ -38,16 +38,17 @@ xepmts = "xepmts.cli:main"
 
 
 [tool.poetry.dependencies]
-python = ">=3.7.1"
+python = ">=3.8,<3.11"
 click = "*"
-eve-panel = "^0.3.26"
-xeauth = "^0.1.11"
+eve-panel = "^0.3.27"
+xeauth = "^0.1.19"
 toml = "^0.10.2"
 streamz = "*"
-dask = {extras = ["dataframe"], version = "^2021.2.0", optional = true}
-hvplot = {version = "^0.7.0", optional = true}
 xepmts-endpoints = "^0.1.4"
 panel = "^0.12.1"
+
+hvplot = {version = "^0.7.0", optional = true}
+dask = {extras = ["dataframe"], version = "^2021.2.0", optional = true}
 
 
 [tool.poetry.extras]
