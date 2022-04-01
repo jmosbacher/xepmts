@@ -718,7 +718,7 @@ python-versions = "*"
 
 [[package]]
 name = "ipykernel"
-version = "6.10.0"
+version = "6.11.0"
 description = "IPython Kernel for Jupyter"
 category = "dev"
 optional = false
@@ -726,17 +726,17 @@ python-versions = ">=3.7"
 
 [package.dependencies]
 appnope = {version = "*", markers = "platform_system == \"Darwin\""}
-debugpy = ">=1.0.0,<2.0"
+debugpy = ">=1.0"
 ipython = ">=7.23.1"
-jupyter-client = "<8.0"
-matplotlib-inline = ">=0.1.0,<0.2.0"
+jupyter-client = ">=6.1.12"
+matplotlib-inline = ">=0.1"
 nest-asyncio = "*"
 psutil = "*"
-tornado = ">=5.0,<7.0"
-traitlets = ">=5.1.0,<6.0"
+tornado = ">=6.1"
+traitlets = ">=5.1.0"
 
 [package.extras]
-test = ["pytest (!=5.3.4)", "pytest-cov", "flaky", "ipyparallel"]
+test = ["pytest (>=6.0)", "pytest-cov", "flaky", "ipyparallel", "pre-commit", "pytest-timeout"]
 
 [[package]]
 name = "ipython"
@@ -2525,8 +2525,8 @@ invoke = [
     {file = "invoke-1.7.0.tar.gz", hash = "sha256:e332e49de40463f2016315f51df42313855772be86435686156bc18f45b5cc6c"},
 ]
 ipykernel = [
-    {file = "ipykernel-6.10.0-py3-none-any.whl", hash = "sha256:86ebe63f58cb68f299e06a2add4957df0eaebc7b0864de5711accd9c532d7810"},
-    {file = "ipykernel-6.10.0.tar.gz", hash = "sha256:d1c7d92daea5d9b55a33e523d4d17c09ad38e0df17a4e0ed2fa5c97f07f200ba"},
+    {file = "ipykernel-6.11.0-py3-none-any.whl", hash = "sha256:62ec17caff6e4fa1dc87ef0a6f9eff5a5d6588bb585ab1e06897e7bec9eb2819"},
+    {file = "ipykernel-6.11.0.tar.gz", hash = "sha256:6712604531c96100f326440c11cb023da26819f2f34ba9d1ca0fb163401834e8"},
 ]
 ipython = [
     {file = "ipython-8.2.0-py3-none-any.whl", hash = "sha256:1b672bfd7a48d87ab203d9af8727a3b0174a4566b4091e9447c22fb63ea32857"},
@@ -2778,6 +2778,7 @@ numpy = [
     {file = "numpy-1.22.3-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:8251ed96f38b47b4295b1ae51631de7ffa8260b5b087808ef09a39a9d66c97ab"},
     {file = "numpy-1.22.3-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:48a3aecd3b997bf452a2dedb11f4e79bc5bfd21a1d4cc760e703c31d57c84b3e"},
     {file = "numpy-1.22.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a3bae1a2ed00e90b3ba5f7bd0a7c7999b55d609e0c54ceb2b076a25e345fa9f4"},
+    {file = "numpy-1.22.3-cp310-cp310-win32.whl", hash = "sha256:f950f8845b480cffe522913d35567e29dd381b0dc7e4ce6a4a9f9156417d2430"},
     {file = "numpy-1.22.3-cp310-cp310-win_amd64.whl", hash = "sha256:08d9b008d0156c70dc392bb3ab3abb6e7a711383c3247b410b39962263576cd4"},
     {file = "numpy-1.22.3-cp38-cp38-macosx_10_14_x86_64.whl", hash = "sha256:201b4d0552831f7250a08d3b38de0d989d6f6e4658b709a02a73c524ccc6ffce"},
     {file = "numpy-1.22.3-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:f8c1f39caad2c896bc0018f699882b345b2a63708008be29b1f355ebf6f933fe"},
