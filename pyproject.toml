@@ -47,7 +47,7 @@ streamz = "*"
 xepmts-endpoints = "^0.1.4"
 
 hvplot = {version = "^0.7.0", optional = true}
-dask = {extras = ["dataframe"], version = "^2021.2.0", optional = true}
+dask = {extras = ["dataframe"], version = ">=2021.2,<2023.0", optional = true}
 
 
 [tool.poetry.extras]
